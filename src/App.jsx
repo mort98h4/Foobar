@@ -11,6 +11,7 @@ import Ratings from "./pages/Ratings";
 function App() {
   const [data, setData] = useState([]);
   const [products, setProducts] = useState([]);
+  const [ratings, setRatings] = useState([]);
 
   // Found on javascript.plainenglish.io START
   // - https://javascript.plainenglish.io/using-reacts-useeffect-hook-to-fetch-data-and-periodically-refresh-that-data-2a69b6d44081
@@ -19,9 +20,28 @@ function App() {
       .then((res) => res.json())
       .then(setData);
   }
+  const getProducts = () => {
+    fetch("https://foobarsiwmorten.herokuapp.com/beertypes")
+      .then((res) => res.json())
+      .then(setProducts);
+  }
+  // const getRatings = () => {
+  //   fetch("https://foobar-a352.restdb.io/rest/beers", {
+  //     method: "get",
+  //     headers: {
+  //       "Content-Type": "application/json; charset=utf-8",
+  //       "x-apikey": "60a3d37fe3b6e02545edaa27",
+  //       "cache-control": "no-cache"
+  //     }
+  //   })
+  //     .then((res) => res.json())
+  //     .then(setRatings);
+  // }
 
   useEffect(() => {
     getData();
+    getProducts();
+    // getRatings();
     
     const interval = setInterval(() => {
       getData()
@@ -30,24 +50,38 @@ function App() {
   }, []);
   // Found on javascript.plainenglish.io END
 
-  useEffect(() => {
-    fetch("https://foobarsiwmorten.herokuapp.com/beertypes")
-      .then((res) => res.json())
-      .then(setProducts);
-  }, []);
+  // useEffect(() => {
+  //   fetch("https://foobarsiwmorten.herokuapp.com/beertypes")
+  //     .then((res) => res.json())
+  //     .then(setProducts);
+  // }, []);
+
+  // useEffect(() => {
+  //   fetch("https://foobar-a352.restdb.io/rest/beers", {
+  //     method: "get",
+  //     headers: {
+  //       "Content-Type": "application/json; charset=utf-8",
+  //       "x-apikey": "60a3d37fe3b6e02545edaa27",
+  //       "cache-control": "no-cache"
+  //     }
+  //   })
+  //     .then((res) => res.json())
+  //     .then(setRatings);
+  // }, []);
 
   const productsCopy = [...products];
   // console.log(productsCopy);
-  //console.log(data);
+  // console.log(data);
+  // console.log(ratings);
 
   return (
     <div className="App">
       <Nav></Nav>
       <Router>
-        <Dashboard path="/" data={data}/>
-        <Beers path="beers" products={productsCopy}/>
+        <Dashboard path="/" data={data} ratings={ratings}/>
+        <Beers path="beers" products={productsCopy} ratings={ratings}/>
         <Cart path="cart" />
-        <Ratings path="ratings" />
+        <Ratings path="ratings" ratings={ratings}/>
       </Router>
     </div>
   )
