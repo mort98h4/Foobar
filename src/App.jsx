@@ -9,7 +9,25 @@ import Cart from "./pages/Cart";
 import Ratings from "./pages/Ratings";
 
 function App() {
+  const [data, setData] = useState([]);
   const [products, setProducts] = useState([]);
+
+  // Found on javascript.plainenglish.io START
+  const getData = () => {
+    fetch("https://foobarsiwmorten.herokuapp.com")
+      .then((res) => res.json())
+      .then(setData);
+  }
+
+  useEffect(() => {
+    getData();
+    
+    const interval = setInterval(() => {
+      getData()
+    }, 2000)
+    return () => clearInterval(interval);
+  }, []);
+  // Found on javascript.plainenglish.io END
 
   useEffect(() => {
     fetch("https://foobarsiwmorten.herokuapp.com/beertypes")
@@ -19,12 +37,13 @@ function App() {
 
   const productsCopy = [...products];
   // console.log(productsCopy);
+  //console.log(data);
 
   return (
     <div className="App">
       <Nav></Nav>
       <Router>
-        <Dashboard path="/" />
+        <Dashboard path="/" data={data}/>
         <Beers path="beers" products={productsCopy}/>
         <Cart path="cart" />
         <Ratings path="ratings" />
