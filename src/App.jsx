@@ -13,6 +13,7 @@ function App() {
   const [products, setProducts] = useState([]);
 
   // Found on javascript.plainenglish.io START
+  // - https://javascript.plainenglish.io/using-reacts-useeffect-hook-to-fetch-data-and-periodically-refresh-that-data-2a69b6d44081
   const getData = () => {
     fetch("https://foobarsiwmorten.herokuapp.com")
       .then((res) => res.json())
