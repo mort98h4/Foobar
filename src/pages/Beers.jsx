@@ -1,9 +1,15 @@
 import React, {useState} from "react";
+import Product from "../components/Product";
 
-export default function Beers() {
+export default function Beers(props) {
+    // console.log(props);
+    const productComponents = props.products.map((item) => <Product {...item} />)
     return(
-        <div>
-            <h1>Beers</h1>
-        </div>
+        <main className="container">
+            <header className="row">
+                <h1>Beers</h1>
+            </header>
+            {productComponents}
+        </main>
     )
 }

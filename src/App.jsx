@@ -9,12 +9,23 @@ import Cart from "./pages/Cart";
 import Ratings from "./pages/Ratings";
 
 function App() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch("https://foobarsiwmorten.herokuapp.com/beertypes")
+      .then((res) => res.json())
+      .then(setProducts);
+  }, []);
+
+  const productsCopy = [...products];
+  // console.log(productsCopy);
+
   return (
     <div className="App">
       <Nav></Nav>
       <Router>
         <Dashboard path="/" />
-        <Beers path="beers" />
+        <Beers path="beers" products={productsCopy}/>
         <Cart path="cart" />
         <Ratings path="ratings" />
       </Router>
