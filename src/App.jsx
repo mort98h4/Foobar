@@ -71,20 +71,28 @@ function App() {
 
   const productsCopy = [...products];
   // console.log(productsCopy);
-  // console.log(data);
+  console.log(data);
   // console.log(ratings);
 
   return (
     <div className="App">
       <Nav></Nav>
+      {data.length === 0 ? <Loader/> : 
       <Router>
         <Dashboard path="/" data={data} ratings={ratings}/>
         <Beers path="beers" products={productsCopy} ratings={ratings}/>
         <Cart path="cart" />
         <Ratings path="ratings" ratings={ratings}/>
-      </Router>
+      </Router>}
+      
     </div>
   )
 }
 
 export default App
+
+function Loader() {
+  return(
+    <p>Loading...</p>
+  )
+}
