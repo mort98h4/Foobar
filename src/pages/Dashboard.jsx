@@ -2,9 +2,8 @@ import React, {useState} from "react";
 import QueueComponent from "../components/QueueComponent";
 
 export default function Dashboard(props) {
-    // console.log(props.data.queue.map(item));
     const queue = props.data.queue;
-    console.log(queue);
+    console.log(props.ratings);
     const queueComponents = queue.map((item) => <QueueComponent key={item.id} {...item}/>)
     return(
         <div className="container">

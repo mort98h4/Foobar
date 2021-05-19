@@ -25,23 +25,23 @@ function App() {
       .then((res) => res.json())
       .then(setProducts);
   }
-  // const getRatings = () => {
-  //   fetch("https://foobar-a352.restdb.io/rest/beers", {
-  //     method: "get",
-  //     headers: {
-  //       "Content-Type": "application/json; charset=utf-8",
-  //       "x-apikey": "60a3d37fe3b6e02545edaa27",
-  //       "cache-control": "no-cache"
-  //     }
-  //   })
-  //     .then((res) => res.json())
-  //     .then(setRatings);
-  // }
+  const getRatings = () => {
+    fetch("https://foobar-a352.restdb.io/rest/beers", {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        "x-apikey": "60a3d37fe3b6e02545edaa27",
+        "cache-control": "no-cache"
+      }
+    })
+      .then((res) => res.json())
+      .then(setRatings);
+  }
 
   useEffect(() => {
     getData();
     getProducts();
-    // getRatings();
+    getRatings();
     
     const interval = setInterval(() => {
       getData()
