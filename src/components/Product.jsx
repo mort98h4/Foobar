@@ -51,11 +51,13 @@ export default function Product(props) {
                         <button className="btn btn-primary" disabled={amount === 0} onClick={clickedMinus}>-</button>
                         {amount}
                         <button className="btn btn-primary" onClick={clickedPlus}>+</button>
-                        <button onClick={props.addToBasket} className="btn btn-primary" >Add to cart</button>
+                        <button onClick={() => props.addToBasket(props)} className="btn btn-primary" >Add to cart</button>
                     </div>
                 </div>
-                <div class="d-grid gap-2">
-                <button className="btn btn-primary" type="button" >View more</button>
+                <div className="row justify-content-center">
+                    <div className="col">
+                    <button className="btn btn-primary w-100" type="button" >View more</button>
+                    </div>
                 </div>
             </div>
         </article>

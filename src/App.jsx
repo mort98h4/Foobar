@@ -12,7 +12,7 @@ function App() {
   const [data, setData] = useState([]);
   const [products, setProducts] = useState([]);
   const [ratings, setRatings] = useState([]);
-  const [basket, setBasket] = useState([]); 
+  const [basket, setBasket] = useState([]);
 
   // Found on javascript.plainenglish.io START
   // - https://javascript.plainenglish.io/using-reacts-useeffect-hook-to-fetch-data-and-periodically-refresh-that-data-2a69b6d44081
@@ -71,12 +71,24 @@ function App() {
   // }, []);
 
 
-  function addToBasket(payload){
-    // add amout
-    // check for exsistance 
-
-    setBasket(prevState =>[...prevState, payload])
-}
+  function addToBasket(payload) {
+    const inBasket = basket.findIndex((item) => item.name === payload.name);
+    if (inBasket === -1) {
+      //add
+      const nextPayload = { ...payload };
+      nextPayload.amount = 1;
+      setBasket((prevState) => [...prevState, nextPayload]);
+    } else {
+      //if it exists, modify amount
+      const nextBasket = basket.map((item) => {
+        if (item.name === payload.name) {
+          item.amount += 1;
+        }
+        return item;
+      });
+      setBasket(nextBasket);
+    }
+  }
 
   const productsCopy = [...products];
   // console.log(productsCopy);
