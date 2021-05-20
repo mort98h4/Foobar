@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import Product from "../components/Product";
 
-export default function Beers(props) {
+export default function Beers(props) { 
     // console.log(props);
-    const productComponents = props.products.map((item) => <Product key={item.name} {...item} />)
+    const productComponents = props.products.map((item) => <Product key={item.name} {...item} addTobasket={props.addToBasket}/>)
 
     const [sortKey, setSortKey] = useState("name");
     const [sortDirection, setSortDirection] = useState("asc");

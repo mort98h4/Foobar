@@ -2,10 +2,8 @@ import React, {useState} from "react";
 
 
 export default function Product(props) {
-    console.log(props);
-
     const [amount, setAmount] = useState(0);
-
+   
     function clickedPlus(evt) {
       setAmount((prevState) => {
         return prevState + 1;
@@ -53,7 +51,7 @@ export default function Product(props) {
                         <button className="btn btn-primary" disabled={amount === 0} onClick={clickedMinus}>-</button>
                         {amount}
                         <button className="btn btn-primary" onClick={clickedPlus}>+</button>
-                        <button className="btn btn-primary">Add to cart</button>
+                        <button onClick={props.addToBasket} className="btn btn-primary" >Add to cart</button>
                     </div>
                 </div>
                 <div class="d-grid gap-2">
