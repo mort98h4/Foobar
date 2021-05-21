@@ -3,9 +3,10 @@ import NowServing from "../components/NowServing";
 import Queue from "../components/Queue";
 import Bartenders from "../components/Bartenders";
 import BeersOnTap from "../components/BeersOnTap";
+import MostPopularNow from "../components/MostPopularNow";
 
 export default function Dashboard(props) {
-    // console.log(props);
+    console.log(props);
     
     return(
         <div className="container">
@@ -20,12 +21,7 @@ export default function Dashboard(props) {
                 </div>
                 <div className="col-12 col-md-6">
                     <BeersOnTap taps={props.data.taps}/>
-                    <div className="row">
-                        <div className="col">
-                            <p>This will be the most popular now section</p>
-                        </div>
-                    </div>
-                    /* end */
+                    <MostPopularNow/>
                 </div>
             </div>
         </div>
