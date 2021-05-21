@@ -50,25 +50,6 @@ function App() {
   }, []);
   // Found on javascript.plainenglish.io END
 
-  // useEffect(() => {
-  //   fetch("https://foobarsiwmorten.herokuapp.com/beertypes")
-  //     .then((res) => res.json())
-  //     .then(setProducts);
-  // }, []);
-
-  // useEffect(() => {
-  //   fetch("https://foobar-a352.restdb.io/rest/beers", {
-  //     method: "get",
-  //     headers: {
-  //       "Content-Type": "application/json; charset=utf-8",
-  //       "x-apikey": "60a3d37fe3b6e02545edaa27",
-  //       "cache-control": "no-cache"
-  //     }
-  //   })
-  //     .then((res) => res.json())
-  //     .then(setRatings);
-  // }, []);
-
   const productsCopy = [...products];
   // console.log(productsCopy);
   // console.log(data);
