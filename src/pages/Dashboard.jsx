@@ -1,8 +1,9 @@
 import React, {useState} from "react";
+import NowServing from "../components/NowServing";
 import Queue from "../components/Queue";
+import Bartenders from "../components/Bartenders";
 
 export default function Dashboard(props) {
-    const queue = props.data.queue;
     // console.log(props);
     
     return(
@@ -12,24 +13,9 @@ export default function Dashboard(props) {
             </div>
             <div className="row">
                 <div className="col-12 col-md-6">
-                    /* This should be in a component */
-                    <div className="row">
-                        <div className="col">
-                            <h2>Now serving</h2>
-                        </div>
-                        <div className="col">
-                            <p>This will be the now serving section</p>
-                        </div>
-                    </div>
-                    /* end */
+                    <NowServing serving={props.data.serving}/>
                     <Queue queue={props.data.queue}/>
-                    /* This should be in a component */
-                    <div className="row">
-                        <div className="col">
-                            <p>This will be the bartenders section</p>
-                        </div>
-                    </div>
-                    /* end */
+                    <Bartenders bartenders={props.data.bartenders} bar={props.data.bar}/>
                 </div>
                 <div className="col-12 col-md-6">
                     /* This should be in a component */
