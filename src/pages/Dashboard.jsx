@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import NowServing from "../components/NowServing";
 import Queue from "../components/Queue";
 import Bartenders from "../components/Bartenders";
+import BeersOnTap from "../components/BeersOnTap";
 
 export default function Dashboard(props) {
     // console.log(props);
@@ -18,14 +19,7 @@ export default function Dashboard(props) {
                     <Bartenders bartenders={props.data.bartenders} bar={props.data.bar}/>
                 </div>
                 <div className="col-12 col-md-6">
-                    /* This should be in a component */
-                    <div className="row">
-                        <div className="col">
-                            <p>This will be the beers on tap section</p>
-                        </div>
-                    </div>
-                    /* end */
-                    /* This will be the beers on tap section */
+                    <BeersOnTap taps={props.data.taps}/>
                     <div className="row">
                         <div className="col">
                             <p>This will be the most popular now section</p>
