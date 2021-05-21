@@ -71,18 +71,18 @@ function App() {
 
   const productsCopy = [...products];
   // console.log(productsCopy);
-  console.log(data);
+  // console.log(data);
   // console.log(ratings);
 
   return (
     <div className="App">
       <Nav></Nav>
-      {data.length === 0 ? <Loader/> : 
+      {data.length === 0 || ratings.length === 0 ? <Loader/> : 
       <Router>
         <Dashboard path="/" data={data} ratings={ratings}/>
         <Beers path="beers" products={productsCopy} ratings={ratings}/>
         <Cart path="cart" />
-        <Ratings path="ratings" ratings={ratings}/>
+        <Ratings path="ratings" data={data} ratings={ratings}/>
       </Router>}
       
     </div>
