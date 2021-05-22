@@ -6,7 +6,7 @@ import BeersOnTap from "../components/BeersOnTap";
 import MostPopularNow from "../components/MostPopularNow";
 
 export default function Dashboard(props) {
-    console.log(props);
+    // console.log(props);
     
     return(
         <div className="container">
@@ -21,7 +21,7 @@ export default function Dashboard(props) {
                 </div>
                 <div className="col-12 col-md-6">
                     <BeersOnTap taps={props.data.taps} ratings={props.ratings}/>
-                    <MostPopularNow/>
+                    <MostPopularNow orders={props.data.serving} beers={props.data.storage}/>
                 </div>
             </div>
         </div>
