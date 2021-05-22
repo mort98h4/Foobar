@@ -29,13 +29,23 @@ export default function MostPopularNow(props) {
         }
     })
 
+    const beerPopularityCopy = beerPopularity;
+    const sortedList = beerPopularityCopy.sort(compare);
+    function compare(a,b) {
+        if (a["popularity"] > b["popularity"]) {
+            return -1;
+        }
+    }
+    const topThree = sortedList.slice(0,3);
+    const beerComponent = topThree.map((item) => <MostPopularNowBeer key={item.name} {...item} topThree={topThree}/>)
+
     return(
         <div className="row">
             <div className="col-12">
                 <h2>Most popular now</h2>
             </div>
-            <div className="col-12">
-                <p>This will be the most popular now section</p>
+            <div className="row">
+                {beerComponent}
             </div>
         </div>
     )
