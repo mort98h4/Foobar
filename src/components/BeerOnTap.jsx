@@ -5,7 +5,7 @@ export default function BeerOnTap(props) {
         <div className="row justify-content-between">
             <div className="col-6">
                 <p>{props.beer}</p>
-                <p>Rating...</p>
+                <span>{props.ratingAVG}</span>
             </div>
             <div className="col-6 text-end">
                 <p>49,-</p>

@@ -20,7 +20,7 @@ export default function Dashboard(props) {
                     <Bartenders bartenders={props.data.bartenders} bar={props.data.bar}/>
                 </div>
                 <div className="col-12 col-md-6">
-                    <BeersOnTap taps={props.data.taps}/>
+                    <BeersOnTap taps={props.data.taps} ratings={props.ratings}/>
                     <MostPopularNow/>
                 </div>
             </div>
