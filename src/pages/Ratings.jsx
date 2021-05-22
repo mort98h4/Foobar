@@ -33,9 +33,9 @@ export default function Ratings(props) {
         order: []
     }
     const Beer = {
-        _id: "", beer_name: "", ratings: []
+        _id: "", beer_name: "", ratings: [], sum: "", nratings: ""
     }
-    rateOrder.id = newOrder.id;
+    rateOrder._id = newOrder.id;
 
     rateOrder.order = newOrder.order.map(orderItem => {
         const beer = Object.create(Beer);
@@ -43,6 +43,8 @@ export default function Ratings(props) {
         const beerIndex = props.ratings.findIndex(item=>item.beer_name === orderItem);
         beer._id = props.ratings[beerIndex]._id;
         beer.ratings = props.ratings[beerIndex].ratings;
+        beer.sum = props.ratings[beerIndex].sum;
+        beer.nratings = props.ratings[beerIndex].nratings;
         return beer;
     })
 
@@ -65,11 +67,15 @@ export default function Ratings(props) {
         if (inOrder === -1) {
             const nextProps = {...props};
             nextProps.ratings = props.ratings.concat([selectedRating]);
+            nextProps.sum += selectedRating;
+            nextProps.nratings = nextProps.nratings + 1; 
+            console.log(nextProps);
             setBeerRating(prevState => [...prevState, nextProps]);
         } else {
             const nextRating = beerRating.map(item=>{
                 if (item.id === props.id) {
                     item.ratings = props.ratings.concat([selectedRating]);
+                    item.sum = props.sum + selectedRating; 
                 } 
                 return item;
             });
@@ -84,7 +90,7 @@ export default function Ratings(props) {
         })
     }
 
-    const beerRatingComponent = rateOrder.order.map((item) => <BeerRating key={item._id} id={item._id} name={item.beer_name} ratings={item.ratings} clickStarHandler={clickStarHandler}/>)
+    const beerRatingComponent = rateOrder.order.map((item) => <BeerRating key={item._id} {...item} clickStarHandler={clickStarHandler}/>)
 
     return(
         <div className="container">
@@ -106,7 +112,7 @@ export default function Ratings(props) {
 
 async function putRatings(data) {
     const updateData = JSON.stringify(data);
-    const jsonData = await fetch("https://foobar-a352.restdb.io/rest/beers/"+data.id, {
+    const jsonData = await fetch("https://foobar-a352.restdb.io/rest/beers/"+data._id, {
         method: "put",
         headers: {
             "Content-Type": "application/json; charset=utf-8",
