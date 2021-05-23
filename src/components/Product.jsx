@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 
 
+
 export default function Product(props) {
     const [amount, setAmount] = useState(0);
    
@@ -9,14 +10,14 @@ export default function Product(props) {
         return prevState + 1;
       });
     }
-  
+    
     function clickedMinus(evt) {
       setAmount((prevState) => {
         return prevState - 1;
       });
     }
+  
 
- 
     console.log(amount); 
 
     return (
