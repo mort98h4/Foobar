@@ -16,6 +16,9 @@ export default function Product(props) {
       });
     }
 
+ 
+    console.log(amount); 
+
     return (
         <article className="row pt-3">
             <div className="col-12 col-md-4">
@@ -51,7 +54,7 @@ export default function Product(props) {
                         <button className="btn btn-primary" disabled={amount === 0} onClick={clickedMinus}>-</button>
                         {amount}
                         <button className="btn btn-primary" onClick={clickedPlus}>+</button>
-                        <button onClick={() => props.addToBasket(props)} className="btn btn-primary" >Add to cart</button>
+                        <button onClick={() => props.addToBasket(props)} disabled={amount === 0} className="btn btn-primary" >Add to cart</button>
                     </div>
                 </div>
                 <div className="row justify-content-center">
