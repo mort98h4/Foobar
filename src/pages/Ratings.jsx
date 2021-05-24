@@ -51,6 +51,7 @@ export default function Ratings(props) {
     // Update state when clicking a new rating
     const [beerRating, setBeerRating] = useState([]);
     function clickStarHandler(props) {
+        console.log(props);
         const selectedRating = parseInt(event.target.dataset.rating);
         const dataId = event.target.dataset.id;
 
@@ -63,7 +64,8 @@ export default function Ratings(props) {
             }
         })
 
-        const inOrder = beerRating.findIndex(item=>item.id === props.id);
+        const inOrder = beerRating.findIndex(item=>item._id === props._id);
+        console.log(inOrder);
         if (inOrder === -1) {
             const nextProps = {...props};
             nextProps.ratings = props.ratings.concat([selectedRating]);
@@ -73,7 +75,7 @@ export default function Ratings(props) {
             setBeerRating(prevState => [...prevState, nextProps]);
         } else {
             const nextRating = beerRating.map(item=>{
-                if (item.id === props.id) {
+                if (item._id === props._id) {
                     item.ratings = props.ratings.concat([selectedRating]);
                     item.sum = props.sum + selectedRating; 
                 } 
@@ -86,8 +88,11 @@ export default function Ratings(props) {
     function clickSubmitHandler() {
         console.log("You clicked submit");
         beerRating.forEach(item=>{
-            putRatings(item);
+            const status = putRatings(item);
+            console.log(status)
         })
+        document.querySelector("#rateBeers").setAttribute("hidden", true);
+        document.querySelector("#rateMessage").removeAttribute("hidden");
     }
 
     const beerRatingComponent = rateOrder.order.map((item) => <BeerRating key={item._id} {...item} clickStarHandler={clickStarHandler}/>)
@@ -97,14 +102,27 @@ export default function Ratings(props) {
             <div className="row">
                 <h1>Ratings</h1>
             </div>
-            <div className="row">
-                <div className="col">
+            <div id="rateBeers" className="row justify-content-center">
+                <div className="col-10">
                     <h2>Order {rateOrder.id}</h2>
                     {beerRatingComponent}
                 </div>
+                <div className="col-12 d-flex justify-content-center">
+                    <button id="submitRatings" className="btn btn-primary" disabled={beerRating.length === 0} onClick={clickSubmitHandler}>Submit ratings</button>
+                </div>
             </div>
-            <div className="row justify-content-center">
-                <button id="submitRatings" className="btn btn-primary" onClick={clickSubmitHandler}>Submit ratings</button>
+            <div id="rateMessage" hidden className="row justify-content-center">
+                <div className="col-10">
+                    <h3>Hey Siw!</h3>
+                    <p>Thank you for rating our beers!</p>
+                </div>
+                <div className="col-10">
+                    <p>Still thirsty?</p>
+                    <p>Buy another round!</p>
+                </div>
+                <div className="col-12">
+                    <button className="btn btn-primary">Menu</button>
+                </div>
             </div>
         </div>
     )
@@ -121,5 +139,5 @@ async function putRatings(data) {
         },
         body: updateData
     })
-    console.log(jsonData);
+    return jsonData.status;
 }
