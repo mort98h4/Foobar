@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function MostPopularNowBeer(props) {
-    console.log(props);
     const index = props.topThree.findIndex(item=>item.name === props.name);
     return(
         <div className="col-4">
