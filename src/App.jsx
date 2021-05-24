@@ -46,7 +46,7 @@ function App() {
     
     const interval = setInterval(() => {
       getData()
-    }, 2000)
+    }, 10000)
     return () => clearInterval(interval);
   }, []);
   // Found on javascript.plainenglish.io END
