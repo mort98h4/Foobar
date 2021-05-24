@@ -7,10 +7,10 @@ import Confirm from "../components/Confirm";
 export default function Cart(props) {
 
     return(
-       <section className="basket">
+       <section className="container">
           <CartItem basket={props.basket}/>
-          <Pay/>
-          <Confirm/>
+          {props.basket.length > 0 && <Pay />}
+          {<Confirm/>}
         
         </section>
     )
