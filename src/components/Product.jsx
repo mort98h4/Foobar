@@ -18,8 +18,6 @@ export default function Product(props) {
     }
   
 
-    console.log(amount); 
-
     return (
         <article className="row pt-3">
             <div className="col-12 col-md-4">
