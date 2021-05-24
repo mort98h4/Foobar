@@ -12,6 +12,7 @@ function App() {
   const [data, setData] = useState([]);
   const [products, setProducts] = useState([]);
   const [ratings, setRatings] = useState([]);
+  const [basket, setBasket] = useState([]);
 
   // Found on javascript.plainenglish.io START
   // - https://javascript.plainenglish.io/using-reacts-useeffect-hook-to-fetch-data-and-periodically-refresh-that-data-2a69b6d44081
@@ -50,19 +51,40 @@ function App() {
   }, []);
   // Found on javascript.plainenglish.io END
 
+
+  function addToBasket(payload) {
+    const inBasket = basket.findIndex((item) => item.name === payload.name);
+    if (inBasket === -1) {
+      //add
+      const nextPayload = { ...payload };
+      nextPayload.amount = 1;
+      setBasket((prevState) => [...prevState, nextPayload]);
+    } else {
+      //if it exists, modify amount
+      const nextBasket = basket.map((item) => {
+        if (item.name === payload.name) {
+          item.amount += 1;
+        }
+        return item;
+      });
+      setBasket(nextBasket);
+    }
+  }
+
   const productsCopy = [...products];
   // console.log(productsCopy);
-  // console.log(data);
+  //console.log(data);
   // console.log(ratings);
 
   return (
     <div className="App">
+          
       <Nav></Nav>
       {data.length === 0 || ratings.length === 0 ? <Loader/> : 
       <Router>
         <Dashboard path="/" data={data} ratings={ratings}/>
-        <Beers path="beers" products={productsCopy} ratings={ratings}/>
-        <Cart path="cart" />
+        <Beers path="beers" products={productsCopy} ratings={ratings} addToBasket={addToBasket}/>
+        <Cart path="cart" basket={basket}/>
         <Ratings path="ratings" data={data} ratings={ratings}/>
       </Router>}
       
