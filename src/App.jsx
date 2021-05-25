@@ -94,6 +94,7 @@ function App() {
     document.querySelector("#rateBeers").setAttribute("hidden", true);
     document.querySelector("#rateMessage").removeAttribute("hidden");
     setUserOrder({id: 0, order: [], name: userOrder.name});
+    getRatings();
   }
 
   const productsCopy = [...products];
