@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import MostPopularNowBeer from "./MostPopularNowBeer";
 
 export default function MostPopularNow(props) {
-    console.log(props);
+    // console.log(props);
 
     const Beer = {name: "", popularity: 0, id: 0}
     const mostPopular = props.beers.map(item => {
@@ -14,20 +14,15 @@ export default function MostPopularNow(props) {
     })
 
     const [beerPopularity, setBeerPopularity] = useState([]);
-    console.log(beerPopularity);
 
     const orders = props.orders.map(order => {
-        console.log(order);
         const orderIndex = beerPopularity.findIndex(item=>item.id === order.id);
-        console.log(orderIndex);
         if (orderIndex === -1) {
             const theOrder = order.order.forEach(orderEntry => {
-                console.log(orderEntry);
                 if (beerPopularity.length === 0) {
                     const index = mostPopular.findIndex(item=>item.name === orderEntry);
                     mostPopular[index].popularity += 1;
                     mostPopular[index].id = order.id;
-                    console.log(mostPopular);
                     setBeerPopularity(mostPopular);
                 } else {
                     const nextPopularity = beerPopularity.map(item=>{
@@ -38,7 +33,6 @@ export default function MostPopularNow(props) {
                         }
                         return item;
                     })
-                    console.log(nextPopularity);
                 }
                 
             })
