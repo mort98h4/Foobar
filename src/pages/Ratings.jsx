@@ -4,14 +4,11 @@ import { Link } from "@reach/router";
 import updateUserOrder from "../App";
 
 export default function Ratings(props) {
-    console.log(props);
-    console.log(props.order.order.length);
-    // The original order
-
     // Remove identical beer names
     const newOrder = {
         id: props.order.id,
-        order: []
+        order: [],
+        name: props.order.name
     }
 
     props.order.order.forEach(item => {
@@ -24,13 +21,13 @@ export default function Ratings(props) {
 
     // The order we're going to use
     const rateOrder = {
-        id: "",
-        order: []
+        id: newOrder.id,
+        order: [],
+        name: newOrder.name
     }
     const Beer = {
         _id: "", beer_name: "", ratings: [], sum: "", nratings: ""
     }
-    rateOrder._id = newOrder.id;
 
     rateOrder.order = newOrder.order.map(orderItem => {
         const beer = Object.create(Beer);
@@ -46,7 +43,6 @@ export default function Ratings(props) {
     // Update state when clicking a new rating
     const [beerRating, setBeerRating] = useState([]);
     function clickStarHandler(props) {
-        console.log(props);
         const selectedRating = parseInt(event.target.dataset.rating);
         const dataId = event.target.dataset.id;
 
@@ -60,7 +56,6 @@ export default function Ratings(props) {
         })
 
         const inOrder = beerRating.findIndex(item=>item._id === props._id);
-        console.log(inOrder);
         if (inOrder === -1) {
             const nextProps = {...props};
             nextProps.ratings = props.ratings.concat([selectedRating]);
@@ -80,16 +75,6 @@ export default function Ratings(props) {
         }
     }
 
-    function clickSubmitHandler() {
-        console.log("You clicked submit");
-        beerRating.forEach(item=>{
-            const status = putRatings(item);
-            console.log(status)
-        })
-        document.querySelector("#rateBeers").setAttribute("hidden", true);
-        document.querySelector("#rateMessage").removeAttribute("hidden");
-    }
-
     const beerRatingComponent = rateOrder.order.map((item) => <BeerRating key={item._id} {...item} clickStarHandler={clickStarHandler}/>)
 
     return(
@@ -102,6 +87,9 @@ export default function Ratings(props) {
                 <div className="col-10">
                     <h2>Sorry, there are no order to rate.</h2>
                     <p>Please go to the beers menu to order.</p>
+                </div>
+                <div className="col-12 d-flex justify-content-center">
+                    <Link className="btn btn-primary" to="../beers">Menu</Link>
                 </div>
             </div>
             :
@@ -117,31 +105,17 @@ export default function Ratings(props) {
             }
             <div id="rateMessage" hidden className="row justify-content-center">
                 <div className="col-10">
-                    <h3>Hey {props.order.name}!</h3>
+                    <h3>Hey {rateOrder.name}!</h3>
                     <p>Thank you for rating our beers!</p>
                 </div>
                 <div className="col-10">
                     <p>Still thirsty?</p>
                     <p>Buy another round!</p>
                 </div>
-                <div className="col-12">
+                <div className="col-12 d-flex justify-content-center">
                     <Link className="btn btn-primary" to="../beers">Menu</Link>
                 </div>
             </div>
         </div>
     )
-}
-
-async function putRatings(data) {
-    const updateData = JSON.stringify(data);
-    const jsonData = await fetch("https://foobar-a352.restdb.io/rest/beers/"+data._id, {
-        method: "put",
-        headers: {
-            "Content-Type": "application/json; charset=utf-8",
-            "x-apikey": "60a3d37fe3b6e02545edaa27",
-            "cache-control": "no-cache"
-        },
-        body: updateData
-    })
-    return jsonData.status;
 }
