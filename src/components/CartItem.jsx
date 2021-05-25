@@ -21,7 +21,6 @@ export default function CartItem({amountList}){
 }
 
 function CartList(props) {
-  console.log(props); 
     return (
      
       <li className="row">
