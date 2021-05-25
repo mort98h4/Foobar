@@ -1,29 +1,24 @@
 import React, {useState} from "react";
 import BeerRating from "../components/BeerRating"; 
+import { Link } from "@reach/router";
+import updateUserOrder from "../App";
 
 export default function Ratings(props) {
+    console.log(props);
+    console.log(props.order.order.length);
     // The original order
-    const order = {
-        id: "123",
-        order: [
-            "Row 26",
-            "Ruined Childhood",
-            "Steampunk",
-            "Steampunk"
-        ]
-    }
 
     // Remove identical beer names
     const newOrder = {
-        id: order.id,
+        id: props.order.id,
         order: []
     }
 
-    order.order.forEach(item => {
-        const firstIndex = order.order.indexOf(item);
+    props.order.order.forEach(item => {
+        const firstIndex = props.order.order.indexOf(item);
         const inNewOrder = newOrder.order.findIndex(newOrderItem=> newOrderItem === item);
         if (inNewOrder === -1) {
-            newOrder.order.push(order.order[firstIndex]);
+            newOrder.order.push(props.order.order[firstIndex]);
         }
     })
 
@@ -102,18 +97,27 @@ export default function Ratings(props) {
             <div className="row">
                 <h1>Ratings</h1>
             </div>
+            {props.order.order.length === 0 ? 
+            <div className="row justify-content-center">
+                <div className="col-10">
+                    <h2>Sorry, there are no order to rate.</h2>
+                    <p>Please go to the beers menu to order.</p>
+                </div>
+            </div>
+            :
             <div id="rateBeers" className="row justify-content-center">
                 <div className="col-10">
                     <h2>Order {rateOrder.id}</h2>
                     {beerRatingComponent}
                 </div>
                 <div className="col-12 d-flex justify-content-center">
-                    <button id="submitRatings" className="btn btn-primary" disabled={beerRating.length === 0} onClick={clickSubmitHandler}>Submit ratings</button>
+                    <button id="submitRatings" className="btn btn-primary" disabled={beerRating.length === 0} onClick={(e) => props.clickSubmitHandler(beerRating)}>Submit ratings</button>
                 </div>
             </div>
+            }
             <div id="rateMessage" hidden className="row justify-content-center">
                 <div className="col-10">
-                    <h3>Hey Siw!</h3>
+                    <h3>Hey {props.order.name}!</h3>
                     <p>Thank you for rating our beers!</p>
                 </div>
                 <div className="col-10">
@@ -121,7 +125,7 @@ export default function Ratings(props) {
                     <p>Buy another round!</p>
                 </div>
                 <div className="col-12">
-                    <button className="btn btn-primary">Menu</button>
+                    <Link className="btn btn-primary" to="../beers">Menu</Link>
                 </div>
             </div>
         </div>
