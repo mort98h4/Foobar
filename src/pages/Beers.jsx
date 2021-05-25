@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import Product from "../components/Product";
+import Foobar from "../components/Foobar";
 
 export default function Beers(props) { 
   
@@ -27,6 +28,7 @@ export default function Beers(props) {
 
     return(
         <main className="container">
+        <Foobar/>
            <div>
                <button className="btn btn-primary" onClick={() => toggleSort("price")}>Filter Kind</button>
                <button className="btn btn-primary" onClick={() => toggleSort("alc")}>Filter Alc</button>
