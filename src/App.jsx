@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import logo from './logo.svg'
 import { Router } from "@reach/router"
+// import bootstrap from "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
 
 import Nav from "./components/Nav";
 import Dashboard from "./pages/Dashboard";
