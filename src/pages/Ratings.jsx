@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import BeerRating from "../components/BeerRating"; 
 import { Link } from "@reach/router";
-import updateUserOrder from "../App";
 
 export default function Ratings(props) {
     // Remove identical beer names
