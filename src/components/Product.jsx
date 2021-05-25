@@ -1,9 +1,13 @@
 import React, {useState} from "react";
+import BeerRating from "./BeerRating";
 
 
 
 export default function Product(props) {
+  
     const [amount, setAmount] = useState(0);
+    let onTap = false;  
+   
     
     function clickedPlus(evt) {
       setAmount((prevState) => {
@@ -16,7 +20,15 @@ export default function Product(props) {
         return prevState - 1;
       });
     }
-  
+
+    props.data.taps.forEach(tap => {
+        const tapBeer = tap.beer;
+        if (tapBeer === props.name){
+            onTap = true; 
+            return onTap; 
+        } 
+    });
+        
 
     return (
         <article className="row pt-3">
@@ -52,12 +64,13 @@ export default function Product(props) {
                     <div className="col d-flex justify-content-end">
                         <button className="btn btn-primary" disabled={amount === 0} onClick={clickedMinus}>-</button>
                         {amount}
-                        <button className="btn btn-primary"  onClick={() =>{clickedPlus(); props.addToAmountList(props);}}  >+</button>
+                        <button className="btn btn-primary" onClick={() =>{clickedPlus(); props.addToAmountList(props);}} disabled={onTap === false} >+</button>
                         <button onClick={() => props.addToBasket(props)} disabled={amount === 0} className="btn btn-primary" >Add to cart</button>
                     </div>
                 </div>
                 <div className="row justify-content-center">
                     <div className="col">
+               
                     <button className="btn btn-primary w-100" type="button" >View more</button>
                     </div>
                 </div>

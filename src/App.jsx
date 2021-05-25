@@ -54,7 +54,7 @@ function App() {
   }, []);
   // Found on javascript.plainenglish.io END
 
-  
+
   function addToAmountList(list) {
     const inList = amountList.findIndex((item) => item.name === list.name);
     if (inList === -1){
@@ -103,7 +103,7 @@ function App() {
       {data.length === 0 || ratings.length === 0 ? <Loader/> : 
       <Router>
         <Dashboard path="/" data={data} ratings={ratings}/>
-        <Beers path="beers" products={productsCopy} addToAmountList={addToAmountList} ratings={ratings} addToBasket={addToBasket}/>
+        <Beers path="beers" data={data} products={productsCopy} addToAmountList={addToAmountList} ratings={ratings} addToBasket={addToBasket}/>
         <Cart path="cart" basket={basket} amountList={amountList}/>
         <Ratings path="ratings" data={data} ratings={ratings}/>
       </Router>}
