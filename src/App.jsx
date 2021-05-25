@@ -7,12 +7,26 @@ import Dashboard from "./pages/Dashboard";
 import Beers from "./pages/Beers";
 import Cart from "./pages/Cart";
 import Ratings from "./pages/Ratings";
+import putRatings from "./helpers/putRatings.js";
 
 function App() {
+
+  const order = {
+    id: 123,
+    order: [
+        "Row 26",
+        "Ruined Childhood",
+        "Steampunk",
+        "Steampunk"
+    ],
+    name: "Siw"
+  }
+
   const [data, setData] = useState([]);
   const [products, setProducts] = useState([]);
   const [ratings, setRatings] = useState([]);
   const [basket, setBasket] = useState([]);
+  const [userOrder, setUserOrder] = useState(order);
 
   // Found on javascript.plainenglish.io START
   // - https://javascript.plainenglish.io/using-reacts-useeffect-hook-to-fetch-data-and-periodically-refresh-that-data-2a69b6d44081
@@ -71,6 +85,17 @@ function App() {
     }
   }
 
+  function clickSubmitHandler(props) {
+    console.log(props);
+    props.forEach(item=>{
+      const status = putRatings(item);
+      console.log(status)
+    });
+    document.querySelector("#rateBeers").setAttribute("hidden", true);
+    document.querySelector("#rateMessage").removeAttribute("hidden");
+    setUserOrder({id: 0, order: [], name: userOrder.name});
+  }
+
   const productsCopy = [...products];
   // console.log(productsCopy);
   //console.log(data);
@@ -85,7 +110,7 @@ function App() {
         <Dashboard path="/" data={data} ratings={ratings}/>
         <Beers path="beers" products={productsCopy} ratings={ratings} addToBasket={addToBasket}/>
         <Cart path="cart" basket={basket}/>
-        <Ratings path="ratings" data={data} ratings={ratings}/>
+        <Ratings path="ratings" order={userOrder} data={data} ratings={ratings} clickSubmitHandler={clickSubmitHandler}/>
       </Router>}
       
     </div>
