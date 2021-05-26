@@ -1,53 +1,33 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import MostPopularNowBeer from "./MostPopularNowBeer";
 
 export default function MostPopularNow(props) {
-    // console.log(props);
-
-    const Beer = {name: "", popularity: 0, id: 0}
-    const mostPopular = props.beers.map(item => {
-        const beer = Object.create(Beer);
-        beer.name = item.name;
-        beer.popularity = 0;
-        beer.id = 0;
-        return beer;
-    })
-
     const [beerPopularity, setBeerPopularity] = useState([]);
+    const [lastOrder, setLastOrder] = useState(0);
 
-    const orders = props.orders.map(order => {
-        const orderIndex = beerPopularity.findIndex(item=>item.id === order.id);
-        if (orderIndex === -1) {
-            const theOrder = order.order.forEach(orderEntry => {
-                if (beerPopularity.length === 0) {
-                    const index = mostPopular.findIndex(item=>item.name === orderEntry);
-                    mostPopular[index].popularity += 1;
-                    mostPopular[index].id = order.id;
-                    setBeerPopularity(mostPopular);
-                } else {
-                    const nextPopularity = beerPopularity.map(item=>{
-                        const index = beerPopularity.findIndex(item=>item.name === orderEntry);
-                        if (item.name === orderEntry) {
-                            item.id = order.id;
-                            item.popularity += 1;
-                        }
-                        return item;
-                    })
-                }
-                
-            })
+    useEffect(() => {
+        let result = beerPopularity;
+        let tempLastOrder = lastOrder;
 
-            // const nextPopularity = beerPopularity.map(entry=> {
-            //     const index = order.order.findIndex(item=>item === entry.name);
-            //     if (entry.name === order.order[index]) {
-            //         entry.id = order.id;
-            //         entry.popularity += 1;
-            //     } 
-            //     return entry;
-            // })
-            // setBeerPopularity(nextPopularity);
-        }
-    })
+        props.orders.forEach(order=>{
+            if (order.id <= tempLastOrder) {
+                return;
+            } else {
+                order.order.forEach(beer => {
+                    const index = result.findIndex(item=>item.name === beer);
+                    if (index === -1) {
+                        result.push({name: beer, popularity: 1});
+                    } else {
+                        result[index].popularity += 1;
+                    }
+                })
+            }
+            tempLastOrder = order.id;
+        })
+
+        setBeerPopularity(result);
+        setLastOrder(tempLastOrder);
+    }, [props.orders]);
 
     const beerPopularityCopy = beerPopularity;
     const sortedList = beerPopularityCopy.sort(compare);
