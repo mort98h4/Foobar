@@ -69,6 +69,10 @@ function App() {
     }
   }
 
+  function removeFromBasket(props) {
+    console.log(props);
+  }
+
   const productsCopy = [...products];
   // console.log(productsCopy);
   //console.log(data);
@@ -89,7 +93,12 @@ function App() {
             ratings={ratings}
             addToBasket={addToBasket}
           />
-          <Cart path="cart" basket={basket} addToBasket={addToBasket} />
+          <Cart
+            path="cart"
+            basket={basket}
+            addToBasket={addToBasket}
+            removeFromBasket={removeFromBasket}
+          />
           <Ratings path="ratings" data={data} ratings={ratings} />
         </Router>
       )}

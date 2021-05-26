@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function CartItem({ basket, addToBasket }) {
+export default function CartItem({ basket, addToBasket, removeFromBasket }) {
   return (
     <section className="">
       <ul>
@@ -10,6 +10,7 @@ export default function CartItem({ basket, addToBasket }) {
             amount={item.amount}
             key={item.name}
             addToBasket={addToBasket}
+            removeFromBasket={removeFromBasket}
           />
         ))}
       </ul>
@@ -19,13 +20,6 @@ export default function CartItem({ basket, addToBasket }) {
 
 function CartList(props) {
   let price = props.amount * 45;
-  /*  const [price, setPrice] = useState(45);
-
-  function calcPrice() {
-    setPrice((prevState) => {
-      return prevState * props.amount;
-    });
-  } */
 
   return (
     <li className="row">
@@ -43,7 +37,6 @@ function CartList(props) {
         <button
           className="btn btn-primary"
           onClick={() => {
-            //calcPrice();
             props.addToBasket(props, 1);
           }}
         >
@@ -53,7 +46,14 @@ function CartList(props) {
       <p className="col">
         PRICE <span>{price},-</span>
       </p>
-      <button className="btn btn-primary col">x</button>
+      <button
+        className="btn btn-primary col"
+        onClick={() => {
+          props.removeFromBasket(props);
+        }}
+      >
+        x
+      </button>
     </li>
   );
 }
