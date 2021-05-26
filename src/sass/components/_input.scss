@@ -1,0 +1,17 @@
+@use "../abstracts/vars";
+
+input {
+  border-radius: 0px !important;
+  border: 3px solid vars.$primary-color !important;
+  box-shadow: vars.$primary-box-shadow;
+}
+
+input:valid {
+  border: 3px solid vars.$valid-color !important;
+  box-shadow: vars.$valid-box-shadow;
+}
+
+input:invalid {
+  border: 3px solid vars.$invalid-color !important;
+  box-shadow: vars.$invalid-box-shadow;
+}
