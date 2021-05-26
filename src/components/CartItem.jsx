@@ -1,15 +1,15 @@
 import React from "react";
 
-export default function CartItem({ amountList }) {
+export default function CartItem({ basket, addToBasket }) {
   return (
     <section className="">
       <ul>
-        {amountList.map((item) => (
+        {basket.map((item) => (
           <CartList
             name={item.name}
             amount={item.amount}
             key={item.name}
-            addToAmountList={item.addToAmountList}
+            addToBasket={addToBasket}
           />
         ))}
       </ul>
@@ -18,24 +18,40 @@ export default function CartItem({ amountList }) {
 }
 
 function CartList(props) {
+  let price = props.amount * 45;
+  /*  const [price, setPrice] = useState(45);
+
+  function calcPrice() {
+    setPrice((prevState) => {
+      return prevState * props.amount;
+    });
+  } */
+
   return (
     <li className="row">
       <img src="" alt="" className="col" />
       <h2 className="col">{props.name}</h2>
       <div className="col">
-        <button className="btn btn-primary" disabled={props.amount === 0}>
+        <button
+          className="btn btn-primary"
+          disabled={props.amount === 1}
+          onClick={() => props.addToBasket(props, -1)}
+        >
           -
         </button>
         {props.amount}
         <button
           className="btn btn-primary"
-          onClick={() => props.addToAmountList(props)}
+          onClick={() => {
+            //calcPrice();
+            props.addToBasket(props, 1);
+          }}
         >
           +
         </button>
       </div>
       <p className="col">
-        <span>Stk.{props.price}</span>
+        PRICE <span>{price},-</span>
       </p>
       <button className="btn btn-primary col">x</button>
     </li>

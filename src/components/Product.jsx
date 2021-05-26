@@ -1,19 +1,25 @@
 import React, { useState } from "react";
-import BeerRating from "./BeerRating";
+//import BeerRating from "./BeerRating";
 
 export default function Product(props) {
   const [amount, setAmount] = useState(0);
   let onTap = false;
 
-  function clickedPlus(evt) {
+  function clickedPlus() {
     setAmount((prevState) => {
       return prevState + 1;
     });
   }
 
-  function clickedMinus(evt) {
+  function clickedMinus() {
     setAmount((prevState) => {
       return prevState - 1;
+    });
+  }
+
+  function resetAmount() {
+    setAmount((prevState) => {
+      return prevState * 0;
     });
   }
 
@@ -69,14 +75,16 @@ export default function Product(props) {
               className="btn btn-primary"
               onClick={() => {
                 clickedPlus();
-                props.addToAmountList(props);
               }}
               disabled={onTap === false}
             >
               +
             </button>
             <button
-              onClick={() => props.addToBasket(props)}
+              onClick={() => {
+                resetAmount();
+                props.addToBasket(props, amount);
+              }}
               disabled={amount === 0}
               className="btn btn-primary"
             >

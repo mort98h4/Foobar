@@ -12,8 +12,6 @@ function App() {
   const [products, setProducts] = useState([]);
   const [ratings, setRatings] = useState([]);
   const [basket, setBasket] = useState([]);
-  const [amountList, setAmountList] = useState([]);
-  const [amountBasket, setAmountBasket] = useState([]);
 
   // Found on javascript.plainenglish.io START
   // - https://javascript.plainenglish.io/using-reacts-useeffect-hook-to-fetch-data-and-periodically-refresh-that-data-2a69b6d44081
@@ -52,35 +50,18 @@ function App() {
   }, []);
   // Found on javascript.plainenglish.io END
 
-  function addToAmountList(list) {
-    const inList = amountList.findIndex((item) => item.name === list.name);
-    if (inList === -1) {
-      const nextList = { ...list };
-      nextList.amount = 1;
-      setAmountList((prevState) => [...prevState, nextList]);
-    } else {
-      const nextItem = amountList.map((item) => {
-        if (item.name === list.name) {
-          item.amount += 1;
-        }
-        return item;
-      });
-      setAmountList(nextItem);
-    }
-  }
-
-  function addToBasket(payload) {
+  function addToBasket(payload, amount) {
     const inBasket = basket.findIndex((item) => item.name === payload.name);
     if (inBasket === -1) {
       //add
       const nextPayload = { ...payload };
-      nextPayload.amount = 1;
+      nextPayload.amount = amount;
       setBasket((prevState) => [...prevState, nextPayload]);
     } else {
       //if it exists, modify amount
       const nextBasket = basket.map((item) => {
         if (item.name === payload.name) {
-          item.amount += 1;
+          item.amount += amount;
         }
         return item;
       });
@@ -105,11 +86,10 @@ function App() {
             path="beers"
             data={data}
             products={productsCopy}
-            addToAmountList={addToAmountList}
             ratings={ratings}
             addToBasket={addToBasket}
           />
-          <Cart path="cart" basket={basket} amountList={amountList} />
+          <Cart path="cart" basket={basket} addToBasket={addToBasket} />
           <Ratings path="ratings" data={data} ratings={ratings} />
         </Router>
       )}
