@@ -44,8 +44,15 @@ export default class PaymentForm extends React.Component {
       <div id="PaymentForm">
         <form>
           <div className="form-group">
-            <label className=""> Email </label>
-            <input type="email" className="form-control" />
+            <label className="" htmlFor="email">
+              E-MAIL
+            </label>
+            <input
+              type="email"
+              name="email"
+              autoComplete="email"
+              className="form-control"
+            />
             <span>WE WILL ONLY USE YOUR EMAIL TO SEND THE BILL </span>
           </div>
           <Cards
@@ -56,43 +63,44 @@ export default class PaymentForm extends React.Component {
             number={this.state.number}
           />
           <div className="form-group">
-            <label className=""> Card Number </label>
+            <label className=""> CARD NUMBER</label>
             <input
               type="tel"
               name="number"
               className="form-control"
-              placeholder="Card Number"
-              pattern="[\d| ]{16,22}"
+              pattern="[\d| ]{19,22}"
               required
               onChange={this.handleInputChange}
               onFocus={this.handleInputFocus}
             />
+            <span>PLEASE ENTER YOUR CARD NUMBER CORRECTLY </span>
           </div>
           <div className="form-group">
-            <label className=""> Cardholder Name </label>
+            <label className=""> CARDHOLDER NAME </label>
             <input
               type="text"
               name="name"
+              pattern="[A-Za-z]"
               className="form-control"
-              placeholder="Name"
               required
               onChange={this.handleInputChange}
               onFocus={this.handleInputFocus}
             />
+            <span>PLEASE ENTER YOUR FULL NAME </span>
           </div>
           <div className="row">
             <div className="col-6">
-              <label className="">Expiry Date </label>
+              <label className="">EXPIRY DATE </label>
               <input
                 type="tel"
                 name="expiry"
                 className="form-control"
-                placeholder="Valid Thru"
                 pattern="\d\d/\d\d"
                 required
                 onChange={this.handleInputChange}
                 onFocus={this.handleInputFocus}
               />
+              <span>PLEASE ENTER THE EXPERIENCE DATE OF YOUR CARD </span>
             </div>
             <div className="col-6">
               <label className=""> CVC </label>
@@ -100,12 +108,12 @@ export default class PaymentForm extends React.Component {
                 type="tel"
                 name="cvc"
                 className="form-control"
-                placeholder="CVC"
                 pattern="\d{3,4}"
                 required
                 onChange={this.handleInputChange}
                 onFocus={this.handleInputFocus}
               />
+              <span>PLEASE ENTER THE CVC OF YOUR CARD </span>
             </div>
           </div>
 
