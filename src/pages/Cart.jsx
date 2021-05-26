@@ -9,7 +9,7 @@ export default function Cart(props) {
     <section className="container">
       <Foobar />
       <Formfill />
-      <CartItem basket={props.basket} amountList={props.amountList} />
+      <CartItem basket={props.basket} addToBasket={props.addToBasket} />
       <Pay />
       <Confirm />
     </section>
