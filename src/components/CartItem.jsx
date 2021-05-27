@@ -1,47 +1,59 @@
 import React from "react";
 
-export default function CartItem({basket}){
-  
-    return (
-        <section className="">
-        <ul>
-          {basket.map((item) => (
-            <CartList
-              name={item.name}
-              amount={item.amount}
-              key={item.name}
-            />
-          ))}
-
-        </ul>
-      </section>
- 
-    );
+export default function CartItem({ basket, addToBasket, removeFromBasket }) {
+  return (
+    <section className="">
+      <ul>
+        {basket.map((item) => (
+          <CartList
+            name={item.name}
+            amount={item.amount}
+            key={item.name}
+            addToBasket={addToBasket}
+            removeFromBasket={removeFromBasket}
+          />
+        ))}
+      </ul>
+    </section>
+  );
 }
 
 function CartList(props) {
+  let price = props.amount * 45;
 
-    function clickedPlus(evt) {
-        console.log("minus has been clicked"); 
-          return props.amount + 1;
-      }
-      
-      function clickedMinus(evt) {
-        return props.amount - 1;
-      }
-    return (
-
-      <li className="row">
-        <img src="" alt="" className="col"/>
-        <h2 className="col">{props.name}</h2>
-        <div className="col">
-        <button className="btn btn-primary" disabled={props.amount === 0} onClick={clickedMinus}>-</button>
-        {props.amount} 
-        <button className="btn btn-primary" onClick={clickedPlus}>+</button>
-        </div>
-        <p className="col"><span>Stk.{props.price}</span></p>
-        <button className="btn btn-primary col">x</button>
-      </li>
-    );
-  }
-
+  return (
+    <li className="row">
+      <img src="" alt="" className="col" />
+      <h2 className="col">{props.name}</h2>
+      <div className="col">
+        <button
+          className="btn btn-primary"
+          disabled={props.amount === 1}
+          onClick={() => props.addToBasket(props, -1)}
+        >
+          -
+        </button>
+        {props.amount}
+        <button
+          className="btn btn-primary"
+          onClick={() => {
+            props.addToBasket(props, 1);
+          }}
+        >
+          +
+        </button>
+      </div>
+      <p className="col">
+        PRICE <span>{price},-</span>
+      </p>
+      <button
+        className="btn btn-primary col"
+        onClick={() => {
+          props.removeFromBasket(props);
+        }}
+      >
+        x
+      </button>
+    </li>
+  );
+}

@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import logo from './logo.svg'
-import { Router } from "@reach/router"
+import React, { useState, useEffect } from "react";
+import { Router } from "@reach/router";
 
 import Nav from "./components/Nav";
 import Dashboard from "./pages/Dashboard";
@@ -34,50 +33,49 @@ function App() {
     fetch("https://foobarsiwmorten.herokuapp.com")
       .then((res) => res.json())
       .then(setData);
-  }
+  };
   const getProducts = () => {
     fetch("https://foobarsiwmorten.herokuapp.com/beertypes")
       .then((res) => res.json())
       .then(setProducts);
-  }
+  };
   const getRatings = () => {
     fetch("https://foobar-a352.restdb.io/rest/beers", {
       method: "get",
       headers: {
         "Content-Type": "application/json; charset=utf-8",
         "x-apikey": "60a3d37fe3b6e02545edaa27",
-        "cache-control": "no-cache"
-      }
+        "cache-control": "no-cache",
+      },
     })
       .then((res) => res.json())
       .then(setRatings);
-  }
+  };
 
   useEffect(() => {
     getData();
     getProducts();
     getRatings();
-    
+
     const interval = setInterval(() => {
-      getData()
-    }, 10000)
+      getData();
+    }, 10000);
     return () => clearInterval(interval);
   }, []);
   // Found on javascript.plainenglish.io END
 
-
-  function addToBasket(payload) {
+  function addToBasket(payload, amount) {
     const inBasket = basket.findIndex((item) => item.name === payload.name);
     if (inBasket === -1) {
       //add
       const nextPayload = { ...payload };
-      nextPayload.amount = 1;
+      nextPayload.amount = amount;
       setBasket((prevState) => [...prevState, nextPayload]);
     } else {
       //if it exists, modify amount
       const nextBasket = basket.map((item) => {
         if (item.name === payload.name) {
-          item.amount += 1;
+          item.amount += amount;
         }
         return item;
       });
@@ -97,6 +95,10 @@ function App() {
     getRatings();
   }
 
+  function removeFromBasket(props) {
+    console.log(props);
+  }
+
   const productsCopy = [...products];
   // console.log(productsCopy);
   //console.log(data);
@@ -104,24 +106,34 @@ function App() {
 
   return (
     <div className="App">
-          
       <Nav></Nav>
-      {data.length === 0 || ratings.length === 0 ? <Loader/> : 
-      <Router>
-        <Dashboard path="/" data={data} ratings={ratings}/>
-        <Beers path="beers" products={productsCopy} ratings={ratings} addToBasket={addToBasket}/>
-        <Cart path="cart" basket={basket}/>
-        <Ratings path="ratings" order={userOrder} data={data} ratings={ratings} clickSubmitHandler={clickSubmitHandler}/>
-      </Router>}
-      
+      {data.length === 0 || ratings.length === 0 ? (
+        <Loader />
+      ) : (
+        <Router>
+          <Dashboard path="/" data={data} ratings={ratings} />
+          <Beers
+            path="beers"
+            data={data}
+            products={productsCopy}
+            ratings={ratings}
+            addToBasket={addToBasket}
+          />
+          <Cart
+            path="cart"
+            basket={basket}
+            addToBasket={addToBasket}
+            removeFromBasket={removeFromBasket}
+          />
+          <Ratings path="ratings" order={userOrder} data={data} ratings={ratings} clickSubmitHandler={clickSubmitHandler} />
+        </Router>
+      )}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
 
 function Loader() {
-  return(
-    <p>Loading...</p>
-  )
+  return <p>Loading...</p>;
 }
