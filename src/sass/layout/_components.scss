@@ -1,0 +1,10 @@
+@use "../abstracts/vars";
+
+.card {
+    background-color: vars.$screen-color;
+}
+
+.component {
+    background-color: vars.$container-color;
+    border-radius: .5rem;
+}

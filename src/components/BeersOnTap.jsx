@@ -19,12 +19,16 @@ export default function BeersOnTap(props) {
 
     const beerOnTapComponent = beers.map((item) => <BeerOnTap key={item.id} {...item}/>)
     return (
-        <div className="row">
-            <div className="col-12">
-                <h2>Beers on tap</h2>
-            </div>
-            <div className="col-12">
-                {beerOnTapComponent}
+        <div className="row mb-3">
+            <div className="card">
+                <div className="card-body component">
+                    <div className="col-12">
+                        <h2>Beers on tap</h2>
+                    </div>
+                    <div className="col-12">
+                        {beerOnTapComponent}
+                    </div>
+                </div>
             </div>
         </div>
     )

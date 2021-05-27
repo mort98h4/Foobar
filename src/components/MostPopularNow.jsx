@@ -40,12 +40,16 @@ export default function MostPopularNow(props) {
     const beerComponent = topThree.map((item) => <MostPopularNowBeer key={item.name} {...item} topThree={topThree}/>)
 
     return(
-        <div className="row mb-5">
-            <div className="col-12">
-                <h2>Most popular now</h2>
-            </div>
-            <div className="row">
-                {beerComponent}
+        <div className="row mb-3">
+            <div className="card">
+                <div className="card-body component">
+                    <div className="row">
+                        <h2>Most popular now</h2>
+                    </div>
+                    <div className="row">
+                        {beerComponent}
+                    </div>
+                </div>
             </div>
         </div>
     )

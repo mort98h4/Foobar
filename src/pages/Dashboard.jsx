@@ -13,7 +13,7 @@ export default function Dashboard(props) {
             <div className="row">
                 <h1>Dashboard</h1>                
             </div>
-            <div className="row">
+            <div className="row gx-3">
                 <div className="col-12 col-md-6">
                     <NowServing serving={props.data.serving}/>
                     <Queue queue={props.data.queue}/>
