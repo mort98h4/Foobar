@@ -1,7 +1,9 @@
 import React from "react";
 import Bartender from "./Bartender";
+import getTimeLeftToOrder from "../helpers/getTimeLeftToOrder.js";
 
 export default function Bartenders(props) {
+    const leftToOrder = getTimeLeftToOrder(props.bar.closingTime); 
     const bartenderComponent = props.bartenders.map((item) => <Bartender key={item.name} {...item}/>)
     return (
         <div className="row">
@@ -19,7 +21,7 @@ export default function Bartenders(props) {
                     <p>Lygten 12, 2400 KBH NV</p>
                     <p>Closing at {props.bar.closingTime}</p>
                 </address>
-                <p>You have x hours left to order</p>
+                <p>{leftToOrder}</p>
             </div>
         </div>
     )
