@@ -3,3 +3,7 @@
 @use "./components";
 @use './layout';
 @use './abstracts';
+
+img {
+    width: 100%;
+}
