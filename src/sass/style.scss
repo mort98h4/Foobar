@@ -1,8 +1,9 @@
 @use "../../node_modules/bootstrap/scss/bootstrap.scss";
 @use "../../node_modules/react-credit-cards/lib/styles.scss";
+@use './abstracts';
+@use "./base";
 @use "./components";
 @use './layout';
-@use './abstracts';
 
 img {
     width: 100%;
