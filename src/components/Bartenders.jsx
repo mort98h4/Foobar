@@ -18,11 +18,13 @@ export default function Bartenders(props) {
                     <div className="row">
                         <div className="col-12">
                             <address>
-                                <p>{props.bar.name}</p>
-                                <p>Lygten 12, 2400 KBH NV</p>
-                                <p>Closing at {props.bar.closingTime}</p>
+                                <ul>
+                                    <li>{props.bar.name}</li>
+                                    <li>Lygten 12, 2400 KBH NV</li>
+                                    <li>Closing at {props.bar.closingTime}</li>
+                                </ul>
                             </address>
-                            <p>{leftToOrder}</p>
+                            <span>{leftToOrder}</span>
                         </div>
                     </div>
                 </div>
