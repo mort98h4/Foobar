@@ -6,9 +6,7 @@ export default function BeersOnTap(props) {
     const beers = [];
     const Beer = {name: "", ratingAVG: 0, id: 0};
     const addBeers = props.taps.forEach(tap=>{
-        console.log(tap);
         const index = beers.findIndex(item=>item.name === tap.beer);
-        console.log(index);
         if (index === -1) {
             const beer = Object.create(Beer);
             beer.name = tap.beer;
