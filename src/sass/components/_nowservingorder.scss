@@ -1,0 +1,17 @@
+@use "../abstracts/vars";
+
+.nowServingOrder {
+    flex-direction: column;
+    max-width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid vars.$secondary-color;
+    p {
+        margin: 0;
+    }
+    span {
+        font-family: Tangled;
+        font-size: 3rem;
+        line-height: 1;
+    }
+}

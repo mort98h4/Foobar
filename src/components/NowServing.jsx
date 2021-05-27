@@ -10,7 +10,7 @@ export default function NowServing(props) {
                     <div className="row">
                         <h2>Now serving</h2>
                     </div>
-                    <div className="row">
+                    <div className="row justify-content-around">
                         {nowServingComponents}
                     </div>
                 </div>
