@@ -1,0 +1,11 @@
+@use "../abstracts/vars";
+
+.queueOrder {
+    margin-top: .5rem;
+    border-bottom: 2px solid vars.$tertiary-color;
+    p, span {
+        display: inline;
+        font-weight: 600;
+        margin-bottom: 0;
+    }
+}

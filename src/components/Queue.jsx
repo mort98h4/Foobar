@@ -8,7 +8,7 @@ export default function Queue(props) {
             <div className="card">
                 <div className="card-body component">
                     <div className="row">
-                        <h2>Order queue</h2>
+                        <h2 className="mb-0">Order queue</h2>
                     </div>
                     <div className="row">
                         <div className="col-12">
