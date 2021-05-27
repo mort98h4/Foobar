@@ -3,10 +3,20 @@ import Ratings from "../pages/Ratings";
 import BeerOnTap from "./BeerOnTap";
 
 export default function BeersOnTap(props) {
-    const beers = props.taps.map((beer) => {
-        const onTap = props.ratings.findIndex(item=>item.beer_name === beer.beer);
-        beer.ratingAVG = props.ratings[onTap].avg;
-        return beer;
+    const beers = [];
+    const Beer = {name: "", ratingAVG: 0, id: 0};
+    const addBeers = props.taps.forEach(tap=>{
+        console.log(tap);
+        const index = beers.findIndex(item=>item.name === tap.beer);
+        console.log(index);
+        if (index === -1) {
+            const beer = Object.create(Beer);
+            beer.name = tap.beer;
+            beer.id = tap.id;
+            const onTap = props.ratings.findIndex(item=>item.beer_name === tap.beer);
+            beer.ratingAVG = props.ratings[onTap].avg;
+            beers.push(beer);
+        }
     })
 
     const beerOnTapComponent = beers.map((item) => <BeerOnTap key={item.id} {...item}/>)
