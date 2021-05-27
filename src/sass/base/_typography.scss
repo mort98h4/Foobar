@@ -1,0 +1,22 @@
+@use "../abstracts/vars";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;600&display=swap');
+@font-face {
+    font-family: Tangled;
+    src: url(../.././KGTangledUpInYou.ttf);
+}
+
+h1, h2 {
+    font-family: Tangled, sans-serif;
+}
+
+h3, p {
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1, span {
+    color: vars.$primary-color;
+}
+
+h2, h3, p {
+    color: vars.$secondary-color;
+}
