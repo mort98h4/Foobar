@@ -20,6 +20,7 @@ function App() {
   const [ratings, setRatings] = useState([]);
   const [basket, setBasket] = useState([]);
   const [userOrder, setUserOrder] = useState(order);
+  const [totalAmount, setTotalAmount] = useState(0);
 
   // Found on javascript.plainenglish.io START
   // - https://javascript.plainenglish.io/using-reacts-useeffect-hook-to-fetch-data-and-periodically-refresh-that-data-2a69b6d44081
@@ -65,6 +66,7 @@ function App() {
       const nextPayload = { ...payload };
       nextPayload.amount = amount;
       setBasket((prevState) => [...prevState, nextPayload]);
+      setTotalAmount(totalAmount + amount);
     } else {
       //if it exists, modify amount
       const nextBasket = basket.map((item) => {
@@ -74,6 +76,12 @@ function App() {
         return item;
       });
       setBasket(nextBasket);
+      setTotalAmount(totalAmount + amount);
+    }
+    if (totalAmount >= 20) {
+      setTotalAmount(`20+`);
+    } else {
+      setTotalAmount(totalAmount + amount);
     }
   }
 
@@ -100,7 +108,7 @@ function App() {
 
   return (
     <div className="App">
-      <Nav></Nav>
+      <Nav totalAmount={totalAmount} />
       {data.length === 0 || ratings.length === 0 ? (
         <Loader />
       ) : (

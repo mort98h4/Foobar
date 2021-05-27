@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "@reach/router";
 
-export default function Nav() {
+export default function Nav(props) {
   return (
     <nav className="navbar navbar-light bg-light position-fixed">
       <Link className="navbar-brand" to="/">
@@ -14,7 +14,7 @@ export default function Nav() {
         You are number <span>"Hardcodet"</span> in the line
       </h4>
       <Link className="navbar-brand" to="cart">
-        Cart<span>0</span>
+        Cart<span>{props.totalAmount}</span>
       </Link>
       <Link className="navbar-brand" to="ratings">
         Ratings
