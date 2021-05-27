@@ -2,7 +2,7 @@ import React from "react";
 
 export default function CartItem({ basket, addToBasket, removeFromBasket }) {
   return (
-    <section className="">
+    <section id="cartItems">
       <ul>
         {basket.map((item) => (
           <CartList
@@ -14,6 +14,7 @@ export default function CartItem({ basket, addToBasket, removeFromBasket }) {
           />
         ))}
       </ul>
+      <button className="btn btn-primary">Confirm</button>
     </section>
   );
 }

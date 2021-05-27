@@ -7,6 +7,8 @@ import {
   formatExpirationDate,
 } from "./Form.jsx";
 
+import "react-credit-cards/es/styles-compiled.css";
+
 // https://www.npmjs.com/package/react-credit-cards
 export default class PaymentForm extends React.Component {
   state = {
@@ -17,14 +19,8 @@ export default class PaymentForm extends React.Component {
     number: "",
   };
 
-  handleInputFocus = (e) => {
-    this.setState({ focus: e.target.name });
-  };
-
-  handleInputChange = (e) => {
-    const { name, value } = e.target;
-
-    this.setState({ [name]: value });
+  handleInputFocus = (evt) => {
+    this.setState({ focus: evt.target.name });
   };
 
   handleInputChange = ({ target }) => {
@@ -40,9 +36,69 @@ export default class PaymentForm extends React.Component {
   };
 
   render() {
+    const basketItems = this.props.basket;
+
+    function submitPayment() {
+      const form = document.querySelector("#form");
+      const email = form.email.checkValidity();
+      const cardNumber = form.number.checkValidity();
+      const name = form.name.checkValidity();
+      const expiry = form.expiry.checkValidity();
+      const cvc = form.cvc.checkValidity();
+
+      if (
+        email != false &&
+        cardNumber != false &&
+        name != false &&
+        expiry != false &&
+        cvc != false
+      ) {
+        console.log("is valid");
+
+        const nameLowerCase =
+          form.name.value.substring(0, 1).toUpperCase() +
+          form.name.value.substring(1).toLowerCase();
+
+        const firstName = nameLowerCase.substring(
+          0,
+          nameLowerCase.indexOf(" ")
+        );
+
+        //console.log(firstName);
+        //console.log(form.email.value);
+        //console.log(form.number.value);
+        //console.log(form.name.value);
+        //console.log(form.expiry.value);
+        //console.log(form.cvc.value);
+
+        const basketList = [];
+        basketItems.forEach(basketItem);
+
+        function basketItem(item) {
+          const beer = item.name;
+          const amount = item.amount;
+          basketList.push({ name: beer, amount: amount });
+        }
+        post(basketList);
+      } else {
+        console.log("not valid");
+      }
+    }
+    const url = "https://foobarsiwmorten.herokuapp.com";
+    function post(data) {
+      const requestOptions = {
+        method: "POST",
+        body: JSON.stringify(data),
+      };
+      fetch(url, requestOptions)
+        .then((response) => response.json())
+        .then((data) => this.setState({ postId: data.id }));
+      console.log(requestOptions);
+    }
+
     return (
       <div id="PaymentForm">
-        <form>
+        <form id="form">
           <div className="form-group">
             <label className="" htmlFor="email">
               E-MAIL
@@ -52,6 +108,8 @@ export default class PaymentForm extends React.Component {
               name="email"
               autoComplete="email"
               className="form-control"
+              required
+              id="email"
             />
             <span>WE WILL ONLY USE YOUR EMAIL TO SEND THE BILL </span>
           </div>
@@ -72,6 +130,7 @@ export default class PaymentForm extends React.Component {
               required
               onChange={this.handleInputChange}
               onFocus={this.handleInputFocus}
+              id="number"
             />
             <span>PLEASE ENTER YOUR CARD NUMBER CORRECTLY </span>
           </div>
@@ -80,11 +139,11 @@ export default class PaymentForm extends React.Component {
             <input
               type="text"
               name="name"
-              pattern="[A-Za-z]"
               className="form-control"
               required
               onChange={this.handleInputChange}
               onFocus={this.handleInputFocus}
+              id="name"
             />
             <span>PLEASE ENTER YOUR FULL NAME </span>
           </div>
@@ -99,6 +158,7 @@ export default class PaymentForm extends React.Component {
                 required
                 onChange={this.handleInputChange}
                 onFocus={this.handleInputFocus}
+                id="expiry"
               />
               <span>PLEASE ENTER THE EXPERIENCE DATE OF YOUR CARD </span>
             </div>
@@ -112,13 +172,20 @@ export default class PaymentForm extends React.Component {
                 required
                 onChange={this.handleInputChange}
                 onFocus={this.handleInputFocus}
+                id="cvc"
               />
               <span>PLEASE ENTER THE CVC OF YOUR CARD </span>
             </div>
           </div>
 
           <div className="form-actions">
-            <button className="btn btn-primary btn-block">PAY</button>
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={submitPayment}
+            >
+              PAY
+            </button>
           </div>
         </form>
       </div>

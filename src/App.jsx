@@ -9,17 +9,11 @@ import Ratings from "./pages/Ratings";
 import putRatings from "./helpers/putRatings.js";
 
 function App() {
-
   const order = {
     id: 123,
-    order: [
-        "Row 26",
-        "Ruined Childhood",
-        "Steampunk",
-        "Steampunk"
-    ],
-    name: "Siw"
-  }
+    order: ["Row 26", "Ruined Childhood", "Steampunk", "Steampunk"],
+    name: "Siw",
+  };
 
   const [data, setData] = useState([]);
   const [products, setProducts] = useState([]);
@@ -85,13 +79,13 @@ function App() {
 
   function clickSubmitHandler(props) {
     console.log(props);
-    props.forEach(item=>{
+    props.forEach((item) => {
       const status = putRatings(item);
-      console.log(status)
+      console.log(status);
     });
     document.querySelector("#rateBeers").setAttribute("hidden", true);
     document.querySelector("#rateMessage").removeAttribute("hidden");
-    setUserOrder({id: 0, order: [], name: userOrder.name});
+    setUserOrder({ id: 0, order: [], name: userOrder.name });
     getRatings();
   }
 
@@ -125,7 +119,13 @@ function App() {
             addToBasket={addToBasket}
             removeFromBasket={removeFromBasket}
           />
-          <Ratings path="ratings" order={userOrder} data={data} ratings={ratings} clickSubmitHandler={clickSubmitHandler} />
+          <Ratings
+            path="ratings"
+            order={userOrder}
+            data={data}
+            ratings={ratings}
+            clickSubmitHandler={clickSubmitHandler}
+          />
         </Router>
       )}
     </div>
