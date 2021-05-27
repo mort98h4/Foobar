@@ -7,15 +7,16 @@ export default function MostPopularNowBeer(props) {
     const imagePath = cleanImageName(props.name);
     const imageAlt = `Label of ${props.name}`;
     return(
-        <div className="col-4">
+        <div className="mostPopularBeer col-12 col-md-4">
             <div className="row justify-content-center">
-                <div className="col-6">
+                <div className="col-5 col-md-8 col-lg-6 mb-2">
                     <LazyLoad height={200} once={true} offset={100}>
                         <img src={imagePath} alt={imageAlt}></img>
                     </LazyLoad>
                 </div>
                 <div className="col-12 text-center">
-                    <p><span>#{index+1} </span>{props.name}</p>
+                    <span>#{index+1}</span>
+                    <p>{props.name}</p>
                 </div>
             </div>
         </div>
