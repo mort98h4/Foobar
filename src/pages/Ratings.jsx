@@ -3,50 +3,45 @@ import BeerRating from "../components/BeerRating";
 import { Link } from "@reach/router";
 
 export default function Ratings(props) {
-    // Remove identical beer names
-    const newOrder = {
-        id: props.order.id,
-        order: [],
-        name: props.order.name
-    }
+    console.log(props);
+    const rateOrder = {order: []};
 
-    props.order.order.forEach(item => {
-        const firstIndex = props.order.order.indexOf(item);
-        const inNewOrder = newOrder.order.findIndex(newOrderItem=> newOrderItem === item);
-        if (inNewOrder === -1) {
-            newOrder.order.push(props.order.order[firstIndex]);
+    if (props.order.length <= 1 || props.order[0].order.length < 0) {
+        console.log(props.order);
+        const newOrder = props.order.map(entry => {
+            rateOrder.id = entry.id;
+            rateOrder.name = entry.name;
+            console.log(entry.order);
+            entry.order.forEach(orderEntry => {
+                const inRateOrder = rateOrder.order.findIndex(newOrderItem=> newOrderItem === orderEntry);
+                if (inRateOrder === -1) {
+                    rateOrder.order.push(orderEntry);
+                }
+            })
+        });
+
+        const Beer = {
+            _id: "", beer_name: "", ratings: [], sum: "", nratings: "", customer: ""
         }
-    })
 
-    // The order we're going to use
-    const rateOrder = {
-        id: newOrder.id,
-        order: [],
-        name: newOrder.name
-    }
-    const Beer = {
-        _id: "", beer_name: "", ratings: [], sum: "", nratings: ""
-    }
-
-    rateOrder.order = newOrder.order.map(orderItem => {
-        const beer = Object.create(Beer);
-        beer.beer_name = orderItem;
-        const beerIndex = props.ratings.findIndex(item=>item.beer_name === orderItem);
-        beer._id = props.ratings[beerIndex]._id;
-        beer.ratings = props.ratings[beerIndex].ratings;
-        beer.sum = props.ratings[beerIndex].sum;
-        beer.nratings = props.ratings[beerIndex].nratings;
-        return beer;
-    })
+        rateOrder.order = rateOrder.order.map(orderItem => {
+            const beer = Object.create(Beer);
+            beer.beer_name = orderItem;
+            const beerIndex = props.ratings.findIndex(item=>item.beer_name === orderItem);
+            beer._id = props.ratings[beerIndex]._id;
+            beer.ratings = props.ratings[beerIndex].ratings;
+            beer.sum = props.ratings[beerIndex].sum;
+            beer.nratings = props.ratings[beerIndex].nratings;
+            beer.customer = rateOrder.name;
+            return beer;
+        })
+    } 
 
     // Update state when clicking a new rating
     const [beerRating, setBeerRating] = useState([]);
     function clickStarHandler(props) {
-        console.log(props);
-        console.log(event.target.dataset.rating);
         const selectedRating = parseInt(event.target.dataset.rating);
         const dataId = event.target.dataset.id;
-        console.log(selectedRating, dataId)
 
         document.querySelectorAll(`.star[data-id="${dataId}"]`).forEach(star => {
             const rating = parseInt(star.dataset.rating);
@@ -63,7 +58,6 @@ export default function Ratings(props) {
             nextProps.ratings = props.ratings.concat([selectedRating]);
             nextProps.sum += selectedRating;
             nextProps.nratings = nextProps.nratings + 1; 
-            console.log(nextProps);
             setBeerRating(prevState => [...prevState, nextProps]);
         } else {
             const nextRating = beerRating.map(item=>{
@@ -76,7 +70,6 @@ export default function Ratings(props) {
             setBeerRating(nextRating);
         }
     }
-
     const beerRatingComponent = rateOrder.order.map((item) => <BeerRating key={item._id} {...item} clickStarHandler={clickStarHandler}/>)
 
     return(
@@ -84,7 +77,7 @@ export default function Ratings(props) {
             <div className="row">
                 <h1>Ratings</h1>
             </div>
-            {props.order.order.length === 0 ? 
+            {props.order.length === 0 || props.order[0].order.length === 0 ? 
             <div className="row justify-content-center text-center">
                 <div className="col-12 col-md-10">
                     <div className="row">
@@ -107,6 +100,7 @@ export default function Ratings(props) {
                 </div>
             </div>
             :
+            
             <div id="rateBeers" className="row justify-content-center">
                 <div className="col-12 col-md-10">
                     <div className="row">
