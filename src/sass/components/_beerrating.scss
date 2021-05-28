@@ -1,0 +1,12 @@
+@use "../abstracts/vars";
+
+.beerRating {
+    border-bottom: 2px solid vars.$tertiary-color;
+    p {
+        font-size: 1.4rem;
+        font-weight: 600;
+        @media screen and (min-width: 768px) {
+            font-size: 1.8rem;
+        }
+    }
+}
