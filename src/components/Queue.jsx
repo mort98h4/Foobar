@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import QueueOrder from "./QueueOrder";
 
 export default function Queue(props) {
-    const queueComponents = props.queue.map((item => <QueueOrder key={item.id} {...item}/>))
+    const queueComponents = props.queue.map((item => <QueueOrder key={item.id} {...item} userOrder={props.userOrder}/>))
     return(
         <div className="row mb-3">
             <div className="card">

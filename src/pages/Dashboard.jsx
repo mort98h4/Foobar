@@ -6,8 +6,6 @@ import BeersOnTap from "../components/BeersOnTap";
 import MostPopularNow from "../components/MostPopularNow";
 
 export default function Dashboard(props) {
-    // console.log(props);
-    
     return(
         <div className="container pb-5">
             <div className="row">
@@ -16,7 +14,7 @@ export default function Dashboard(props) {
             <div className="row gx-3">
                 <div className="col-12 col-md-6">
                     <NowServing serving={props.data.serving}/>
-                    <Queue queue={props.data.queue}/>
+                    <Queue queue={props.data.queue} userOrder={props.userOrder}/>
                     <Bartenders bartenders={props.data.bartenders} bar={props.data.bar}/>
                 </div>
                 <div className="col-12 col-md-6">
