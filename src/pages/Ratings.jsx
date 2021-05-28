@@ -85,13 +85,28 @@ export default function Ratings(props) {
                 <h1>Ratings</h1>
             </div>
             {props.order.order.length === 0 ? 
-            <div className="row justify-content-center">
-                <div className="col-10">
-                    <h2>Sorry, there are no order to rate.</h2>
-                    <p>Please go to the beers menu to order.</p>
+            <div className="row justify-content-center text-center">
+                <div className="col-12 col-md-10">
+                    <div className="row">
+                        <div className="card">
+                            <div className="card-body component">
+                                <div className="row">
+                                    <div className="col">
+                                        <h2>Sorry, there is no order to rate.</h2>
+                                        <p>Please go to the beers menu to order.</p>
+                                    </div>
+                                </div>
+                                <div className="row justify-content-center">
+                                    <div className="col d-flex justify-content-center">
+                                        <Link className="btn btn-primary" to="../beers">Menu</Link>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div className="col-12 d-flex justify-content-center">
-                    <Link className="btn btn-primary" to="../beers">Menu</Link>
+                    
                 </div>
             </div>
             :
@@ -115,17 +130,31 @@ export default function Ratings(props) {
                 </div>
             </div>
             }
-            <div id="rateMessage" hidden className="row justify-content-center">
-                <div className="col-10">
-                    <h3>Hey {rateOrder.name}!</h3>
-                    <p>Thank you for rating our beers!</p>
-                </div>
-                <div className="col-10">
-                    <p>Still thirsty?</p>
-                    <p>Buy another round!</p>
-                </div>
-                <div className="col-12 d-flex justify-content-center">
-                    <Link className="btn btn-primary" to="../beers">Menu</Link>
+            <div id="rateMessage" hidden className="row justify-content-center text-center">
+                <div className="col-12 col-md-10">
+                    <div className="row">
+                        <div className="card">
+                            <div className="card-body component">
+                                <div className="row">
+                                    <div className="col">
+                                        <h3><span>Hey {rateOrder.name}!</span></h3>
+                                        <p>Thank you for rating our beers!</p>
+                                    </div>
+                                </div>
+                                <div className="row mt-3">
+                                    <div className="col">
+                                        <h4>Still thirsty?</h4>
+                                        <p>Buy another round!</p>
+                                    </div>
+                                </div>
+                                <div className="row justify-content-center">
+                                    <div className="col d-flex justify-content-center">
+                                        <Link className="btn btn-primary" to="../beers">Menu</Link>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
