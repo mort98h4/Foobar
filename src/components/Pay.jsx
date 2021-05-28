@@ -112,14 +112,18 @@ export default class PaymentForm extends React.Component {
         .then((d) => {
           console.log("Posted order.");
           console.log(d);
-          id.push(d.id);
+          // id.push(d.id);
+          console.log(firstName);
+          console.log(order);
+          console.log(d.id);
+          newOrder.push({ id: d.id, order: order, name: name });
         });
 
-      console.log(firstName);
-      console.log(order);
-      console.log(id);
+      // console.log(firstName);
+      // console.log(order);
+      // console.log(d.id);
 
-      newOrder.push({ id: id, order: order, name: name });
+      
       addToUserOrder(newOrder);
     }
 
