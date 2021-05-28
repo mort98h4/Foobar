@@ -13,7 +13,7 @@ function App() {
   const [products, setProducts] = useState([]);
   const [ratings, setRatings] = useState([]);
   const [basket, setBasket] = useState([]);
-  const [userOrder, setUserOrder] = useState([]);
+  const [userOrder, setUserOrder] = useState([{id: 0, order: [], name: ""}]);
   const [totalAmount, setTotalAmount] = useState(0);
 
   // Found on javascript.plainenglish.io START
