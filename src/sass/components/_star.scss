@@ -1,8 +1,15 @@
+@use "../abstracts/vars";
+
+.starContainer {
+    width: 25px;
+    height: 25px;
+    margin: 2px;
+    pointer-events: none;
+}
+
 .star {
-    width: 20px;
-    height: 20px;
-    margin: 10px;
-    border-radius: 50%;
-    border: 2px solid hotpink;
-    background-color: transparent;
+    pointer-events: all;
+    polygon {
+        pointer-events: none;
+    }
 }
