@@ -33,6 +33,7 @@ export default function Ratings(props) {
             beer.sum = props.ratings[beerIndex].sum;
             beer.nratings = props.ratings[beerIndex].nratings;
             beer.customer = rateOrder.name;
+            beer.orderId = rateOrder.id;
             return beer;
         })
     } 

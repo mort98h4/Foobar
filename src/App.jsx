@@ -90,7 +90,7 @@ function App() {
     });
     document.querySelector("#rateBeers").setAttribute("hidden", true);
     document.querySelector("#rateMessage").removeAttribute("hidden");
-    setUserOrder([{order: [], name: props[0].customer}]);
+    setUserOrder([{order: [], name: props[0].customer, id: props[0].orderId}]);
     getRatings();
   }
 
@@ -110,7 +110,7 @@ function App() {
         <Loader />
       ) : (
         <Router>
-          <Dashboard path="/" data={data} ratings={ratings} />
+          <Dashboard path="/" data={data} ratings={ratings} userOrder={userOrder}/>
           <Beers
             path="beers"
             data={data}
