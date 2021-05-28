@@ -3,7 +3,6 @@ import Star from "../components/Star";
 
 export default function roundRatingAvg(rating) {
     const round = Math.round(rating);
-    console.log(round);
     if (round === 1) {
         return (
             <div className="row mb-1">
