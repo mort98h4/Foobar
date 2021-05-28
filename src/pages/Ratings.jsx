@@ -105,9 +105,6 @@ export default function Ratings(props) {
                         </div>
                     </div>
                 </div>
-                <div className="col-12 d-flex justify-content-center">
-                    
-                </div>
             </div>
             :
             <div id="rateBeers" className="row justify-content-center">
