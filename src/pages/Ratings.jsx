@@ -80,7 +80,7 @@ export default function Ratings(props) {
     const beerRatingComponent = rateOrder.order.map((item) => <BeerRating key={item._id} {...item} clickStarHandler={clickStarHandler}/>)
 
     return(
-        <div className="container">
+        <div className="container pb-5">
             <div className="row">
                 <h1>Ratings</h1>
             </div>

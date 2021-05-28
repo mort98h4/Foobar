@@ -9,7 +9,7 @@ export default function Dashboard(props) {
     // console.log(props);
     
     return(
-        <div className="container">
+        <div className="container pb-5">
             <div className="row">
                 <h1>Dashboard</h1>                
             </div>
