@@ -53,7 +53,7 @@ export default function Product(props) {
             <p>Hardcodet rating of 4.5</p>
           </div>
           <div className="col-3 text-end">
-            <p>Hardcodet price of 49,-</p>
+            <p>stk. 49,-</p>
           </div>
         </div>
         <div className="row">

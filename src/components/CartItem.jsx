@@ -1,9 +1,12 @@
 import React from "react";
 
 export default function CartItem({ basket, addToBasket, removeFromBasket }) {
+  const basketLength = basket.length;
+
   return (
-    <section className="">
-      <ul>
+    <section id="cartItems">
+      {basketLength === 0 && <NoOrders />}
+      <ul id="basketItems">
         {basket.map((item) => (
           <CartList
             name={item.name}
@@ -14,12 +17,13 @@ export default function CartItem({ basket, addToBasket, removeFromBasket }) {
           />
         ))}
       </ul>
+      <button className="btn btn-primary">Confirm</button>
     </section>
   );
 }
 
 function CartList(props) {
-  let price = props.amount * 45;
+  let price = props.amount * 49;
 
   return (
     <li className="row">
@@ -55,5 +59,15 @@ function CartList(props) {
         x
       </button>
     </li>
+  );
+}
+
+function NoOrders() {
+  return (
+    <div id="noItemsInBasket">
+      <h2>Hello</h2>
+      <p>You have no beers in your basket</p>
+      <p>Please go to the product List to add the beers you want to order</p>
+    </div>
   );
 }
