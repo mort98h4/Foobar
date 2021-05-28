@@ -9,17 +9,11 @@ import Ratings from "./pages/Ratings";
 import putRatings from "./helpers/putRatings.js";
 
 function App() {
-  const order = {
-    id: 123,
-    order: ["Row 26", "Ruined Childhood", "Steampunk", "Steampunk"],
-    name: "Siw",
-  };
-
   const [data, setData] = useState([]);
   const [products, setProducts] = useState([]);
   const [ratings, setRatings] = useState([]);
   const [basket, setBasket] = useState([]);
-  const [userOrder, setUserOrder] = useState(order); // tomt array
+  const [userOrder, setUserOrder] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
 
   // Found on javascript.plainenglish.io START
@@ -60,9 +54,8 @@ function App() {
   // Found on javascript.plainenglish.io END
 
   function addToUserOrder(props) {
-    console.log(props);
+    setUserOrder(props);
   }
-  // 1. setUserOrder
 
   function addToBasket(payload, amount) {
     const inBasket = basket.findIndex((item) => item.name === payload.name);
@@ -91,14 +84,13 @@ function App() {
   }
 
   function clickSubmitHandler(props) {
-    console.log(props);
     props.forEach((item) => {
       const status = putRatings(item);
       console.log(status);
     });
     document.querySelector("#rateBeers").setAttribute("hidden", true);
     document.querySelector("#rateMessage").removeAttribute("hidden");
-    setUserOrder({ id: 0, order: [], name: userOrder.name });
+    setUserOrder([{order: [], name: props[0].customer}]);
     getRatings();
   }
 
