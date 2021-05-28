@@ -42,15 +42,18 @@ export default function Ratings(props) {
     // Update state when clicking a new rating
     const [beerRating, setBeerRating] = useState([]);
     function clickStarHandler(props) {
+        console.log(props);
+        console.log(event.target.dataset.rating);
         const selectedRating = parseInt(event.target.dataset.rating);
         const dataId = event.target.dataset.id;
+        console.log(selectedRating, dataId)
 
         document.querySelectorAll(`.star[data-id="${dataId}"]`).forEach(star => {
             const rating = parseInt(star.dataset.rating);
             if (rating <= selectedRating) {
-                star.style.backgroundColor = "hotpink";
+                star.style.fill = "#f2b705";
             } else {
-                star.style.backgroundColor = "transparent";
+                star.style.fill = "transparent";
             }
         })
 
@@ -93,12 +96,22 @@ export default function Ratings(props) {
             </div>
             :
             <div id="rateBeers" className="row justify-content-center">
-                <div className="col-10">
-                    <h2>Order {rateOrder.id}</h2>
-                    {beerRatingComponent}
-                </div>
-                <div className="col-12 d-flex justify-content-center">
-                    <button id="submitRatings" className="btn btn-primary" disabled={beerRating.length === 0} onClick={(e) => props.clickSubmitHandler(beerRating)}>Submit ratings</button>
+                <div className="col-12 col-md-10">
+                    <div className="row">
+                        <div className="card">
+                            <div className="card-body component">
+                                <div className="row">
+                                    <h2>Order {rateOrder.id}</h2>
+                                </div>
+                                {beerRatingComponent}
+                                <div className="row mt-3 justify-content-center">
+                                    <div className="col-12 d-flex justify-content-center">
+                                        <button id="submitRatings" className="btn btn-primary" disabled={beerRating.length === 0} onClick={(e) => props.clickSubmitHandler(beerRating)}>Submit ratings</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
                 </div>
             </div>
             }
