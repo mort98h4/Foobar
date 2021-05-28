@@ -3,7 +3,6 @@ import LazyLoad from 'react-lazyload';
 import cleanImageName from "../helpers/cleanImageName.js";
 
 export default function BeerRating(props) {
-    console.log(props);
     const imagePath = cleanImageName(props.beer_name);
     const imageAlt = `Label of ${props.beer_name}`;
     return(
