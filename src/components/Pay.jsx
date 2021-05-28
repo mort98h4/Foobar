@@ -36,6 +36,9 @@ export default class PaymentForm extends React.Component {
   };
 
   render() {
+    //const userOrder = this.props.userOrder;
+    //console.log(userOrder);
+    const addToUserOrder = this.props.addToUserOrder;
     const basketItems = this.props.basket;
 
     function submitPayment() {
@@ -53,8 +56,6 @@ export default class PaymentForm extends React.Component {
         expiry != false &&
         cvc != false
       ) {
-        console.log("is valid");
-
         const nameLowerCase =
           form.name.value.substring(0, 1).toUpperCase() +
           form.name.value.substring(1).toLowerCase();
@@ -73,27 +74,53 @@ export default class PaymentForm extends React.Component {
 
         const basketList = [];
         basketItems.forEach(basketItem);
-
         function basketItem(item) {
           const beer = item.name;
           const amount = item.amount;
           basketList.push({ name: beer, amount: amount });
         }
-        post(basketList);
+
+        const orderList = [];
+        basketList.forEach((item) => {
+          for (let i = 0; i < item.amount; i++) {
+            orderList.push(item.name);
+          }
+        });
+
+        post(basketList, firstName, orderList);
       } else {
         console.log("not valid");
       }
     }
-    const url = "https://foobarsiwmorten.herokuapp.com";
-    function post(data) {
-      const requestOptions = {
-        method: "POST",
+
+    async function post(data, firstName, orderList) {
+      const newOrder = [];
+      const id = [];
+      const name = firstName;
+      const order = orderList;
+      const url = "https://foobarsiwmorten.herokuapp.com/order";
+
+      fetch(url, {
+        method: "post",
         body: JSON.stringify(data),
-      };
-      fetch(url, requestOptions)
-        .then((response) => response.json())
-        .then((data) => this.setState({ postId: data.id }));
-      console.log(requestOptions);
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((d) => {
+          console.log("Posted order.");
+          console.log(d);
+          id.push(d.id);
+        });
+
+      console.log(firstName);
+      console.log(order);
+      console.log(id);
+
+      newOrder.push({ id: id, order: order, name: name });
+      addToUserOrder(newOrder);
     }
 
     return (

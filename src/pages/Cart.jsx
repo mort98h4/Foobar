@@ -14,7 +14,7 @@ export default function Cart(props) {
         addToBasket={props.addToBasket}
         removeFromBasket={props.removeFromBasket}
       />
-      <Pay basket={props.basket} />
+      <Pay basket={props.basket} addToUserOrder={props.addToUserOrder} />
       <Confirm />
     </section>
   );

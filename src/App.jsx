@@ -19,7 +19,7 @@ function App() {
   const [products, setProducts] = useState([]);
   const [ratings, setRatings] = useState([]);
   const [basket, setBasket] = useState([]);
-  const [userOrder, setUserOrder] = useState(order);
+  const [userOrder, setUserOrder] = useState(order); // tomt array
   const [totalAmount, setTotalAmount] = useState(0);
 
   // Found on javascript.plainenglish.io START
@@ -58,6 +58,11 @@ function App() {
     return () => clearInterval(interval);
   }, []);
   // Found on javascript.plainenglish.io END
+
+  function addToUserOrder(props) {
+    console.log(props);
+  }
+  // 1. setUserOrder
 
   function addToBasket(payload, amount) {
     const inBasket = basket.findIndex((item) => item.name === payload.name);
@@ -126,6 +131,7 @@ function App() {
             basket={basket}
             addToBasket={addToBasket}
             removeFromBasket={removeFromBasket}
+            addToUserOrder={addToUserOrder}
           />
           <Ratings
             path="ratings"
