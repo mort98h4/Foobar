@@ -23,7 +23,7 @@
     // }
 }
 
-button:focus, [type=button]:focus, button:hover, [type=button]:hover {
+button:focus, [type=button]:focus, button:hover, [type=button]:hover, a.btn:focus, a.btn:hover {
     outline: none !important;
     background-color: transparent !important;
     border-color: vars.$hover-color !important;
