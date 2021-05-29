@@ -109,6 +109,7 @@ function App() {
         <Loader />
       ) : (
         <div>
+          <Nav totalAmount={totalAmount} queue={data.queue} serving={data.serving} userOrder={userOrder}/>
           <header className="row text-center pt-3">
             <h1>{data.bar.name}</h1>
           </header>
@@ -138,7 +139,6 @@ function App() {
           </Router>
         </div>
       )}
-      <Nav totalAmount={totalAmount} queue={data.queue} userOrder={userOrder[0].id}/>
     </div>
   );
 }
