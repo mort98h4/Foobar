@@ -21,7 +21,7 @@ export default function Nav(props) {
   }
 
   return (
-    <nav className="navbar navbar-light position-fixed text-center">
+    <nav className="mainNav navbar navbar-light position-fixed text-center">
       <Link className="navbar-brand" to="/">
         <div className="iconContainer">
           <svg className="dashboardIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="#FCF8EF" stroke="#FCF8EF" strokeWidth="1" 
