@@ -10,7 +10,7 @@ h1, h2 {
     font-family: Tangled, sans-serif;
 }
 
-h3, h4, p {
+h3, h4, p, a {
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -25,10 +25,15 @@ h2 {
 }
 
 // Font colors
-h1, h4, span {
+h1, h4, span, a {
     color: vars.$primary-color;
 }
 
 h2, h3, p {
     color: vars.$secondary-color;
+}
+
+// Font weights 
+a {
+    font-weight: 600;
 }
