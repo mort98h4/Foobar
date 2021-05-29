@@ -3,15 +3,12 @@ import BeerRating from "../components/BeerRating";
 import { Link } from "@reach/router";
 
 export default function Ratings(props) {
-    console.log(props);
     const rateOrder = {order: []};
 
     if (props.order.length <= 1 || props.order[0].order.length < 0) {
-        console.log(props.order);
         const newOrder = props.order.map(entry => {
             rateOrder.id = entry.id;
             rateOrder.name = entry.name;
-            console.log(entry.order);
             entry.order.forEach(orderEntry => {
                 const inRateOrder = rateOrder.order.findIndex(newOrderItem=> newOrderItem === orderEntry);
                 if (inRateOrder === -1) {
