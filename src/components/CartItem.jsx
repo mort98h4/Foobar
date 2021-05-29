@@ -1,23 +1,12 @@
 import React from "react";
-
-export let hideForm = true;
+import { Link } from "@reach/router";
 
 export default function CartItem({ basket, addToBasket, removeFromBasket }) {
   const basketLength = basket.length;
 
-  function hideBasket() {
-    document.querySelector("#basketItems").setAttribute("hidden", true);
-    document.querySelector("#hideBasketBtn").setAttribute("hidden", true);
-  }
-
-  function displayForm(hideForm) {
-    hideForm = false;
-    console.log(hideForm);
-  }
-
   return (
     <section id="cartItems">
-      {basketLength === 0 && <NoOrders />}
+      <div id="noItemsInBasket">{basketLength === 0 && <NoOrders />}</div>
       <ul id="basketItems">
         {basket.map((item) => (
           <CartList
@@ -29,16 +18,6 @@ export default function CartItem({ basket, addToBasket, removeFromBasket }) {
           />
         ))}
       </ul>
-      <button
-        className="btn btn-primary"
-        id="hideBasketBtn"
-        onClick={() => {
-          hideBasket();
-          displayForm(hideForm);
-        }}
-      >
-        Confirm
-      </button>
     </section>
   );
 }
@@ -85,10 +64,11 @@ function CartList(props) {
 
 function NoOrders() {
   return (
-    <div id="noItemsInBasket">
+    <div>
       <h2>Hello</h2>
       <p>You have no beers in your basket</p>
       <p>Please go to the product List to add the beers you want to order</p>
+      <Link to="../beers"> View beers</Link>
     </div>
   );
 }

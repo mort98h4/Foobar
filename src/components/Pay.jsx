@@ -39,6 +39,8 @@ export default class PaymentForm extends React.Component {
     const addToUserOrder = this.props.addToUserOrder;
     const basketItems = this.props.basket;
     const resetBasket = this.props.resetBasket;
+    const displayBasket = this.props.displayBasket;
+    const ThankYouForOrdering = this.props.ThankYouForOrdering;
 
     function submitPayment() {
       const form = document.querySelector("#form");
@@ -88,7 +90,6 @@ export default class PaymentForm extends React.Component {
 
     async function post(data, firstName, orderList) {
       const newOrder = [];
-      const id = [];
       const name = firstName;
       const order = orderList;
       const url = "https://foobarsiwmorten.herokuapp.com/order";
@@ -105,7 +106,6 @@ export default class PaymentForm extends React.Component {
         .then((d) => {
           console.log("Posted order.");
           console.log(d);
-          // id.push(d.id);
           console.log(firstName);
           console.log(order);
           console.log(d.id);
@@ -116,7 +116,6 @@ export default class PaymentForm extends React.Component {
       //console.log(order);
       //console.log(id);
 
-      
       addToUserOrder(newOrder);
       resetBasket(basketItems);
     }
@@ -130,7 +129,7 @@ export default class PaymentForm extends React.Component {
     }
 
     return (
-      <div id="PaymentForm">
+      <div id="PaymentForm" hidden>
         <form id="form">
           <div className="form-group">
             <label className="" htmlFor="email">
@@ -211,11 +210,25 @@ export default class PaymentForm extends React.Component {
             </div>
           </div>
 
+          <button
+            type="button"
+            className="btn btn-primary"
+            id="hideBasketBtn"
+            onClick={() => {
+              displayBasket();
+            }}
+          >
+            Change basket
+          </button>
+
           <div className="form-actions">
             <button
               type="button"
               className="btn btn-primary"
-              onClick={submitPayment}
+              onClick={() => {
+                ThankYouForOrdering();
+                submitPayment();
+              }}
             >
               PAY
             </button>
