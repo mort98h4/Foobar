@@ -1,7 +1,19 @@
 import React from "react";
 
+export let hideForm = true;
+
 export default function CartItem({ basket, addToBasket, removeFromBasket }) {
   const basketLength = basket.length;
+
+  function hideBasket() {
+    document.querySelector("#basketItems").setAttribute("hidden", true);
+    document.querySelector("#hideBasketBtn").setAttribute("hidden", true);
+  }
+
+  function displayForm(hideForm) {
+    hideForm = false;
+    console.log(hideForm);
+  }
 
   return (
     <section id="cartItems">
@@ -17,7 +29,16 @@ export default function CartItem({ basket, addToBasket, removeFromBasket }) {
           />
         ))}
       </ul>
-      <button className="btn btn-primary">Confirm</button>
+      <button
+        className="btn btn-primary"
+        id="hideBasketBtn"
+        onClick={() => {
+          hideBasket();
+          displayForm(hideForm);
+        }}
+      >
+        Confirm
+      </button>
     </section>
   );
 }

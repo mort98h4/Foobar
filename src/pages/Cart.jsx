@@ -3,8 +3,11 @@ import CartItem from "../components/CartItem";
 import Pay from "../components/Pay";
 import Confirm from "../components/Confirm";
 import Foobar from "../components/Foobar";
+import { hideForm } from "../components/CartItem";
 
 export default function Cart(props) {
+  //let hideForm = true;
+
   return (
     <section className="container pb-5-rem">
       <Foobar />
@@ -13,8 +16,16 @@ export default function Cart(props) {
         basket={props.basket}
         addToBasket={props.addToBasket}
         removeFromBasket={props.removeFromBasket}
+        displayForm={displayForm}
       />
-      <Pay basket={props.basket} addToUserOrder={props.addToUserOrder} />
+      {hideForm === false && (
+        <Pay
+          basket={props.basket}
+          addToUserOrder={props.addToUserOrder}
+          resetBasket={props.resetBasket}
+        />
+      )}
+
       <Confirm />
     </section>
   );

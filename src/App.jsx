@@ -83,6 +83,14 @@ function App() {
     }
   }
 
+  function resetBasket(payload) {
+    console.log("reset basket");
+    console.log(payload);
+    payload.length = 0;
+
+    setTotalAmount(0);
+  }
+
   function clickSubmitHandler(props) {
     props.forEach((item) => {
       const status = putRatings(item);
@@ -130,6 +138,7 @@ function App() {
               addToBasket={addToBasket}
               removeFromBasket={removeFromBasket}
               addToUserOrder={addToUserOrder}
+              resetBasket={resetBasket}
             />
             <Ratings
               path="ratings"

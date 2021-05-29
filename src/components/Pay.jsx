@@ -36,10 +36,9 @@ export default class PaymentForm extends React.Component {
   };
 
   render() {
-    //const userOrder = this.props.userOrder;
-    //console.log(userOrder);
     const addToUserOrder = this.props.addToUserOrder;
     const basketItems = this.props.basket;
+    const resetBasket = this.props.resetBasket;
 
     function submitPayment() {
       const form = document.querySelector("#form");
@@ -65,13 +64,6 @@ export default class PaymentForm extends React.Component {
           nameLowerCase.indexOf(" ")
         );
 
-        //console.log(firstName);
-        //console.log(form.email.value);
-        //console.log(form.number.value);
-        //console.log(form.name.value);
-        //console.log(form.expiry.value);
-        //console.log(form.cvc.value);
-
         const basketList = [];
         basketItems.forEach(basketItem);
         function basketItem(item) {
@@ -88,6 +80,7 @@ export default class PaymentForm extends React.Component {
         });
 
         post(basketList, firstName, orderList);
+        resetFrom();
       } else {
         console.log("not valid");
       }
@@ -119,12 +112,21 @@ export default class PaymentForm extends React.Component {
           newOrder.push({ id: d.id, order: order, name: name });
         });
 
-      // console.log(firstName);
-      // console.log(order);
-      // console.log(d.id);
+      //console.log(firstName);
+      //console.log(order);
+      //console.log(id);
 
       
       addToUserOrder(newOrder);
+      resetBasket(basketItems);
+    }
+
+    function resetFrom() {
+      form.email.value = "";
+      form.number.value = "";
+      form.name.value = "";
+      form.expiry.value = "";
+      form.cvc.value = "";
     }
 
     return (
