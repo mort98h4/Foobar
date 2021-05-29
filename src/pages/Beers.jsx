@@ -32,7 +32,7 @@ export default function Beers(props) {
   }
 
   return (
-    <main className="container">
+    <main className="container pb-5-rem">
       <div>
         <button className="btn btn-primary" onClick={() => toggleSort("price")}>
           Filter Kind

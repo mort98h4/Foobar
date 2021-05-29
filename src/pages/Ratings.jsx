@@ -71,7 +71,7 @@ export default function Ratings(props) {
     const beerRatingComponent = rateOrder.order.map((item) => <BeerRating key={item._id} {...item} clickStarHandler={clickStarHandler}/>)
 
     return(
-        <div className="container pb-5">
+        <div className="container pb-5-rem">
             {props.order.length === 0 || props.order[0].order.length === 0 ? 
             <div className="row justify-content-center text-center">
                 <div className="col-12 col-md-10">

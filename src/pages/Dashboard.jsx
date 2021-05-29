@@ -7,7 +7,7 @@ import MostPopularNow from "../components/MostPopularNow";
 
 export default function Dashboard(props) {
     return(
-        <div className="container pb-5">
+        <div className="container pb-5-rem">
             <div className="row gx-3">
                 <div className="col-12 col-md-6">
                     <NowServing serving={props.data.serving}/>

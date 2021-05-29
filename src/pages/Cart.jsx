@@ -6,7 +6,7 @@ import Foobar from "../components/Foobar";
 
 export default function Cart(props) {
   return (
-    <section className="container">
+    <section className="container pb-5-rem">
       <Foobar />
       <Formfill />
       <CartItem
