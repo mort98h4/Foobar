@@ -38,6 +38,7 @@ export default class PaymentForm extends React.Component {
   render() {
     const addToUserOrder = this.props.addToUserOrder;
     const basketItems = this.props.basket;
+    const resetBasket = this.props.resetBasket;
 
     function submitPayment() {
       const form = document.querySelector("#form");
@@ -113,6 +114,7 @@ export default class PaymentForm extends React.Component {
 
       newOrder.push({ id: id, order: order, name: name });
       addToUserOrder(newOrder);
+      resetBasket(basketItems);
     }
 
     function resetFrom() {

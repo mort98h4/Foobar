@@ -90,6 +90,18 @@ function App() {
     }
   }
 
+  function resetBasket(payload) {
+    console.log("reset basket");
+    console.log(payload);
+    payload.length = 0;
+    //const nextPayload = { ...payload };
+    //nextPayload.length = 0;
+    //setBasket((prevState) => [...prevState, nextPayload]);
+    setTotalAmount((prevState) => {
+      return prevState * 0;
+    });
+  }
+
   function clickSubmitHandler(props) {
     console.log(props);
     props.forEach((item) => {
@@ -132,6 +144,7 @@ function App() {
             addToBasket={addToBasket}
             removeFromBasket={removeFromBasket}
             addToUserOrder={addToUserOrder}
+            resetBasket={resetBasket}
           />
           <Ratings
             path="ratings"
