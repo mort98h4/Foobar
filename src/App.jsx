@@ -105,35 +105,40 @@ function App() {
 
   return (
     <div className="App">
-      <Nav totalAmount={totalAmount} />
       {data.length === 0 || ratings.length === 0 ? (
         <Loader />
       ) : (
-        <Router>
-          <Dashboard path="/" data={data} ratings={ratings} userOrder={userOrder}/>
-          <Beers
-            path="beers"
-            data={data}
-            products={productsCopy}
-            ratings={ratings}
-            addToBasket={addToBasket}
-          />
-          <Cart
-            path="cart"
-            basket={basket}
-            addToBasket={addToBasket}
-            removeFromBasket={removeFromBasket}
-            addToUserOrder={addToUserOrder}
-          />
-          <Ratings
-            path="ratings"
-            order={userOrder}
-            data={data}
-            ratings={ratings}
-            clickSubmitHandler={clickSubmitHandler}
-          />
-        </Router>
+        <div>
+          <header className="row text-center pt-3">
+            <h1>{data.bar.name}</h1>
+          </header>
+          <Router>
+            <Dashboard path="/" data={data} ratings={ratings} userOrder={userOrder}/>
+            <Beers
+              path="beers"
+              data={data}
+              products={productsCopy}
+              ratings={ratings}
+              addToBasket={addToBasket}
+            />
+            <Cart
+              path="cart"
+              basket={basket}
+              addToBasket={addToBasket}
+              removeFromBasket={removeFromBasket}
+              addToUserOrder={addToUserOrder}
+            />
+            <Ratings
+              path="ratings"
+              order={userOrder}
+              data={data}
+              ratings={ratings}
+              clickSubmitHandler={clickSubmitHandler}
+            />
+          </Router>
+        </div>
       )}
+      <Nav totalAmount={totalAmount} />
     </div>
   );
 }
