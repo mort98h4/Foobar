@@ -108,10 +108,12 @@ function App() {
       {data.length === 0 || ratings.length === 0 ? (
         <Loader />
       ) : (
-        <div>
+        <div className="container-fluid p-0">
           <Nav totalAmount={totalAmount} queue={data.queue} serving={data.serving} userOrder={userOrder}/>
           <header className="row text-center pt-3">
-            <h1>{data.bar.name}</h1>
+            <div className="col">
+              <h1>{data.bar.name}</h1>
+            </div>
           </header>
           <Router>
             <Dashboard path="/" data={data} ratings={ratings} userOrder={userOrder}/>
