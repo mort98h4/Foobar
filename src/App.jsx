@@ -138,7 +138,7 @@ function App() {
           </Router>
         </div>
       )}
-      <Nav totalAmount={totalAmount} />
+      <Nav totalAmount={totalAmount} queue={data.queue} userOrder={userOrder[0].id}/>
     </div>
   );
 }
