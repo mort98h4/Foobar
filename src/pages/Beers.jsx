@@ -33,27 +33,33 @@ export default function Beers(props) {
 
   return (
     <main className="container pb-5-rem">
-      <div>
-        <button className="btn btn-primary" onClick={() => toggleSort("price")}>
-          Filter Kind
-        </button>
-        <button className="btn btn-primary" onClick={() => toggleSort("alc")}>
-          Filter Alc
-        </button>
-        <button
-          className="btn btn-primary"
-          onClick={() => toggleSort("category")}
-        >
-          Filter Category
-        </button>
-        <button
-          className="btn btn-primary"
-          onClick={() => toggleSort("popularity")}
-        >
-          Filter Popularity
-        </button>
+      <div className="row justify-content-center">
+        <nav className="col-10 d-md-flex justify-content-around beersNav">
+          <button className="btn btn-primary" onClick={() => toggleSort("price")}>
+            Filter Kind
+          </button>
+          <button className="btn btn-primary" onClick={() => toggleSort("alc")}>
+            Filter Alc
+          </button>
+          <button
+            className="btn btn-primary"
+            onClick={() => toggleSort("category")}
+          >
+            Filter Category
+          </button>
+          <button
+            className="btn btn-primary"
+            onClick={() => toggleSort("popularity")}
+          >
+            Filter Popularity
+          </button>
+        </nav>
       </div>
-      {productComponents}
+      <div className="row justify-content-center">
+        <div className="col-12 col-md-10">
+          {productComponents}
+        </div>
+      </div>
     </main>
   );
 }
