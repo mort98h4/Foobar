@@ -1,7 +1,53 @@
+@use "../abstracts/vars";
+
 /* styles for navigation - must have its own doc*/
 nav {
   width: 100vw;
   justify-content: space-evenly !important;
   z-index: 99 !important;
   bottom: 0 !important;
+  border-top: 2px solid vars.$primary-color;
+  background-color: vars.$container-color;
+  .navbar-brand {
+    margin-right: 0;
+    div {
+      position: relative;
+      .totalAmount {
+        position: absolute;
+        top: -5px;
+        right: -25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 50%;
+        background-color: vars.$primary-color;
+        color: vars.$screen-color;
+        font-size: 1rem;
+        font-weight: 600;
+        font-family: 'Montserrat', sans-serif;
+      }
+    }
+  }
+  a[aria-current="page"] {
+    .dashboardIcon, .beerIcon {
+      fill: vars.$primary-color;
+      stroke: vars.$primary-color;
+    }
+    .cartIcon {
+      fill: vars.$primary-color;
+    }
+    .starIcon {
+      stroke: vars.$primary-color;
+    }
+  }
+  .iconContainer {
+    width: 30px;
+    height: 30px;
+    margin: 2px;
+  }
+  .navbar-text {
+    margin-bottom: 0;
+  }
 }
