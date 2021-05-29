@@ -8,3 +8,11 @@ address {
         padding: 0;
     }
 }
+
+.bartender {
+    img {
+        // clip-path: circle(50% at 50% 50%);
+        border-radius: 50%;
+        border: 2px solid vars.$secondary-color;
+    }
+}
