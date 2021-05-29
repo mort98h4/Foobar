@@ -94,12 +94,8 @@ function App() {
     console.log("reset basket");
     console.log(payload);
     payload.length = 0;
-    //const nextPayload = { ...payload };
-    //nextPayload.length = 0;
-    //setBasket((prevState) => [...prevState, nextPayload]);
-    setTotalAmount((prevState) => {
-      return prevState * 0;
-    });
+
+    setTotalAmount(0);
   }
 
   function clickSubmitHandler(props) {

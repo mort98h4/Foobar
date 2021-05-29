@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Carousel } from "3d-react-carousal";
 //import BeerRating from "./BeerRating";
 
 export default function Product(props) {
@@ -30,6 +31,25 @@ export default function Product(props) {
       return onTap;
     }
   });
+
+  let slides = [
+    <div className="carousel" key={`${props.name}+1`}>
+      <h2>Aroma</h2>
+      <p>{props.description.aroma}</p>
+    </div>,
+    <div className="carousel" key={`${props.name}+2`}>
+      <h2>Appearance</h2>
+      <p>{props.description.appearance}</p>
+    </div>,
+    <div className="carousel" key={`${props.name}+3`}>
+      <h2>Flavor</h2>
+      <p>{props.description.flavor}</p>
+    </div>,
+    <div className="carousel" key={`${props.name}+4`}>
+      <h2>Mouthfeel</h2>
+      <p>{props.description.mouthfeel}</p>
+    </div>,
+  ];
 
   return (
     <article className="row pt-3">
@@ -92,14 +112,15 @@ export default function Product(props) {
             </button>
           </div>
         </div>
-        <div className="row justify-content-center">
-          <div className="col">
-            <button className="btn btn-primary w-100" type="button">
-              View more
-            </button>
-          </div>
+      </div>
+      <div className="row justify-content-center">
+        <div className="col">
+          <button className="btn btn-primary w-100" type="button">
+            View more
+          </button>
         </div>
       </div>
+      <Carousel slides={slides} autoplay={false} interval={1000} />
     </article>
   );
 }
