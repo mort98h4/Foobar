@@ -1,69 +1,12 @@
 import React, { useState } from "react";
 import { Carousel } from "3d-react-carousal";
+import LazyLoad from 'react-lazyload';
+import cleanImageName from "../helpers/cleanImageName.js";
 //import BeerRating from "./BeerRating";
 
 export default function Product(props) {
   const [amount, setAmount] = useState(0);
   let onTap = false;
-
-  /*
-  const accordingHeaderH2 = document.querySelector("#accordionExample h2");
-  const accordingHeaderBtn = document.querySelector("#accordionExample h2 button")
-
-  if (accordingHeaderH2 != null) {
-    if (props.name == "El Hefe") {
-      accordingHeaderH2.setAttribute("id", "headingOne");
-      accordingHeaderBtn.setAttribute("data-bs-target", "collapseOne");
-      console.log(props.name);
-      console.log("1");
-    } else if (props.name == "Fairy Tale Ale") {
-      accordingHeaderH2.setAttribute("id", "headingTwo");
-      accordingHeaderBtn.setAttribute("data-bs-target", "collapseTwo");
-      console.log(props.name);
-      console.log("2");
-    } else if (props.name == "GitHop") {
-      accordingHeaderH2.setAttribute("id", "headingThree");
-      accordingHeaderBtn.setAttribute("data-bs-target", "collapseThree");
-      console.log(props.name);
-      console.log("3");
-    } else if (props.name == "Hollaback Lager") {
-      accordingHeaderH2.setAttribute("id", "headingFour");
-      accordingHeaderBtn.setAttribute("data-bs-target", "collapseFour");
-      console.log(props.name);
-      console.log("4");
-    } else if (props.name == "Hoppily Ever After") {
-      accordingHeaderH2.setAttribute("id", "headingFive");
-      accordingHeaderBtn.setAttribute("data-bs-target", "collapseFive");
-      console.log(props.name);
-      console.log("5");
-    } else if (props.name == "Mowintime") {
-      accordingHeaderH2.setAttribute("id", "headingSix");
-      accordingHeaderBtn.setAttribute("data-bs-target", "collapseSix");
-      console.log(props.name);
-      console.log("6");
-    } else if (props.name == "Row 26") {
-      accordingHeaderH2.setAttribute("id", "headingSeven");
-      accordingHeaderBtn.setAttribute("data-bs-target", "collapseSeven");
-      console.log(props.name);
-      console.log("7");
-    } else if (props.name == "Ruined Childhood") {
-      accordingHeaderH2.setAttribute("id", "headingEight");
-      accordingHeaderBtn.setAttribute("data-bs-target", "collapseEight");
-      console.log(props.name);
-      console.log("8");
-    } else if (props.name == "Sleighride") {
-      accordingHeaderH2.setAttribute("id", "headingNine");
-      accordingHeaderBtn.setAttribute("data-bs-target", "collapseNine");
-      console.log(props.name);
-      console.log("9");
-    } else if (props.name == "Steampunk") {
-      accordingHeaderH2.setAttribute("id", "headingTen");
-      accordingHeaderBtn.setAttribute("data-bs-target", "collapseTen");
-      console.log(props.name);
-      console.log("10");
-    }
-  }
-  */
 
   function clickedPlus() {
     setAmount((prevState) => {
@@ -110,95 +53,126 @@ export default function Product(props) {
     </div>,
   ];
 
+  const imagePath = cleanImageName(props.name);
+  const imageAlt = `Label of ${props.name}`;
+
+  const lowerCaseName = getNewId(props.name);
+  const accordionId = `${lowerCaseName}Accordion`;
+  const dataBsParent = `#${accordionId}`;
+  const headingId = `${lowerCaseName}Heading`;
+  const collapseId = `${lowerCaseName}Collapse`;
+  const dataBsTarget = `#${collapseId}`
+
   return (
-    <article className="row pt-3">
-      <div className="col-12 col-md-4">
-        <img src="" alt=""></img>
-      </div>
-      <div className="col-12 col-md-8">
-        <div className="row">
-          <div className="col">
-            <h2>{props.name}</h2>
+    <article className="row mb-3">
+      <div className="card">
+        <div className="card-body component">
+          <div className="row pb-3 justify-content-center">
+            <div className="col-4 col-md-3 pb-3 pb-md-0">
+              <LazyLoad height={200} once={true} offset={100}>
+                <img src={imagePath} alt={imageAlt}></img>
+              </LazyLoad>
+            </div>
+            <div className="col-12 col-md-9">
+              <div className="row text-center text-md-start">
+                <div className="col-12 col-md-9">
+                  <h2>{props.name}</h2>
+                  <div className="row">
+                    <div className="col-6 col-md-5">
+                      <p>{props.category}</p>
+                    </div>
+                    <div className="col-3 col-md-2">
+                      <p>Alc: {props.alc}</p>
+                    </div>
+                    <div className="col-3 col-md-2">
+                      <p>4.5</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-3 d-none d-md-block text-end">
+                  <p className="price">49,-</p>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col">
+                  <p>{props.description.overallImpression}</p>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-12 d-md-none text-end">
+                  <p className="price">49,-</p>
+                </div>
+                <div className="col-12 d-flex justify-content-around">
+                  <button
+                    className="btn btn-primary"
+                    disabled={amount === 0}
+                    onClick={clickedMinus}
+                  >
+                    -
+                  </button>
+                  <div className="amount d-flex align-items-center justify-content-center">
+                    <p className="mb-0">{amount}</p>
+                  </div>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => {
+                      clickedPlus();
+                    }}
+                    disabled={onTap === false}
+                  >
+                    +
+                  </button>
+                  <button
+                    onClick={() => {
+                      resetAmount();
+                      props.addToBasket(props, amount);
+                    }}
+                    disabled={amount === 0}
+                    className="btn btn-primary"
+                  >
+                    Add to cart
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col-3">
-            <p>{props.category}</p>
-          </div>
-          <div className="col-3">
-            <p>Alc: {props.alc}</p>
-          </div>
-          <div className="col-3">
-            <p>Hardcodet rating of 4.5</p>
-          </div>
-          <div className="col-3 text-end">
-            <p>stk. 49,-</p>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col">
-            <p>{props.description.overallImpression}</p>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col d-flex justify-content-end">
-            <button
-              className="btn btn-primary"
-              disabled={amount === 0}
-              onClick={clickedMinus}
-            >
-              -
-            </button>
-            {amount}
-            <button
-              className="btn btn-primary"
-              onClick={() => {
-                clickedPlus();
-              }}
-              disabled={onTap === false}
-            >
-              +
-            </button>
-            <button
-              onClick={() => {
-                resetAmount();
-                props.addToBasket(props, amount);
-              }}
-              disabled={amount === 0}
-              className="btn btn-primary"
-            >
-              Add to cart
-            </button>
-          </div>
-        </div>
-      </div>
-      <div className="accordion" id="accordionExample">
-        <div className="accordion-item">
-          <h2 className="accordion-header" id="headingOne">
-            <button
-              className="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseOne"
-              aria-expanded="false"
-              aria-controls="collapseOne"
-            >
-              View more
-            </button>
-          </h2>
-          <ul className="dropdown-menu w-100"></ul>
-          <div
-            id="collapseOne"
-            className="accordion-collapse collapse"
-            aria-labelledby="headingOne"
-            data-bs-parent="#accordionExample"
-          >
-            <div className="accordion-body">
-              <Carousel slides={slides} autoplay={false} interval={1000} />
+          <div className="row pt-3">
+            <div className="accordion" id={accordionId}>
+              <div className="accordion-item">
+                <h2 className="accordion-header" id={headingId}>
+                  <button
+                    className="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target={dataBsTarget}
+                    aria-expanded="false"
+                    aria-controls={collapseId}
+                  >
+                    View more
+                  </button>
+                </h2>
+                <ul className="dropdown-menu w-100"></ul>
+                <div
+                  id={collapseId}
+                  className="accordion-collapse collapse"
+                  aria-labelledby={headingId}
+                  data-bs-parent={dataBsParent}
+                >
+                  <div className="accordion-body">
+                    <Carousel slides={slides} autoplay={false} interval={1000} />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </article>
   );
+}
+
+function getNewId(props) {
+  console.log(props);
+  const propsLowerCase = props.toLowerCase().replaceAll(" ", "");
+  return propsLowerCase;
 }
