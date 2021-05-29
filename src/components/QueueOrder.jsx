@@ -1,13 +1,11 @@
 import React from "react";
 
 export default function QueueOrder(props) {
-    console.log(props);
-    console.log(props.userOrder[0].id);
-
+    // Create random name to orders not posted by the user.
     const randomNames = ["Simone", "Rie", "Camilla", "Kristine", "Marie", "Anders", "Søren", "Christian", "Phillip", "Thomas"];
     const namesLen = randomNames.length;
-    const randomNumber = getRandomNumber(namesLen);
-    const randomName = getRandomName(randomNames, randomNumber);
+    const randomNumber = Math.floor(Math.random() * namesLen);
+    const randomName = randomNames[randomNumber];
 
     return (
         <div className="queueOrder row justify-content-between">
@@ -20,12 +18,4 @@ export default function QueueOrder(props) {
             </div>
         </div>
     )
-}
-
-function getRandomNumber(max) {
-    return Math.floor(Math.random() * max);
-}
-
-function getRandomName(names, num) {
-    return names[num];
 }
