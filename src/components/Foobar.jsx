@@ -1,9 +1,10 @@
 import React from "react";
 
-export default function Foobar() {
+export default function Foobar(props) {
+console.log(props)
   return (
-    <div>
-      <h1>Foobar</h1>
+    <div className="row text-center pt-3">
+        <h1>{props.bar}</h1>
     </div>
   );
 }
