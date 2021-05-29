@@ -2,9 +2,26 @@ import React from "react";
 import { Link } from "@reach/router";
 
 export default function Nav(props) {
-  console.log(props);
+  const queue = props.queue;
+  const userOrder = props.userOrder;
+  const serving = props.serving;
+  let message;
+  if (userOrder.length > 0) {
+    const queueIndex = queue.findIndex(item=>item.id === userOrder[0].id);
+    const servingIndex = serving.findIndex(item=>item.id === userOrder[0].id);
+    if (queueIndex > -1) {
+      message = <NoInLine queueIndex={queueIndex}></NoInLine>
+    } else if (servingIndex > -1) {
+      message = <p className="navbar-text">Your order <br className="d-md-none" />is being served</p>;
+    } else {
+      message = <p className="navbar-text">You have <br className="d-md-none" />no active orders</p>;
+    } 
+  } else {
+    message = <p className="navbar-text">You have <br className="d-md-none" />no active orders</p>;
+  }
+
   return (
-    <nav className="navbar navbar-light position-fixed">
+    <nav className="navbar navbar-light position-fixed text-center">
       <Link className="navbar-brand" to="/">
         <div className="iconContainer">
           <svg className="dashboardIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="#FCF8EF" stroke="#FCF8EF" strokeWidth="1" 
@@ -52,9 +69,7 @@ export default function Nav(props) {
           </svg>
         </div>
       </Link>
-      <p className="navbar-text">
-        You are number <span>"Hardcodet"</span> in the line
-      </p>
+        {message}
       <Link className="navbar-brand" to="cart">
         <div>
           <div className="iconContainer">
@@ -83,4 +98,10 @@ export default function Nav(props) {
       </Link>
     </nav>
   );
+}
+
+function NoInLine(props) {
+  return (
+    <p className="navbar-text">You are <br className="d-md-none" />no. <span>{props.queueIndex + 1}</span> in line</p>
+  )
 }
