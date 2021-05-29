@@ -75,9 +75,6 @@ export default function Ratings(props) {
 
     return(
         <div className="container pb-5">
-            <div className="row">
-                <h1>Ratings</h1>
-            </div>
             {props.order.length === 0 || props.order[0].order.length === 0 ? 
             <div className="row justify-content-center text-center">
                 <div className="col-12 col-md-10">
