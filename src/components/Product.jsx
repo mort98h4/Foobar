@@ -3,11 +3,8 @@ import { Carousel } from "3d-react-carousal";
 import LazyLoad from 'react-lazyload';
 import cleanImageName from "../helpers/cleanImageName.js";
 import Star from "./Star";
-//import BeerRating from "./BeerRating";
 
 export default function Product(props) {
-  console.log(props);
-
   const ratingIndex = props.ratings.findIndex(item=>item.beer_name === props.name);
   const avgRating = props.ratings[ratingIndex].avg.toFixed(1);
 
