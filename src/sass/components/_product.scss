@@ -1,5 +1,127 @@
 @use "../abstracts/vars";
 
-.beersNav {
+
+.beerComponent {
+    p {
+        margin-bottom: 0;
+    }
+    .beerInfo {
+        color: vars.$tertiary-color;
+        font-size: .9rem;
+    }
+
+    .starContainer {
+        height: 20px;
+        width: 20px;
+        display: flex;
+        margin: -2px 0 0 3px;
+        .star {
+            stroke: vars.$tertiary-color;
+            fill: vars.$tertiary-color;
+        }
+    }
     
+    .price {
+        color: vars.$primary-color;
+        font-family: Tangled, sans-serif;
+        font-size: 4rem;
+        margin-bottom: 0;
+    }
+
+    .btn-amount {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .accordion-item {
+        background-color: vars.$container-color;
+        border: none;
+        .accordion-button[type="button"] {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            text-align: center !important;
+            color: vars.$tertiary-color;
+            background-color: vars.$container-color;
+            background-image: url("../../.arrowup.svg");
+            :hover {
+                color: vars.$secondary-color !important;
+            }
+        }
+        button:focus, [type=button]:focus, button:hover, [type=button]:hover {
+            color: vars.$secondary-color !important;
+            box-shadow: none !important;
+        }
+        .accordion-button:not(.collapsed)::after {
+            background-image: url("../.././arrowdown.svg");
+        }
+        .accordion-button::after {
+            background-image: url("../.././arrowup.svg");
+        }
+        .accordion-body {
+            height: 650px;
+            @media screen and (min-width: 768px) {
+                height: 400px;
+            }
+            @media screen and (min-width: 1024px) {
+                height: 300px;
+            }
+            .react-3d-carousel {
+                width: 100%;
+                .slider-container {
+                    width: 100%;
+                    margin: -0px auto 0px -50%;
+                    .slider-right div, .slider-left div {
+                        border-color: vars.$secondary-color;
+                        color: vars.$secondary-color;
+                        background-color: rgba(16, 16, 16, 0.8);
+                        border-radius: 50%;
+                        width: 2.5rem;
+                        height: 2.5rem;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        :hover, :focus {
+                            border-color: vars.$primary-color;
+                            color: vars.$primary-color;
+                        }
+                        .fa-arrow-left:before {
+                            content: "ᐸ";
+                            font-weight: 600;
+                        }
+                        .fa-arrow-right:before {
+                            content: "ᐳ";
+                            font-weight: 600;
+                        }
+                    }
+                    .slider-content {
+                        width: 80%;
+                        @media screen and (min-width: 768px) {
+                            width: 75%;
+                        }
+                        .carousel {
+                            padding: 1rem;
+                            background-color: vars.$tertiary-color;
+                            border-radius: .5rem;
+                            height: 650px;
+                            @media screen and (min-width: 768px) {
+                                height: 400px;
+                            }
+                            @media screen and (min-width: 1024px) {
+                                height: 300px;
+                            }
+                            h2 {
+                                font-family: 'Montserrat', sans-serif;
+                                font-size: 1.5rem;
+                                font-weight: 600;
+                            }
+                            p {
+                                font-size: .9rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
+
