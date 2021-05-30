@@ -19,7 +19,7 @@ export default function Beers(props) {
     }
   });
 
-  props.products.sort(compare);
+  productsList.sort(compare);
   function compare(a, b) {
     if (a[sortKey] > b[sortKey]) {
       return sortDirection === "asc" ? 1 : -1;
