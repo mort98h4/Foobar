@@ -5,8 +5,7 @@ import cleanImageName from "../helpers/cleanImageName.js";
 import Star from "./Star";
 
 export default function Product(props) {
-  const ratingIndex = props.ratings.findIndex(item=>item.beer_name === props.name);
-  const avgRating = props.ratings[ratingIndex].avg.toFixed(1);
+  const avgRating = props.popularity.toFixed(1);
 
   const [amount, setAmount] = useState(0);
   let onTap = false;
@@ -94,7 +93,7 @@ export default function Product(props) {
                   </div>
                 </div>
                 <div className="col-3 d-none d-md-block text-end">
-                  <p className="price">49,-</p>
+                  <p className="price">{props.price},-</p>
                 </div>
               </div>
               <div className="row pb-md-3">
@@ -104,7 +103,7 @@ export default function Product(props) {
               </div>
               <div className="row pt-md-3">
                 <div className="col-12 d-md-none text-end">
-                  <p className="price">49,-</p>
+                  <p className="price">{props.price},-</p>
                 </div>
                 <div className="col-12">
                   <div className="row justify-content-center">
@@ -182,7 +181,6 @@ export default function Product(props) {
 }
 
 function getNewId(props) {
-  console.log(props);
   const propsLowerCase = props.toLowerCase().replaceAll(" ", "");
   return propsLowerCase;
 }
