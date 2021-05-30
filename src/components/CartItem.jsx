@@ -1,44 +1,26 @@
 import React from "react";
-
-export let hideForm = true;
+import { Link } from "@reach/router";
 
 export default function CartItem({ basket, addToBasket, removeFromBasket }) {
   const basketLength = basket.length;
 
-  function hideBasket() {
-    document.querySelector("#basketItems").setAttribute("hidden", true);
-    document.querySelector("#hideBasketBtn").setAttribute("hidden", true);
-  }
-
-  function displayForm(hideForm) {
-    hideForm = false;
-    console.log(hideForm);
-  }
-
   return (
     <section id="cartItems">
-      {basketLength === 0 && <NoOrders />}
-      <ul id="basketItems">
-        {basket.map((item) => (
-          <CartList
-            name={item.name}
-            amount={item.amount}
-            key={item.name}
-            addToBasket={addToBasket}
-            removeFromBasket={removeFromBasket}
-          />
-        ))}
-      </ul>
-      <button
-        className="btn btn-primary"
-        id="hideBasketBtn"
-        onClick={() => {
-          hideBasket();
-          displayForm(hideForm);
-        }}
-      >
-        Confirm
-      </button>
+      <div id="noItemsInBasket">{basketLength === 0 && <NoOrders />}</div>
+      <div>
+        <ul id="basketItems">
+          {basket.map((item) => (
+            <CartList
+              name={item.name}
+              amount={item.amount}
+              key={item.name}
+              addToBasket={addToBasket}
+              removeFromBasket={removeFromBasket}
+            />
+          ))}
+        </ul>
+        {basketLength >= 1 && <TotalPriceInBasket basket={basket} />}
+      </div>
     </section>
   );
 }
@@ -83,12 +65,36 @@ function CartList(props) {
   );
 }
 
+function TotalPriceInBasket(props) {
+  //console.log("Total Price");
+  //console.log(props.basket);
+
+  const orderList = [];
+  props.basket.forEach((item) => {
+    for (let i = 0; i < item.amount; i++) {
+      orderList.push(item.name);
+    }
+  });
+
+  const amountInBasket = orderList.length;
+  const totalPrice = amountInBasket * 49;
+
+  return (
+    <div>
+      <h2>Total Price in basket: {totalPrice}</h2>
+    </div>
+  );
+}
+
 function NoOrders() {
   return (
-    <div id="noItemsInBasket">
+    <div>
       <h2>Hello</h2>
       <p>You have no beers in your basket</p>
       <p>Please go to the product List to add the beers you want to order</p>
+      <Link className="btn btn-primary" to="../beers">
+        Menu
+      </Link>
     </div>
   );
 }
