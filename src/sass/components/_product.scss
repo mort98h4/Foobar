@@ -1,5 +1,20 @@
 @use "../abstracts/vars";
 
+.beersNav {
+    .dropdown-menu {
+        background-color: vars.$screen-color;
+        border: 2px solid vars.$primary-color;
+        border-radius: 0;
+        box-shadow: vars.$primary-box-shadow;
+        .dropdown-item {
+            font-family: 'Montserrat', sans-serif;
+            color: vars.$secondary-color;
+        }
+        .dropdown-item:hover {
+            background-color: vars.$container-color !important;
+        }
+    }
+}
 
 .beerComponent {
     p {
