@@ -13,7 +13,7 @@ function App() {
   const [products, setProducts] = useState([]);
   const [ratings, setRatings] = useState([]);
   const [basket, setBasket] = useState([]);
-  const [userOrder, setUserOrder] = useState([{id: 0, order: [], name: ""}]);
+  const [userOrder, setUserOrder] = useState([{ id: 0, order: [], name: "" }]);
   const [totalAmount, setTotalAmount] = useState(0);
 
   // Found on javascript.plainenglish.io START
@@ -98,7 +98,9 @@ function App() {
     });
     document.querySelector("#rateBeers").setAttribute("hidden", true);
     document.querySelector("#rateMessage").removeAttribute("hidden");
-    setUserOrder([{order: [], name: props[0].customer, id: props[0].orderId}]);
+    setUserOrder([
+      { order: [], name: props[0].customer, id: props[0].orderId },
+    ]);
     getRatings();
   }
 
@@ -117,14 +119,24 @@ function App() {
         <Loader />
       ) : (
         <div className="container-fluid p-0">
-          <Nav totalAmount={totalAmount} queue={data.queue} serving={data.serving} userOrder={userOrder}/>
+          <Nav
+            totalAmount={totalAmount}
+            queue={data.queue}
+            serving={data.serving}
+            userOrder={userOrder}
+          />
           <header className="row text-center pt-3">
             <div className="col">
               <h1>{data.bar.name}</h1>
             </div>
           </header>
           <Router>
-            <Dashboard path="/" data={data} ratings={ratings} userOrder={userOrder}/>
+            <Dashboard
+              path="/"
+              data={data}
+              ratings={ratings}
+              userOrder={userOrder}
+            />
             <Beers
               path="beers"
               data={data}
@@ -139,6 +151,9 @@ function App() {
               removeFromBasket={removeFromBasket}
               addToUserOrder={addToUserOrder}
               resetBasket={resetBasket}
+              userOrder={userOrder}
+              queue={data.queue}
+              serving={data.serving}
             />
             <Ratings
               path="ratings"

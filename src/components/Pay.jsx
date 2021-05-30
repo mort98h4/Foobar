@@ -105,10 +105,10 @@ export default class PaymentForm extends React.Component {
         .then((res) => res.json())
         .then((d) => {
           console.log("Posted order.");
-          console.log(d);
-          console.log(firstName);
-          console.log(order);
-          console.log(d.id);
+          //console.log(d);
+          //console.log(firstName);
+          //console.log(order);
+          //console.log(d.id);
           newOrder.push({ id: d.id, order: order, name: name });
         });
 

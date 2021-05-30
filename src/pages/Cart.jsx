@@ -6,7 +6,7 @@ import Foobar from "../components/Foobar";
 
 export default function Cart(props) {
   const emptyBasket = props.basket.length;
-  console.log(emptyBasket);
+  //console.log(emptyBasket);
 
   function hideBasket() {
     document.querySelector("#basketItems").setAttribute("hidden", true);
@@ -24,7 +24,7 @@ export default function Cart(props) {
     document.querySelector("#hideBasketBtn").removeAttribute("hidden");
   }
   function ThankYouForOrdering() {
-    console.log("Thank You For Ordering");
+    //console.log("Thank You For Ordering");
     document.querySelector("#confirmPayment").removeAttribute("hidden");
     document.querySelector("#noItemsInBasket").setAttribute("hidden", true);
   }
@@ -60,7 +60,11 @@ export default function Cart(props) {
         />
       )}
 
-      <Confirm />
+      <Confirm
+        userOrder={props.userOrder}
+        queue={props.queue}
+        serving={props.serving}
+      />
     </section>
   );
 }
