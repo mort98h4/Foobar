@@ -9,6 +9,7 @@ export default function Beers(props) {
       {...item}
       data={props.data}
       addToBasket={props.addToBasket}
+      ratings={props.ratings}
     />
   ));
 
