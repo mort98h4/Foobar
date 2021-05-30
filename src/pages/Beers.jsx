@@ -3,18 +3,21 @@ import Product from "../components/Product";
 import Foobar from "../components/Foobar";
 
 export default function Beers(props) {
-  const productComponents = props.products.map((item) => (
-    <Product
-      key={item.name}
-      {...item}
-      data={props.data}
-      addToBasket={props.addToBasket}
-      ratings={props.ratings}
-    />
-  ));
-
+  const [filterBy, setFilterBy] = useState("*");
   const [sortKey, setSortKey] = useState("name");
   const [sortDirection, setSortDirection] = useState("asc");
+
+  const productsList = props.products.map(beer => {
+    const ratingIndex = props.ratings.findIndex(item=>item.beer_name === beer.name);
+    const avgRating = props.ratings[ratingIndex].avg;
+    beer.popularity = avgRating;
+    beer.price = 49;
+    if (filterBy === "*") {
+      return beer;
+    } else if (beer.category.toLowerCase() === filterBy.toLowerCase()) {
+      return beer;
+    }
+  });
 
   props.products.sort(compare);
   function compare(a, b) {
@@ -32,28 +35,37 @@ export default function Beers(props) {
     setSortKey(key);
   }
 
+  const productComponents = productsList.map((item) => (item ? <Product key={item.name} {...item} data={props.data} addToBasket={props.addToBasket} /> : ""));
+
   return (
     <main className="container pb-5-rem">
-      <div className="row justify-content-center">
+      <div className="row justify-content-center pb-5">
         <nav className="col-10 d-md-flex justify-content-around beersNav">
-          <button className="btn btn-primary" onClick={() => toggleSort("price")}>
-            Filter Kind
-          </button>
-          <button className="btn btn-primary" onClick={() => toggleSort("alc")}>
-            Filter Alc
-          </button>
-          <button
-            className="btn btn-primary"
-            onClick={() => toggleSort("category")}
-          >
-            Filter Category
-          </button>
-          <button
-            className="btn btn-primary"
-            onClick={() => toggleSort("popularity")}
-          >
-            Filter Popularity
-          </button>
+          <div className="dropdown">
+            <button className="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuFilter" data-bs-toggle="dropdown" aria-expanded="false">
+              Filter type
+            </button>
+            <ul className="dropdown-menu" aria-labelledby="dropdownMenuFilter">
+              <li className="dropdown-item" onClick={() => setFilterBy("*")}>All beers</li>
+              <li className="dropdown-item" onClick={() => setFilterBy("Hefeweizen")}>Hefeweizen</li>
+              <li className="dropdown-item" onClick={() => setFilterBy("IPA")}>IPA</li>
+              <li className="dropdown-item" onClick={() => setFilterBy("Oktoberfest")}>Oktoberfest</li>
+              <li className="dropdown-item" onClick={() => setFilterBy("European lager")}>European lager</li>
+              <li className="dropdown-item" onClick={() => setFilterBy("Stout")}>Stout</li>
+              <li className="dropdown-item" onClick={() => setFilterBy("Belgian specialty ale")}>Belgian specialty ale</li>
+              <li className="dropdown-item" onClick={() => setFilterBy("California Common")}>California Common</li>
+            </ul>
+          </div>
+          <div className="dropdown">
+            <button className="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuSort" data-bs-toggle="dropdown" aria-expanded="false">
+              Sort by
+            </button>
+            <ul className="dropdown-menu" aria-labelledby="dropdownMenuSort">
+              <li className="dropdown-item" onClick={() => toggleSort("alc")}>Volume</li>
+              <li className="dropdown-item" onClick={() => toggleSort("popularity")}>Popularity</li>
+              <li className="dropdown-item"  onClick={() => toggleSort("price")}>Price</li>
+            </ul>
+          </div>
         </nav>
       </div>
       <div className="row justify-content-center">
