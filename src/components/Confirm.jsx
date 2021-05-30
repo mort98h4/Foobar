@@ -41,7 +41,7 @@ export default function Confirm(props) {
         <p>
           THANK YOU FOR ORDERING, YOU CAN FOLLOW YOUR ORDER ON THE DASHBOARD
         </p>
-        <p>{message}</p>
+        {message}
         <p>
           YOUR ORDERNUMBER IS: <span>{newOrder.id}</span>
         </p>
