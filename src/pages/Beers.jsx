@@ -40,8 +40,8 @@ export default function Beers(props) {
   return (
     <main className="container pb-5-rem">
       <div className="row justify-content-center pb-5">
-        <nav className="col-10 d-md-flex justify-content-around beersNav">
-          <div className="dropdown">
+        <nav className="beersNav col-12 col-md-10 d-md-flex justify-content-center">
+          <div className="dropdown d-flex justify-content-center pb-3 pb-md-0 px-md-3">
             <button className="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuFilter" data-bs-toggle="dropdown" aria-expanded="false">
               Filter type
             </button>
@@ -56,7 +56,7 @@ export default function Beers(props) {
               <li className="dropdown-item" onClick={() => setFilterBy("California Common")}>California Common</li>
             </ul>
           </div>
-          <div className="dropdown">
+          <div className="dropdown d-flex justify-content-center px-md-3">
             <button className="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuSort" data-bs-toggle="dropdown" aria-expanded="false">
               Sort by
             </button>
