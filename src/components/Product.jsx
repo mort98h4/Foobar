@@ -2,9 +2,15 @@ import React, { useState } from "react";
 import { Carousel } from "3d-react-carousal";
 import LazyLoad from 'react-lazyload';
 import cleanImageName from "../helpers/cleanImageName.js";
+import Star from "./Star";
 //import BeerRating from "./BeerRating";
 
 export default function Product(props) {
+  console.log(props);
+
+  const ratingIndex = props.ratings.findIndex(item=>item.beer_name === props.name);
+  const avgRating = props.ratings[ratingIndex].avg.toFixed(1);
+
   const [amount, setAmount] = useState(0);
   let onTap = false;
 
@@ -64,7 +70,7 @@ export default function Product(props) {
   const dataBsTarget = `#${collapseId}`
 
   return (
-    <article className="row mb-3">
+    <article className="beerComponent row mb-3">
       <div className="card">
         <div className="card-body component">
           <div className="row pb-3 justify-content-center">
@@ -74,18 +80,19 @@ export default function Product(props) {
               </LazyLoad>
             </div>
             <div className="col-12 col-md-9">
-              <div className="row text-center text-md-start">
+              <div className="row pb-3 pb-md-0">
                 <div className="col-12 col-md-9">
-                  <h2>{props.name}</h2>
+                  <h2 className="text-center text-md-start">{props.name}</h2>
                   <div className="row">
-                    <div className="col-6 col-md-5">
-                      <p>{props.category}</p>
+                    <div className="col-4 col-md-5 text-start">
+                      <p className="beerInfo">{props.category}</p>
                     </div>
-                    <div className="col-3 col-md-2">
-                      <p>Alc: {props.alc}</p>
+                    <div className="col-4 col-md-3 text-center">
+                      <p className="beerInfo">Alc: {props.alc}</p>
                     </div>
-                    <div className="col-3 col-md-2">
-                      <p>4.5</p>
+                    <div className="col-4 d-flex justify-content-end">
+                      <p className="beerInfo">{avgRating}</p>
+                      <Star />
                     </div>
                   </div>
                 </div>
@@ -93,45 +100,51 @@ export default function Product(props) {
                   <p className="price">49,-</p>
                 </div>
               </div>
-              <div className="row">
+              <div className="row pb-md-3">
                 <div className="col">
                   <p>{props.description.overallImpression}</p>
                 </div>
               </div>
-              <div className="row">
+              <div className="row pt-md-3">
                 <div className="col-12 d-md-none text-end">
                   <p className="price">49,-</p>
                 </div>
-                <div className="col-12 d-flex justify-content-around">
-                  <button
-                    className="btn btn-primary"
-                    disabled={amount === 0}
-                    onClick={clickedMinus}
-                  >
-                    -
-                  </button>
-                  <div className="amount d-flex align-items-center justify-content-center">
-                    <p className="mb-0">{amount}</p>
+                <div className="col-12">
+                  <div className="row justify-content-center">
+                    <div className="col-10 col-md-6 col-lg-7 col-xl-8 d-flex justify-content-center justify-content-md-end pb-3 pb-md-0">
+                      <button
+                      className="btn btn-primary btn-amount"
+                      disabled={amount === 0}
+                      onClick={clickedMinus}
+                      >
+                        -
+                      </button>
+                      <div className="amount d-flex align-items-center justify-content-center mx-4">
+                        <p className="mb-0">{amount}</p>
+                      </div>
+                      <button
+                        className="btn btn-primary btn-amount"
+                        onClick={() => {
+                          clickedPlus();
+                        }}
+                        disabled={onTap === false}
+                      >
+                        +
+                      </button>
+                    </div>
+                    <div className="col-10 col-md-6 col-lg-5 col-xl-4 d-flex justify-content-center justify-content-md-end">
+                      <button
+                        onClick={() => {
+                          resetAmount();
+                          props.addToBasket(props, amount);
+                        }}
+                        disabled={amount === 0}
+                        className="btn btn-primary"
+                      >
+                        Add to cart
+                      </button>
+                    </div>
                   </div>
-                  <button
-                    className="btn btn-primary"
-                    onClick={() => {
-                      clickedPlus();
-                    }}
-                    disabled={onTap === false}
-                  >
-                    +
-                  </button>
-                  <button
-                    onClick={() => {
-                      resetAmount();
-                      props.addToBasket(props, amount);
-                    }}
-                    disabled={amount === 0}
-                    className="btn btn-primary"
-                  >
-                    Add to cart
-                  </button>
                 </div>
               </div>
             </div>
@@ -158,7 +171,7 @@ export default function Product(props) {
                   aria-labelledby={headingId}
                   data-bs-parent={dataBsParent}
                 >
-                  <div className="accordion-body">
+                  <div className="accordion-body p-0">
                     <Carousel slides={slides} autoplay={false} interval={1000} />
                   </div>
                 </div>
