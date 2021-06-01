@@ -23,11 +23,11 @@ export default function Confirm(props) {
     if (queueIndex > -1) {
       message = <NumberInLine queueIndex={queueIndex}></NumberInLine>;
     } else if (servingIndex > -1) {
-      message = <p className="navbar-text">YOUR ORDER IS BEING SERVED</p>;
+      message = <p className="navbar-text">Your order is being served!</p>;
     } else {
       message = (
         <p className="navbar-text">
-          YOUR ORDER HAS JUST BEEN SERVED WE HOPE YOU WILL ENJOY YOUR BEER!
+          Your order has just been served. We hope you will enjoy your beer!
         </p>
       );
     }
@@ -35,22 +35,28 @@ export default function Confirm(props) {
     message = <p className="navbar-text">You have no active orders</p>;
   }
   return (
-    <div>
-      <div hidden id="confirmPayment">
-        <h2>HEY {newOrder.name}</h2>;
+    <div className="row justify-content-center text-center">
+      <div hidden id="confirmPayment" className="col-12 col-md-10 pb-3">
+        <h3><span>HEY {newOrder.name}!</span></h3>;
         <p>
-          THANK YOU FOR ORDERING, YOU CAN FOLLOW YOUR ORDER ON THE DASHBOARD
+          Thank you for ordering.
         </p>
+        <p>You can follow your order on the dashboard.</p>
+      </div>
+      <div className="col-12 col-md-10 pb-3">
         {message}
         <p>
-          YOUR ORDERNUMBER IS: <span>{newOrder.id}</span>
+          Your ordernumber is: <span>{newOrder.id}</span>
         </p>
+      </div>
+      <div className="col-12 col-md-10 pb-4">
         <Link className="btn btn-primary" to="../">
           Menu
         </Link>
+      </div>
+      <div className="col-12 col-md-10 pb-3">
         <p>
-          CLICK ON THE STAR IN THE MENU WHEN YOU ARE READY TO RATE THE BEERS YOU
-          HAVE BOUGHT
+          Click the star in the navigations menu, when you are ready to rate the beers you have tried.
         </p>
       </div>
     </div>
