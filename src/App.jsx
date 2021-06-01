@@ -18,16 +18,20 @@ function App() {
 
   // Found on javascript.plainenglish.io START
   // - https://javascript.plainenglish.io/using-reacts-useeffect-hook-to-fetch-data-and-periodically-refresh-that-data-2a69b6d44081
+  
+  // Fetch data from Heroku, and set it to state
   const getData = () => {
     fetch("https://foobarsiwmorten.herokuapp.com")
       .then((res) => res.json())
       .then(setData);
   };
+  // Fetch informartion on the beers, and set it to state
   const getProducts = () => {
     fetch("https://foobarsiwmorten.herokuapp.com/beertypes")
       .then((res) => res.json())
       .then(setProducts);
   };
+  // Fetch ratings from restDB, and set it to state
   const getRatings = () => {
     fetch("https://foobar-a352.restdb.io/rest/beers", {
       method: "get",
@@ -41,11 +45,13 @@ function App() {
       .then(setRatings);
   };
 
+  // Call the fetching functions once
   useEffect(() => {
     getData();
     getProducts();
     getRatings();
 
+    // Updates data every 10th seconds
     const interval = setInterval(() => {
       getData();
     }, 10000);
@@ -91,16 +97,24 @@ function App() {
     setTotalAmount(0);
   }
 
+  // Submit new ratings from user
   function clickSubmitHandler(props) {
+    // For each beer rated PUT the new data to restDB
     props.forEach((item) => {
       const status = putRatings(item);
       console.log(status);
     });
+
+    // Change the view of the page, and display succes message
     document.querySelector("#rateBeers").setAttribute("hidden", true);
     document.querySelector("#rateMessage").removeAttribute("hidden");
+
+    // Empty the userOrder order array, so that the user cannot rate the same order twice.
     setUserOrder([
       { order: [], name: props[0].customer, id: props[0].orderId },
     ]);
+
+    // Update the ratings from restDB
     getRatings();
   }
 
