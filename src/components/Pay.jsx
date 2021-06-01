@@ -210,7 +210,10 @@ export default class PaymentForm extends React.Component {
                 <div className="form-group">
                   <div className="col">
                     <div className="row">
-                      <div className="col-3 expiry" id="expiry">
+                      <div
+                        className="col-3 col-md-5 col-lg-3 expiry"
+                        id="expiry"
+                      >
                         <label className="">EXPIRY DATE </label>
                         <input
                           type="tel"
@@ -223,7 +226,7 @@ export default class PaymentForm extends React.Component {
                           id="expiry"
                         />
                       </div>
-                      <div className="col-3 cvc">
+                      <div className="col-3 col-md-5 col-lg-3 cvc">
                         <label className=""> CVC </label>
                         <input
                           type="tel"
