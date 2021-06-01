@@ -96,29 +96,27 @@ export default class PaymentForm extends React.Component {
         } else {
           document.querySelector("#cardnumber span").style.color = "#262626";
         }
-        if (expiry != true && cvc != true) {
-          document.querySelector("#multiihint ").style.color = "#f2b705";
-        } else {
-          document.querySelector("#multiihint ").style.color = "#262626";
-        }
-        if (expiry != true) {
-          document.querySelector("#multiihint ").textContent =
-            "PLEASE ENTER THE EXPERIENCE DATE OF YOUR CARD";
-          document.querySelector("#multiihint ").style.color = "#f2b705";
-        } else {
-          document.querySelector("#multiihint ").style.color = "#262626";
-        }
-        if (cvc != true) {
-          document.querySelector("#multiihint ").textContent =
-            "PLEASE ENTER THE EXPERIENCE CVC OF YOUR CARD";
-          document.querySelector("#multiihint ").style.color = "#f2b705";
-        } else {
-          document.querySelector("#multiihint ").style.color = "#262626";
-        }
         if (name != true) {
           document.querySelector("#cardname span").style.color = "#f2b705";
         } else {
           document.querySelector("#cardname span").style.color = "#262626";
+        }
+
+        //cvc and expiry validate input
+        if (expiry != true && cvc != true) {
+          document.querySelector("#multihint").textContent =
+            "PLEASE ENTER THE EXPERIENCE DATE AND CVC NUMBER OF YOUR CARD";
+          document.querySelector("#multihint").style.color = "#f2b705";
+        } else if (expiry != true && cvc != false) {
+          document.querySelector("#multihint").textContent =
+            "PLEASE ENTER THE EXPERIENCE DATE OF YOUR CARD";
+          document.querySelector("#multihint").style.color = "#f2b705";
+        } else if (cvc != true && expiry != false) {
+          document.querySelector("#multihint ").textContent =
+            "PLEASE ENTER THE CVC OF YOUR CARD";
+          document.querySelector("#multihint").style.color = "#f2b705";
+        } else {
+          document.querySelector("#multihint").style.color = "#262626";
         }
       }
     }
@@ -212,7 +210,7 @@ export default class PaymentForm extends React.Component {
                         />
                       </div>
                     </div>
-                    <span className="col hint" id="multiihint">
+                    <span className="col hint" id="multihint">
                       PLEASE ENTER THE EXPERIENCE DATE AND CVC NUMBER OF YOUR
                       CARD
                     </span>
