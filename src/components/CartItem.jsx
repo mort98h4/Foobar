@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "@reach/router";
+import LazyLoad from "react-lazyload";
+import cleanImageName from "../helpers/cleanImageName.js";
 
 export default function CartItem({ basket, addToBasket, removeFromBasket }) {
   const basketLength = basket.length;
@@ -28,21 +30,32 @@ export default function CartItem({ basket, addToBasket, removeFromBasket }) {
 function CartList(props) {
   let price = props.amount * 49;
 
+  const imagePath = cleanImageName(props.name);
+  const imageAlt = `Label of ${props.name}`;
+
   return (
-    <li className="row">
-      <img src="" alt="" className="col" />
-      <h2 className="col">{props.name}</h2>
-      <div className="col">
+    <li className="row basketitems">
+      <div className="col row">
+        <div className="col col-lg-2">
+          <LazyLoad height={200} once={true} offset={100}>
+            <img src={imagePath} alt={imageAlt}></img>
+          </LazyLoad>
+        </div>
+        <h2 className="col">{props.name}</h2>
+      </div>
+      <div className="col row col-lg-3">
         <button
-          className="btn btn-primary"
+          className="col btn btn-primary btn-amount"
           disabled={props.amount === 1}
           onClick={() => props.addToBasket(props, -1)}
         >
           -
         </button>
-        {props.amount}
+        <div className="col amount d-flex align-items-center justify-content-center mx-4">
+          <p className="mb-0">{props.amount}</p>
+        </div>
         <button
-          className="btn btn-primary"
+          className="col btn btn-primary btn-amount"
           onClick={() => {
             props.addToBasket(props, 1);
           }}
@@ -50,17 +63,21 @@ function CartList(props) {
           +
         </button>
       </div>
-      <p className="col">
-        PRICE <span>{price},-</span>
-      </p>
-      <button
-        className="btn btn-primary col"
-        onClick={() => {
-          props.removeFromBasket(props);
-        }}
-      >
-        x
-      </button>
+      <div className="col-10 col-md-6 col-lg-5 col-xl-4 d-flex justify-content-center justify-content-md-end">
+        <p className="col">
+          PRICE <span>{price},-</span>
+        </p>
+        <div className="">
+          <button
+            className=" btn btn-primary btn-amount col"
+            onClick={() => {
+              props.removeFromBasket(props);
+            }}
+          >
+            x
+          </button>
+        </div>
+      </div>
     </li>
   );
 }
@@ -80,8 +97,10 @@ function TotalPriceInBasket(props) {
   const totalPrice = amountInBasket * 49;
 
   return (
-    <div>
-      <h2>Total Price in basket: {totalPrice}</h2>
+    <div className="row justify-content-center">
+      <div className="col d-flex justify-content-center">
+        <h2>Total Price in basket: {totalPrice}</h2>
+      </div>
     </div>
   );
 }
