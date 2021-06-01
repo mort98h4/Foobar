@@ -1,15 +1,24 @@
 import React from "react";
 import Cards from "react-credit-cards";
-
 import {
   formatCreditCardNumber,
   formatCVC,
   formatExpirationDate,
 } from "./Form.jsx";
 
+/* 
+We have used the npm package react-credit-cards for the payment form. 
+The package includes the following:
+  1. A card-flip function
+  2. name, cvc, expiry and cardnumber input names to connect 
+     changes to the flip-card function
+  3. onChane to handleInputFocus and HandleInputChange
+  4. Lots of possibilities of different card functions, payment functions and more.  
+*/
+// https://www.npmjs.com/package/react-credit-cards
+
 import "react-credit-cards/es/styles-compiled.css";
 
-// https://www.npmjs.com/package/react-credit-cards
 export default class PaymentForm extends React.Component {
   state = {
     cvc: "",
@@ -23,6 +32,7 @@ export default class PaymentForm extends React.Component {
     this.setState({ focus: evt.target.name });
   };
 
+  // on every change in input send target. Functions in form.jsx
   handleInputChange = ({ target }) => {
     if (target.name === "number") {
       target.value = formatCreditCardNumber(target.value);
@@ -36,6 +46,7 @@ export default class PaymentForm extends React.Component {
   };
 
   render() {
+    // defining props from card.jsx
     const addToUserOrder = this.props.addToUserOrder;
     const basketItems = this.props.basket;
     const resetBasket = this.props.resetBasket;
@@ -51,6 +62,7 @@ export default class PaymentForm extends React.Component {
       const cvc = form.cvc.checkValidity();
       const spanColor = "#f2b705";
 
+      // if form is valid
       if (
         email != false &&
         cardNumber != false &&
@@ -58,16 +70,19 @@ export default class PaymentForm extends React.Component {
         expiry != false &&
         cvc != false
       ) {
+        // Clean first name
         const nameLowerCase =
           form.name.value.substring(0, 1).toUpperCase() +
           form.name.value.substring(1).toLowerCase();
-
         const firstName = nameLowerCase.substring(
           0,
           nameLowerCase.indexOf(" ")
         );
 
+        // create basket list for posting to Heroku
         const basketList = [];
+        // for each item push name and amount to basketlist array.
+        //used to posting to Heroku and creating correct data for ratingsystem
         basketItems.forEach(basketItem);
         function basketItem(item) {
           const beer = item.name;
@@ -75,6 +90,7 @@ export default class PaymentForm extends React.Component {
           basketList.push({ name: beer, amount: amount });
         }
 
+        // create orderlist for rating system. Converte all beer amount into list of beer names.
         const orderList = [];
         basketList.forEach((item) => {
           for (let i = 0; i < item.amount; i++) {
@@ -82,27 +98,36 @@ export default class PaymentForm extends React.Component {
           }
         });
 
+        // post further down
         post(basketList, firstName, orderList);
+        // resetform in App.jsx
         resetFrom();
       } else {
+        // If the form isn't valid check for invalid input and display error message
         console.log("not valid");
+
+        // email validate error txt
         if (email != true) {
           document.querySelector("#email span").style.color = "#f2b705";
         } else {
           document.querySelector("#email span").style.color = "#262626";
         }
+
+        // cardnumber validate error txt
         if (cardNumber != true) {
           document.querySelector("#cardnumber span").style.color = "#f2b705";
         } else {
           document.querySelector("#cardnumber span").style.color = "#262626";
         }
+
+        // card name validate error txt
         if (name != true) {
           document.querySelector("#cardname span").style.color = "#f2b705";
         } else {
           document.querySelector("#cardname span").style.color = "#262626";
         }
 
-        //cvc and expiry validate input
+        //cvc and expiry validate error txt
         if (expiry != true && cvc != true) {
           document.querySelector("#multihint").textContent =
             "PLEASE ENTER THE EXPERIENCE DATE AND CVC NUMBER OF YOUR CARD";
@@ -121,6 +146,8 @@ export default class PaymentForm extends React.Component {
       }
     }
 
+    // Posting data (basketList) to Heroku.
+    // Sending newOrder to userOrder and resetBasket.
     async function post(data, firstName, orderList) {
       const newOrder = [];
       const name = firstName;
@@ -138,18 +165,18 @@ export default class PaymentForm extends React.Component {
         .then((res) => res.json())
         .then((d) => {
           console.log("Posted order.");
-          //console.log(d);
-          //console.log(firstName);
-          //console.log(order);
-          //console.log(d.id);
           newOrder.push({ id: d.id, order: order, name: name });
         });
 
+      // addToUserOrder in App.jsx
       addToUserOrder(newOrder);
+      // ThankYouForOrdering in Cart.jsx
       ThankYouForOrdering();
+      // resetBasket in App
       resetBasket(basketItems);
     }
 
+    // reset form when form has been submittet in submitPayment() further up.
     function resetFrom() {
       form.email.value = "";
       form.number.value = "";
@@ -202,7 +229,7 @@ export default class PaymentForm extends React.Component {
                           type="tel"
                           name="cvc"
                           className="form-control"
-                          pattern="\d{3}" // changed from "\d{3,4}"
+                          pattern="\d{3}"
                           required
                           onChange={this.handleInputChange}
                           onFocus={this.handleInputFocus}
@@ -266,7 +293,7 @@ export default class PaymentForm extends React.Component {
                 </div>
                 <div className="col">
                   <div className="form-actions">
-                    <button
+                    <button // using default btn because of npm package
                       type="button"
                       className="btn btn-primary"
                       onClick={() => {
