@@ -2,7 +2,6 @@ import React from "react";
 import CartItem from "../components/CartItem";
 import Pay from "../components/Pay";
 import Confirm from "../components/Confirm";
-import Foobar from "../components/Foobar";
 
 export default function Cart(props) {
   const emptyBasket = props.basket.length;
@@ -31,48 +30,63 @@ export default function Cart(props) {
 
   return (
     <section className="container pb-5-rem">
-      <Foobar />
-      <Formfill />
-      <CartItem
-        basket={props.basket}
-        addToBasket={props.addToBasket}
-        removeFromBasket={props.removeFromBasket}
-      />
-      {emptyBasket >= 1 && (
-        <button
-          className="btn btn-primary"
-          id="hideBasketBtn"
-          onClick={() => {
-            hideBasket();
-          }}
-        >
-          Confirm
-        </button>
-      )}
+      <div className="row justify-content-center">
+        <div className="col-12 col-md-10">
+          <article className="beerComponent row mb-3">
+            <div className="card">
+              <div className="card-body component">
+                <Formfill />
+                <CartItem
+                  basket={props.basket}
+                  addToBasket={props.addToBasket}
+                  removeFromBasket={props.removeFromBasket}
+                />
+                <div className="row justify-content-center">
+                  <div className="col d-flex justify-content-center">
+                    {emptyBasket >= 1 && (
+                      <button
+                        className="btn btn-primary"
+                        id="hideBasketBtn"
+                        onClick={() => {
+                          hideBasket();
+                        }}
+                      >
+                        Confirm
+                      </button>
+                    )}
+                  </div>
+                </div>
 
-      {emptyBasket >= 1 && (
-        <Pay
-          basket={props.basket}
-          addToUserOrder={props.addToUserOrder}
-          resetBasket={props.resetBasket}
-          displayBasket={displayBasket}
-          ThankYouForOrdering={ThankYouForOrdering}
-        />
-      )}
+                {emptyBasket >= 1 && (
+                  <Pay
+                    basket={props.basket}
+                    addToUserOrder={props.addToUserOrder}
+                    resetBasket={props.resetBasket}
+                    displayBasket={displayBasket}
+                    ThankYouForOrdering={ThankYouForOrdering}
+                  />
+                )}
 
-      <Confirm
-        userOrder={props.userOrder}
-        queue={props.queue}
-        serving={props.serving}
-      />
+                <Confirm
+                  userOrder={props.userOrder}
+                  queue={props.queue}
+                  serving={props.serving}
+                />
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
     </section>
   );
 }
 
 function Formfill() {
   return (
-    <div>
-      <h2>33,3%</h2>
+    <div className="row justify-content-center">
+      <div className="col d-flex justify-content-center">
+        <h2>33,3%</h2>
+      </div>
     </div>
   );
 }

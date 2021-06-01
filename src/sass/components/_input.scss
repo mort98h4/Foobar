@@ -1,17 +1,69 @@
 @use "../abstracts/vars";
 
-input {
-  border-radius: 0px !important;
-  border: 3px solid vars.$primary-color !important;
-  box-shadow: vars.$primary-box-shadow;
+.form-group {
+  margin-bottom: 1rem;
 }
 
-input:valid {
-  border: 3px solid vars.$valid-color !important;
-  box-shadow: vars.$valid-box-shadow;
+#multihint {
+  margin-bottom: 2rem;
+}
+
+input:-webkit-autofill {
+  -webkit-text-fill-color: vars.$secondary-color !important;
+  -webkit-box-shadow: 0 0 0 30px vars.$input-color inset !important;
+  box-shadow: 0 0 0 30px vars.$input-color inset !important;
+}
+
+label {
+  color: vars.$secondary-color;
+}
+
+input {
+  border-radius: 0px !important;
+  border: 1px solid vars.$primary-color !important;
+  color: #b1afaf !important;
+}
+input,
+textarea {
+  background-color: vars.$input-color !important;
 }
 
 input:invalid {
-  border: 3px solid vars.$invalid-color !important;
-  box-shadow: vars.$invalid-box-shadow;
+  border: 1px solid vars.$invalid-color !important;
+}
+
+input:valid {
+  border: 1px solid vars.$valid-color !important;
+}
+
+:is(input, textarea):focus {
+  border: 1px solid vars.$primary-color !important;
+  color: vars.$secondary-color !important;
+}
+
+:is(input, textarea):focus:valid {
+  border: 1px solid vars.$valid-color !important;
+}
+
+.expiry {
+  margin-right: 30px;
+}
+
+.expiry label {
+  width: 150px;
+}
+
+#PaymentForm span {
+  font-size: 11px;
+}
+
+.hint {
+  color: vars.$container-color;
+  cursor: default;
+}
+
+@media only screen and (max-width: 766px) {
+  #visualcard {
+    display: none;
+  }
 }

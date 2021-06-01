@@ -119,7 +119,15 @@ function App() {
   }
 
   function removeFromBasket(props) {
-    console.log(props);
+    const index = basket.findIndex((item) => item.name === props.name);
+    if (index >= -1) {
+      basket.splice(index, 1);
+    }
+    //console.log(index);
+    //console.log(basket);
+    setTotalAmount(totalAmount - props.amount);
+
+    // setBasket(basket.splice(basket.indexOf(props.name, 1)));
   }
 
   const productsCopy = [...products];

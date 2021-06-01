@@ -1,31 +1,41 @@
 @use "../abstracts/vars";
 
 .btn {
-    border-radius: 0;
-    background-color: transparent;
-    border: 2px solid transparent;
-    font-family: 'Montserrat', sans-serif;
-    text-transform: uppercase;
-    font-weight: 600;
-    padding-left: 2rem;
-    padding-right: 2rem;
+  border-radius: 0;
+  background-color: transparent;
+  border: 2px solid transparent;
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .btn-primary {
-    color: vars.$secondary-color !important; 
-    background-color: transparent !important;
-    border-color: vars.$primary-color !important;
-    box-shadow: vars.$primary-box-shadow;
-    // :hover {
-    //     background-color: transparent !important;
-    //     border-color: vars.$hover-color !important;
-    //     box-shadow: vars.$hover-box-shadow;
-    // }
+  color: vars.$secondary-color !important;
+  background-color: transparent !important;
+  border-color: vars.$primary-color !important;
+  box-shadow: vars.$primary-box-shadow;
+  // :hover {
+  //     background-color: transparent !important;
+  //     border-color: vars.$hover-color !important;
+  //     box-shadow: vars.$hover-box-shadow;
+  // }
 }
 
-button:focus, [type=button]:focus, button:hover, [type=button]:hover, a.btn:focus, a.btn:hover {
-    outline: none !important;
-    background-color: transparent !important;
-    border-color: vars.$hover-color !important;
-    box-shadow: vars.$hover-box-shadow !important;
+.paybuttons button {
+  margin-bottom: 3rem;
+  min-width: 150px;
+}
+
+button:focus,
+[type="button"]:focus,
+button:hover,
+[type="button"]:hover,
+a.btn:focus,
+a.btn:hover {
+  outline: none !important;
+  background-color: transparent !important;
+  border-color: vars.$hover-color !important;
+  box-shadow: vars.$hover-box-shadow !important;
 }
