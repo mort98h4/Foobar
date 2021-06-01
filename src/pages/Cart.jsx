@@ -41,11 +41,11 @@ export default function Cart(props) {
                   addToBasket={props.addToBasket}
                   removeFromBasket={props.removeFromBasket}
                 />
-                <div className="row justify-content-center">
+                <div className="row justify-content-center pb-3">
                   <div className="col d-flex justify-content-center">
                     {emptyBasket >= 1 && (
                       <button
-                        className="btn btn-primary"
+                        className="btn btn-confirm"
                         id="hideBasketBtn"
                         onClick={() => {
                           hideBasket();
