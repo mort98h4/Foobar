@@ -5,10 +5,13 @@ import { Link } from "@reach/router";
 export default function Ratings(props) {
     const rateOrder = {order: []};
 
+    // If there is an order to rate
     if (props.order.length <= 1 || props.order[0].order.length < 0) {
+        // Add the order information to the order we are going to rate
         const newOrder = props.order.map(entry => {
             rateOrder.id = entry.id;
             rateOrder.name = entry.name;
+            // Make sure there is no identical beers on the order to rate
             entry.order.forEach(orderEntry => {
                 const inRateOrder = rateOrder.order.findIndex(newOrderItem=> newOrderItem === orderEntry);
                 if (inRateOrder === -1) {
@@ -17,10 +20,10 @@ export default function Ratings(props) {
             })
         });
 
+        // Create an object with rating information for each beer
         const Beer = {
             _id: "", beer_name: "", ratings: [], sum: "", nratings: "", customer: ""
         }
-
         rateOrder.order = rateOrder.order.map(orderItem => {
             const beer = Object.create(Beer);
             beer.beer_name = orderItem;
@@ -50,14 +53,18 @@ export default function Ratings(props) {
             }
         })
 
-        const inOrder = beerRating.findIndex(item=>item._id === props._id);
-        if (inOrder === -1) {
+        const inBeerRating = beerRating.findIndex(item=>item._id === props._id);
+        // If the chosen beer has not yet been rated, add it to beerRating
+        // and update the ratings, sum and nratings with their new values.
+        if (inBeerRating === -1) {
             const nextProps = {...props};
             nextProps.ratings = props.ratings.concat([selectedRating]);
             nextProps.sum += selectedRating;
             nextProps.nratings = nextProps.nratings + 1; 
             setBeerRating(prevState => [...prevState, nextProps]);
         } else {
+            // Else find the existing object in beerRating matching the chosen beer,
+            // and update the ratings and sum to their new values. 
             const nextRating = beerRating.map(item=>{
                 if (item._id === props._id) {
                     item.ratings = props.ratings.concat([selectedRating]);
@@ -68,6 +75,8 @@ export default function Ratings(props) {
             setBeerRating(nextRating);
         }
     }
+
+    // For each beer in order return a component 
     const beerRatingComponent = rateOrder.order.map((item) => <BeerRating key={item._id} {...item} clickStarHandler={clickStarHandler}/>)
 
     return(
