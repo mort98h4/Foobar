@@ -114,7 +114,7 @@ export default function Ratings(props) {
                                     <h2>Order {rateOrder.id}</h2>
                                 </div>
                                 {beerRatingComponent}
-                                <div className="row mt-3 justify-content-center">
+                                <div className="row mt-3 justify-content-center pb-3">
                                     <div className="col-12 d-flex justify-content-center">
                                         <button id="submitRatings" className="btn btn-confirm" disabled={beerRating.length === 0} onClick={(e) => props.clickSubmitHandler(beerRating)}>Submit ratings</button>
                                     </div>
