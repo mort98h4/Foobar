@@ -97,9 +97,11 @@ function TotalPriceInBasket(props) {
   const totalPrice = amountInBasket * 49;
 
   return (
-    <div className="row justify-content-center">
+    <div className="row justify-content-center totalprice">
       <div className="col d-flex justify-content-center">
-        <h2>Total Price in basket: {totalPrice}</h2>
+        <h2>
+          Total Price in basket <span>{totalPrice},-</span>
+        </h2>
       </div>
     </div>
   );

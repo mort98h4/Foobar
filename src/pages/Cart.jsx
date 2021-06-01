@@ -14,6 +14,7 @@ export default function Cart(props) {
   }
 
   function displayForm() {
+    document.querySelector(".totalprice").setAttribute("hidden", true);
     document.querySelector("#PaymentForm").removeAttribute("hidden");
   }
 
@@ -21,6 +22,7 @@ export default function Cart(props) {
     document.querySelector("#PaymentForm").setAttribute("hidden", true);
     document.querySelector("#basketItems").removeAttribute("hidden");
     document.querySelector("#hideBasketBtn").removeAttribute("hidden");
+    document.querySelector(".totalprice").removeAttribute("hidden");
   }
   function ThankYouForOrdering() {
     //console.log("Thank You For Ordering");
