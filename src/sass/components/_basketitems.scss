@@ -1,10 +1,21 @@
 @use "../abstracts/vars";
 
-.basketitems {
-  border-bottom: 2px solid #6f6f6f;
-  margin-bottom: 3rem;
-
-  img {
-    margin-top: -1.4rem;
+#cartItems {
+  .basketitems {
+    border-bottom: 2px solid #6f6f6f;
+    margin-bottom: 3rem;
+  
+    
+  }
+  h4 {
+    color: vars.$secondary-color;
+    font-weight: 600;
+    text-transform: uppercase;
+    span {
+      font-family: Tangled, sans-serif;
+      font-size: 3.5rem;
+    }
   }
 }
+
+
