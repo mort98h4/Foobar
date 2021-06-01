@@ -16,6 +16,16 @@
       font-size: 3.5rem;
     }
   }
+  p.price {
+    color: vars.$tertiary-color;
+    font-family: 'Montserrat', sans-serif;
+    font-size: .8rem;
+    span {
+      font-weight: 600;
+      color: vars.$tertiary-color;
+      font-size: 1.2rem;
+    }
+  }
 }
 
 

@@ -75,8 +75,8 @@ function CartList(props) {
       <div className="col-7 col-md-4">
         <div className="row align-items-center">
           <div className="col-8 text-end">
-            <p>
-              PRICE <span>{price},-</span>
+            <p className="price">
+              PRICE: <span>{price}</span>,-
             </p>
           </div>
           <div className="col-4 d-flex justify-content-center justify-content-end pe-3 pe-md-4">
@@ -112,7 +112,7 @@ function TotalPriceInBasket(props) {
   return (
     <div className="row justify-content-center">
       <div className="col d-flex justify-content-center">
-        <h4>Total<span className="totalPrice">{totalPrice},-</span></h4>
+        <h4>Total <span className="totalPrice">{totalPrice},-</span></h4>
       </div>
     </div>
   );
