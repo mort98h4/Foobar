@@ -172,7 +172,6 @@ function App() {
             <Ratings
               path="ratings"
               order={userOrder}
-              data={data}
               ratings={ratings}
               clickSubmitHandler={clickSubmitHandler}
             />
