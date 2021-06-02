@@ -71,13 +71,16 @@ export default class PaymentForm extends React.Component {
         cvc != false
       ) {
         // Clean first name
+        let firstName;
         const nameLowerCase =
           form.name.value.substring(0, 1).toUpperCase() +
           form.name.value.substring(1).toLowerCase();
-        const firstName = nameLowerCase.substring(
-          0,
-          nameLowerCase.indexOf(" ")
-        );
+        const spaceInName = nameLowerCase.indexOf(" ");
+        if (spaceInName === -1) {
+          firstName = nameLowerCase;
+        } else {
+          firstName = nameLowerCase.substring(0, nameLowerCase.indexOf(" "));
+        }
 
         // create basket list for posting to Heroku
         const basketList = [];
