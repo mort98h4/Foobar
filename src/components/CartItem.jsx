@@ -83,9 +83,6 @@ function CartList(props) {
 }
 
 function TotalPriceInBasket(props) {
-  //console.log("Total Price");
-  //console.log(props.basket);
-
   const orderList = [];
   props.basket.forEach((item) => {
     for (let i = 0; i < item.amount; i++) {
