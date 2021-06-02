@@ -47,9 +47,9 @@ export default function Confirm(props) {
         <div hidden={orderCommingSoon === false}>
           <h2>Your order will be displayed in a few secondes</h2>
         </div>
-        <div hidden={displayorder === false}>
+        <div className="row justify-content-center" hidden={displayorder === false}>
           <div className="col-12 col-md-10 pb-3">
-            <h3><span>HEY {newOrder.name}!</span></h3>;
+            <h3><span>Hey {newOrder.name}!</span></h3>;
             <p>
               Thank you for ordering.
             </p>

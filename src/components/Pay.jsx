@@ -301,7 +301,7 @@ export default class PaymentForm extends React.Component {
                   <div className="form-actions">
                     <button // using default btn because of npm package
                       type="button"
-                      className="btn btn-primary"
+                      className="btn btn-confirm"
                       onClick={() => {
                         submitPayment();
                       }}

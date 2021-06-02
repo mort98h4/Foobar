@@ -61,7 +61,8 @@ export default function Beers(props) {
               Sort by
             </button>
             <ul className="dropdown-menu" aria-labelledby="dropdownMenuSort">
-              <li className="dropdown-item" onClick={() => toggleSort("alc")}>Volume</li>
+              <li className="dropdown-item"  onClick={() => toggleSort("name")}>Name</li>
+              <li className="dropdown-item" onClick={() => toggleSort("alc")}>Alcohol</li>
               <li className="dropdown-item" onClick={() => toggleSort("popularity")}>Popularity</li>
               <li className="dropdown-item"  onClick={() => toggleSort("price")}>Price</li>
             </ul>

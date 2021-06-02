@@ -70,7 +70,7 @@ export default function Product(props) {
       <div className="card">
         <div className="card-body component">
           <div className="row pb-3 justify-content-center">
-            <div className="col-4 col-md-3 pb-3 pb-md-0">
+            <div className="col-4 col-md-3 col-lg-2 pb-3 pb-md-0">
               <LazyLoad height={200} once={true} offset={100}>
                 <img src={imagePath} alt={imageAlt}></img>
               </LazyLoad>
