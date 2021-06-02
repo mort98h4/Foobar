@@ -6,12 +6,19 @@ export default function Confirm(props) {
   const queue = props.queue;
   const userOrder = props.userOrder;
   const serving = props.serving;
+  let orderCommingSoon = true;
+  let displayorder = false;
 
   if (props.userOrder.length <= 1 || props.userOrder[0].order.length < 0) {
     const currentOrder = props.userOrder.map((entry) => {
+      orderCommingSoon = false;
+      displayorder = true;
       newOrder.id = entry.id;
       newOrder.name = entry.name;
     });
+  } else {
+    orderCommingSoon = true;
+    displayorder = false;
   }
 
   let message;
@@ -37,21 +44,26 @@ export default function Confirm(props) {
   return (
     <div>
       <div hidden id="confirmPayment">
-        <h2>HEY {newOrder.name}</h2>;
-        <p>
-          THANK YOU FOR ORDERING, YOU CAN FOLLOW YOUR ORDER ON THE DASHBOARD
-        </p>
-        {message}
-        <p>
-          YOUR ORDERNUMBER IS: <span>{newOrder.id}</span>
-        </p>
-        <Link className="btn btn-primary" to="../">
-          Menu
-        </Link>
-        <p>
-          CLICK ON THE STAR IN THE MENU WHEN YOU ARE READY TO RATE THE BEERS YOU
-          HAVE BOUGHT
-        </p>
+        <div hidden={orderCommingSoon === false}>
+          <h2>Your order will be displayed in a few secondes</h2>
+        </div>
+        <div hidden={displayorder === false}>
+          <h2>HEY {newOrder.name}</h2>;
+          <p>
+            THANK YOU FOR ORDERING, YOU CAN FOLLOW YOUR ORDER ON THE DASHBOARD
+          </p>
+          {message}
+          <p>
+            YOUR ORDERNUMBER IS: <span>{newOrder.id}</span>
+          </p>
+          <Link className="btn btn-primary" to="../">
+            Menu
+          </Link>
+          <p>
+            CLICK ON THE STAR IN THE MENU WHEN YOU ARE READY TO RATE THE BEERS
+            YOU HAVE BOUGHT
+          </p>
+        </div>
       </div>
     </div>
   );
