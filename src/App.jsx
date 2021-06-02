@@ -160,14 +160,14 @@ function App() {
               userOrder={userOrder}
             />
             <Beers
-              path="beers"
+              path="kea/15_eksamen_3_sem/beers"
               data={data}
               products={productsCopy}
               ratings={ratings}
               addToBasket={addToBasket}
             />
             <Cart
-              path="cart"
+              path="kea/15_eksamen_3_sem/cart"
               basket={basket}
               addToBasket={addToBasket}
               removeFromBasket={removeFromBasket}
@@ -178,7 +178,7 @@ function App() {
               serving={data.serving}
             />
             <Ratings
-              path="ratings"
+              path="kea/15_eksamen_3_sem/ratings"
               order={userOrder}
               ratings={ratings}
               clickSubmitHandler={clickSubmitHandler}
