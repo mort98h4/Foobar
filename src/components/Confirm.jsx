@@ -62,7 +62,7 @@ export default function Confirm(props) {
             </p>
           </div>
           <div className="col-12 col-md-10 pb-4">
-            <Link className="btn btn-primary" to="kea/15_eksamen_3_sem">
+            <Link className="btn btn-primary" to="/">
               Menu
             </Link>
           </div>

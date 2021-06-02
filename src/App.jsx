@@ -154,20 +154,20 @@ function App() {
           </header>
           <Router>
             <Dashboard
-              path="kea/15_eksamen_3_sem"
+              path="/"
               data={data}
               ratings={ratings}
               userOrder={userOrder}
             />
             <Beers
-              path="kea/15_eksamen_3_sem/beers"
+              path="beers"
               data={data}
               products={productsCopy}
               ratings={ratings}
               addToBasket={addToBasket}
             />
             <Cart
-              path="kea/15_eksamen_3_sem/cart"
+              path="cart"
               basket={basket}
               addToBasket={addToBasket}
               removeFromBasket={removeFromBasket}
@@ -178,7 +178,7 @@ function App() {
               serving={data.serving}
             />
             <Ratings
-              path="kea/15_eksamen_3_sem/ratings"
+              path="ratings"
               order={userOrder}
               ratings={ratings}
               clickSubmitHandler={clickSubmitHandler}

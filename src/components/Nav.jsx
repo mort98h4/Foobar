@@ -22,7 +22,7 @@ export default function Nav(props) {
 
   return (
     <nav className="mainNav navbar navbar-light position-fixed text-center">
-      <Link className="navbar-brand" to="kea/15_eksamen_3_sem">
+      <Link className="navbar-brand" to="/">
         <div className="iconContainer">
           <svg className="dashboardIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="#FCF8EF" stroke="#FCF8EF" strokeWidth="1" 
                  strokeLinecap="round" strokeLinejoin="round">
@@ -39,7 +39,7 @@ export default function Nav(props) {
           </svg>
         </div>
       </Link>
-      <Link className="navbar-brand" to="kea/15_eksamen_3_sem/beers">
+      <Link className="navbar-brand" to="beers">
         <div className="iconContainer">
           <svg className="beerIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="#FCF8EF" stroke="#FCF8EF" strokeWidth="4" 
                  strokeLinecap="round" strokeLinejoin="round">
@@ -70,7 +70,7 @@ export default function Nav(props) {
         </div>
       </Link>
         {message}
-      <Link className="navbar-brand" to="kea/15_eksamen_3_sem/cart">
+      <Link className="navbar-brand" to="cart">
         <div>
           <div className="iconContainer">
             <svg className="cartIcon" viewBox="0 0 20 19" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#FCF8EF" stroke="transparent" strokeWidth="1" 
@@ -86,7 +86,7 @@ export default function Nav(props) {
           </div>
         </div>
       </Link>
-      <Link className="navbar-brand" to="kea/15_eksamen_3_sem/ratings">
+      <Link className="navbar-brand" to="ratings">
         <div className="iconContainer">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" 
                  fill="transparent" stroke="#FCF8EF" strokeWidth="2" 
