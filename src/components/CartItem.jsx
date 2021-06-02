@@ -123,7 +123,7 @@ function NoOrders() {
         <p>Please go to the beers menu to order.</p>
       </div>
       <div className="col-12 d-flex justify-content-center">
-        <Link className="btn btn-primary" to="beers">
+        <Link className="btn btn-primary" to="../beers">
           Menu
         </Link>
       </div> 

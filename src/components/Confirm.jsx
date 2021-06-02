@@ -63,7 +63,7 @@ export default function Confirm(props) {
           </div>
           <div className="col-12 col-md-10 pb-4">
             <Link className="btn btn-primary" to="/">
-              Menu
+              Go to dashboard
             </Link>
           </div>
           <div className="col-12 col-md-10 pb-3">
