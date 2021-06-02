@@ -50,7 +50,8 @@ export default function Confirm(props) {
         <div hidden={displayorder === false}>
           <h2>HEY {newOrder.name}</h2>;
           <p>
-            THANK YOU FOR ORDERING, YOU CAN FOLLOW YOUR ORDER ON THE DASHBOARD
+            THANK YOU FOR ORDERING, YOUR PAYMENT HAS BEEN CONFIRMED AND YOU CAN
+            NOW FOLLOW YOUR ORDER ON THE DASHBOARD
           </p>
           {message}
           <p>
