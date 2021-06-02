@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Carousel } from "3d-react-carousal";
-import LazyLoad from 'react-lazyload';
+import LazyLoad from "react-lazyload";
 import cleanImageName from "../helpers/cleanImageName.js";
 import Star from "./Star";
 
@@ -63,7 +63,7 @@ export default function Product(props) {
   const dataBsParent = `#${accordionId}`;
   const headingId = `${lowerCaseName}Heading`;
   const collapseId = `${lowerCaseName}Collapse`;
-  const dataBsTarget = `#${collapseId}`
+  const dataBsTarget = `#${collapseId}`;
 
   return (
     <article className="beerComponent row mb-3">
@@ -106,12 +106,18 @@ export default function Product(props) {
                   <p className="price">{props.price},-</p>
                 </div>
                 <div className="col-12">
-                  <div className="row justify-content-center">
+                  <p className="notontap" hidden={onTap === true}>
+                    This beer is not on tap today
+                  </p>
+                  <div
+                    className="row justify-content-center"
+                    hidden={onTap === false}
+                  >
                     <div className="col-10 col-md-6 col-lg-7 col-xl-8 d-flex justify-content-center justify-content-md-end pb-3 pb-md-0">
                       <button
-                      className="btn btn-primary btn-amount"
-                      disabled={amount === 0}
-                      onClick={clickedMinus}
+                        className="btn btn-primary btn-amount"
+                        disabled={amount === 0}
+                        onClick={clickedMinus}
                       >
                         -
                       </button>
@@ -168,7 +174,11 @@ export default function Product(props) {
                   data-bs-parent={dataBsParent}
                 >
                   <div className="accordion-body p-0">
-                    <Carousel slides={slides} autoplay={false} interval={1000} />
+                    <Carousel
+                      slides={slides}
+                      autoplay={false}
+                      interval={1000}
+                    />
                   </div>
                 </div>
               </div>
