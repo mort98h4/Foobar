@@ -10,7 +10,7 @@ export default function CartItem({ basket, addToBasket, removeFromBasket }) {
     <section id="cartItems">
       <div id="noItemsInBasket">{basketLength === 0 && <NoOrders />}</div>
       <div>
-        <ul id="basketItems">
+        <ul id="basketItems" className="ps-0">
           {basket.map((item) => (
             <CartList
               name={item.name}
@@ -34,48 +34,61 @@ function CartList(props) {
   const imageAlt = `Label of ${props.name}`;
 
   return (
-    <li className="row basketitems">
-      <div className="col row">
-        <div className="col col-lg-2">
-          <LazyLoad height={200} once={true} offset={100}>
-            <img src={imagePath} alt={imageAlt}></img>
-          </LazyLoad>
+    <li className="row basketitems align-items-center pb-4 pb-md-3">
+      <div className="col-12 col-md-4">
+        <div className="row justify-content-center align-items-center">
+          <div className="col-3 col-md-4 pb-3 pb-md-0">
+            <LazyLoad height={200} once={true} offset={100}>
+              <img src={imagePath} alt={imageAlt}></img>
+            </LazyLoad>
+          </div>
+          <div className="col-12 col-md-8 text-center text-md-start">
+            <h3 className="mb-3 mb-md-0">{props.name}</h3>
+          </div>
         </div>
-        <h2 className="col">{props.name}</h2>
       </div>
-      <div className="col row col-lg-3">
-        <button
-          className="col btn btn-primary btn-amount"
-          disabled={props.amount === 1}
-          onClick={() => props.addToBasket(props, -1)}
-        >
-          -
-        </button>
-        <div className="col amount d-flex align-items-center justify-content-center mx-4">
-          <p className="mb-0">{props.amount}</p>
+      <div className="col-5 col-md-4">
+        <div className="row justify-content-center">
+          <div className="col-md-10 d-flex justify-content-md-center">
+            <button
+              className="btn btn-primary btn-amount"
+              disabled={props.amount === 1}
+              onClick={() => props.addToBasket(props, -1)}
+            >
+              -
+            </button>
+            <div className="amount d-flex align-items-center justify-content-center mx-3 mx-md-4">
+              <p className="mb-md-0">{props.amount}</p>
+            </div>
+            <button
+              className="btn btn-primary btn-amount"
+              onClick={() => {
+                props.addToBasket(props, 1);
+              }}
+            >
+              +
+            </button>
+          </div>
+          
         </div>
-        <button
-          className="col btn btn-primary btn-amount"
-          onClick={() => {
-            props.addToBasket(props, 1);
-          }}
-        >
-          +
-        </button>
       </div>
-      <div className="col-10 col-md-6 col-lg-5 col-xl-4 d-flex justify-content-center justify-content-md-end">
-        <p className="col">
-          PRICE <span>{price},-</span>
-        </p>
-        <div className="">
-          <button
-            className=" btn btn-primary btn-amount col"
-            onClick={() => {
-              props.removeFromBasket(props);
-            }}
-          >
-            x
-          </button>
+      <div className="col-7 col-md-4">
+        <div className="row align-items-center">
+          <div className="col-8 text-end">
+            <p className="price">
+              PRICE: <span>{price}</span>,-
+            </p>
+          </div>
+          <div className="col-4 d-flex justify-content-center justify-content-end pe-3 pe-md-4">
+            <button
+              className="btn btn-primary btn-amount"
+              onClick={() => {
+                props.removeFromBasket(props);
+              }}
+            >
+              x
+            </button>
+          </div>
         </div>
       </div>
     </li>
@@ -96,9 +109,7 @@ function TotalPriceInBasket(props) {
   return (
     <div className="row justify-content-center totalprice">
       <div className="col d-flex justify-content-center">
-        <h2>
-          Total Price in basket <span>{totalPrice},-</span>
-        </h2>
+        <h4>Total <span className="totalPrice">{totalPrice},-</span></h4>
       </div>
     </div>
   );
@@ -106,13 +117,16 @@ function TotalPriceInBasket(props) {
 
 function NoOrders() {
   return (
-    <div>
-      <h2>Hello</h2>
-      <p>You have no beers in your basket</p>
-      <p>Please go to the product List to add the beers you want to order</p>
-      <Link className="btn btn-primary" to="../beers">
-        Menu
-      </Link>
+    <div className="row text-center">
+      <div className="col-12 pb-3">
+        <h2>You have no beers in your basket.</h2>
+        <p>Please go to the beers menu to order.</p>
+      </div>
+      <div className="col-12 d-flex justify-content-center">
+        <Link className="btn btn-primary" to="../beers">
+          Menu
+        </Link>
+      </div> 
     </div>
   );
 }

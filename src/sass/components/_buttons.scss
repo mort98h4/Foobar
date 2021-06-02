@@ -23,6 +23,13 @@
   // }
 }
 
+.btn-confirm {
+  color: vars.$secondary-color !important;
+  background-color: transparent !important;
+  border-color: vars.$valid-color !important;
+  box-shadow: vars.$valid-box-shadow;
+}
+
 .paybuttons button {
   margin-bottom: 3rem;
   min-width: 150px;

@@ -93,7 +93,7 @@ export default function Ratings(props) {
                                         <p>Please go to the beers menu to order.</p>
                                     </div>
                                 </div>
-                                <div className="row justify-content-center">
+                                <div className="row justify-content-center pb-3">
                                     <div className="col d-flex justify-content-center">
                                         <Link className="btn btn-primary" to="../beers">Menu</Link>
                                     </div>
@@ -114,9 +114,9 @@ export default function Ratings(props) {
                                     <h2>Order {rateOrder.id}</h2>
                                 </div>
                                 {beerRatingComponent}
-                                <div className="row mt-3 justify-content-center">
+                                <div className="row mt-3 justify-content-center pb-3">
                                     <div className="col-12 d-flex justify-content-center">
-                                        <button id="submitRatings" className="btn btn-primary" disabled={beerRating.length === 0} onClick={(e) => props.clickSubmitHandler(beerRating)}>Submit ratings</button>
+                                        <button id="submitRatings" className="btn btn-confirm" disabled={beerRating.length === 0} onClick={(e) => props.clickSubmitHandler(beerRating)}>Submit ratings</button>
                                     </div>
                                 </div>
                             </div>
@@ -142,7 +142,7 @@ export default function Ratings(props) {
                                         <p>Buy another round!</p>
                                     </div>
                                 </div>
-                                <div className="row justify-content-center">
+                                <div className="row justify-content-center pb-3">
                                     <div className="col d-flex justify-content-center">
                                         <Link className="btn btn-primary" to="../beers">Menu</Link>
                                     </div>
