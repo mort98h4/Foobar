@@ -154,7 +154,7 @@ function App() {
           </header>
           <Router>
             <Dashboard
-              path="/"
+              path="kea/15_eksamen_3_sem"
               data={data}
               ratings={ratings}
               userOrder={userOrder}

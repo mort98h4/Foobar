@@ -95,7 +95,7 @@ export default function Ratings(props) {
                                 </div>
                                 <div className="row justify-content-center pb-3">
                                     <div className="col d-flex justify-content-center">
-                                        <Link className="btn btn-primary" to="../beers">Menu</Link>
+                                        <Link className="btn btn-primary" to="kea/15_eksamen_3_sem/beers">Menu</Link>
                                     </div>
                                 </div>
                             </div>
@@ -144,7 +144,7 @@ export default function Ratings(props) {
                                 </div>
                                 <div className="row justify-content-center pb-3">
                                     <div className="col d-flex justify-content-center">
-                                        <Link className="btn btn-primary" to="../beers">Menu</Link>
+                                        <Link className="btn btn-primary" to="kea/15_eksamen_3_sem/beers">Menu</Link>
                                     </div>
                                 </div>
                             </div>
