@@ -10,7 +10,8 @@ export default function CartItem({ basket, addToBasket, removeFromBasket }) {
     <section id="cartItems">
       <div id="noItemsInBasket">{basketLength === 0 && <NoOrders />}</div>
       <div>
-        <div className="row">
+        {basketLength > 0 ? 
+        <div id="myProgress33" className="row" >
           <div className="col-12">
             <div className="row justify-content-center">
               <div className="col d-flex justify-content-center myProgress">
@@ -19,6 +20,7 @@ export default function CartItem({ basket, addToBasket, removeFromBasket }) {
             </div>
           </div>
         </div>
+        : ""}
         <ul id="basketItems" className="ps-0">
           {basket.map((item) => (
             <CartList

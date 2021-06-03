@@ -11,6 +11,7 @@ export default function Cart(props) {
   function hideBasket() {
     document.querySelector("#basketItems").setAttribute("hidden", true);
     document.querySelector("#hideBasketBtn").setAttribute("hidden", true);
+    document.querySelector("#myProgress33").setAttribute("hidden", true);
     displayForm();
   }
 
@@ -24,6 +25,7 @@ export default function Cart(props) {
     document.querySelector("#basketItems").removeAttribute("hidden");
     document.querySelector("#hideBasketBtn").removeAttribute("hidden");
     document.querySelector(".totalprice").removeAttribute("hidden");
+    document.querySelector("#myProgress33").removeAttribute("hidden");
   }
   function ThankYouForOrdering() {
     //console.log("Thank You For Ordering");
@@ -38,7 +40,7 @@ export default function Cart(props) {
           <article className="beerComponent row mb-3">
             <div className="card">
               <div className="card-body component">
-                
+
                 <CartItem
                   basket={props.basket}
                   addToBasket={props.addToBasket}
