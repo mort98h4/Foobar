@@ -44,6 +44,15 @@ export default function Confirm(props) {
   return (
     <div className="row justify-content-center text-center">
       <div hidden id="confirmPayment" className="col-12">
+        <div className="row">
+          <div className="col-12">
+            <div className="row justify-content-center">
+              <div className="col d-flex justify-content-center myProgress">
+                <h2>100%</h2>
+              </div>
+            </div>
+          </div>
+        </div>
         <div hidden={orderCommingSoon === false}>
           <h2>Your order will be displayed in a few secondes</h2>
         </div>

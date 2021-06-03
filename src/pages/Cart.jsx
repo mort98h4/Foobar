@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import CartItem from "../components/CartItem";
 import Pay from "../components/Pay";
 import Confirm from "../components/Confirm";
+import Formfill from "../components/Formfill";
 
 export default function Cart(props) {
   const emptyBasket = props.basket.length;
@@ -37,7 +38,6 @@ export default function Cart(props) {
           <article className="beerComponent row mb-3">
             <div className="card">
               <div className="card-body component">
-                <Formfill />
                 <CartItem
                   basket={props.basket}
                   addToBasket={props.addToBasket}
@@ -83,12 +83,13 @@ export default function Cart(props) {
   );
 }
 
-function Formfill() {
-  return (
-    <div className="row justify-content-center">
-      <div className="col d-flex justify-content-center">
-        <h2>33,3%</h2>
-      </div>
-    </div>
-  );
-}
+// function Formfill(props) {
+//   console.log(props);
+//   return (
+//     <div className="row justify-content-center">
+//       <div className="col d-flex justify-content-center">
+//         <h2>{props.progress}%</h2>
+//       </div>
+//     </div>
+//   );
+// }

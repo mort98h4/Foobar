@@ -46,6 +46,7 @@ export default class PaymentForm extends React.Component {
   };
 
   render() {
+    console.log(this.props);
     // defining props from card.jsx
     const addToUserOrder = this.props.addToUserOrder;
     const basketItems = this.props.basket;
@@ -190,7 +191,15 @@ export default class PaymentForm extends React.Component {
 
     return (
       <div id="PaymentForm" hidden>
-        <form id="form">
+        <div className="row">
+          <div className="col-12">
+            <div className="row justify-content-center">
+              <div className="col d-flex justify-content-center myProgress">
+                <h2>66%</h2>
+              </div>
+            </div>
+          </div>
+        <form id="form" className="col-12">
           <div className="row">
             <div className="col">
               <div className="row">
@@ -323,6 +332,7 @@ export default class PaymentForm extends React.Component {
             </div>
           </div>
         </form>
+        </div>
       </div>
     );
   }
