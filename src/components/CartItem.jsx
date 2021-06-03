@@ -10,6 +10,15 @@ export default function CartItem({ basket, addToBasket, removeFromBasket }) {
     <section id="cartItems">
       <div id="noItemsInBasket">{basketLength === 0 && <NoOrders />}</div>
       <div>
+        <div className="row">
+          <div className="col-12">
+            <div className="row justify-content-center">
+              <div className="col d-flex justify-content-center myProgress">
+                <h2>33%</h2>
+              </div>
+            </div>
+          </div>
+        </div>
         <ul id="basketItems" className="ps-0">
           {basket.map((item) => (
             <CartList
@@ -34,75 +43,64 @@ function CartList(props) {
   const imageAlt = `Label of ${props.name}`;
 
   return (
-    <div className="row">
-      <div className="col-12">
-        <div className="row justify-content-center">
-          <div className="col d-flex justify-content-center myProgress">
-            <h2>33%</h2>
+    <li className="row basketitems align-items-center pb-4 pb-md-3">
+      <div className="col-12 col-md-4">
+        <div className="row justify-content-center align-items-center">
+          <div className="col-3 col-md-4 pb-3 pb-md-0">
+            <LazyLoad height={200} once={true} offset={100}>
+              <img src={imagePath} alt={imageAlt}></img>
+            </LazyLoad>
+          </div>
+          <div className="col-12 col-md-8 text-center text-md-start">
+            <h3 className="mb-3 mb-md-0">{props.name}</h3>
           </div>
         </div>
       </div>
-      <div className="col-12">
-        <li className="row basketitems align-items-center pb-4 pb-md-3">
-          <div className="col-12 col-md-4">
-            <div className="row justify-content-center align-items-center">
-              <div className="col-3 col-md-4 pb-3 pb-md-0">
-                <LazyLoad height={200} once={true} offset={100}>
-                  <img src={imagePath} alt={imageAlt}></img>
-                </LazyLoad>
-              </div>
-              <div className="col-12 col-md-8 text-center text-md-start">
-                <h3 className="mb-3 mb-md-0">{props.name}</h3>
-              </div>
+      <div className="col-5 col-md-4">
+        <div className="row justify-content-center">
+          <div className="col-md-10 d-flex justify-content-md-center">
+            <button
+              className="btn btn-primary btn-amount"
+              disabled={props.amount === 1}
+              onClick={() => props.addToBasket(props, -1)}
+            >
+              -
+            </button>
+            <div className="amount d-flex align-items-center justify-content-center mx-3 mx-md-4">
+              <p className="mb-md-0">{props.amount}</p>
             </div>
+            <button
+              className="btn btn-primary btn-amount"
+              onClick={() => {
+                props.addToBasket(props, 1);
+              }}
+            >
+              +
+            </button>
           </div>
-          <div className="col-5 col-md-4">
-            <div className="row justify-content-center">
-              <div className="col-md-10 d-flex justify-content-md-center">
-                <button
-                  className="btn btn-primary btn-amount"
-                  disabled={props.amount === 1}
-                  onClick={() => props.addToBasket(props, -1)}
-                >
-                  -
-                </button>
-                <div className="amount d-flex align-items-center justify-content-center mx-3 mx-md-4">
-                  <p className="mb-md-0">{props.amount}</p>
-                </div>
-                <button
-                  className="btn btn-primary btn-amount"
-                  onClick={() => {
-                    props.addToBasket(props, 1);
-                  }}
-                >
-                  +
-                </button>
-              </div>
-                
-            </div>
-          </div>
-          <div className="col-7 col-md-4">
-            <div className="row align-items-center">
-              <div className="col-8 text-end">
-                <p className="price">
-                  PRICE: <span>{price}</span>,-
-                </p>
-              </div>
-              <div className="col-4 d-flex justify-content-center justify-content-end pe-3 pe-md-4">
-                <button
-                  className="btn btn-primary btn-amount"
-                  onClick={() => {
-                    props.removeFromBasket(props);
-                  }}
-                >
-                  x
-                </button>
-              </div>
-            </div>
-          </div>
-        </li>
+          
+        </div>
       </div>
-    </div>
+      <div className="col-7 col-md-4">
+        <div className="row align-items-center">
+          <div className="col-8 text-end">
+            <p className="price">
+              PRICE: <span>{price}</span>,-
+            </p>
+          </div>
+          <div className="col-4 d-flex justify-content-center justify-content-end pe-3 pe-md-4">
+            <button
+              className="btn btn-primary btn-amount"
+              onClick={() => {
+                props.removeFromBasket(props);
+              }}
+            >
+              x
+            </button>
+          </div>
+        </div>
+      </div>
+    </li>
   );
 }
 
@@ -134,7 +132,7 @@ function NoOrders() {
         <p>Please go to the beers menu to order.</p>
       </div>
       <div className="col-12 d-flex justify-content-center">
-        <Link className="btn btn-primary" to="../beers">
+        <Link className="btn btn-primary" to="beers">
           Menu
         </Link>
       </div> 

@@ -38,6 +38,7 @@ export default function Cart(props) {
           <article className="beerComponent row mb-3">
             <div className="card">
               <div className="card-body component">
+                
                 <CartItem
                   basket={props.basket}
                   addToBasket={props.addToBasket}
