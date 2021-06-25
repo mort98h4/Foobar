@@ -1,5 +1,6 @@
 import React from "react";
 import Cards from "react-credit-cards";
+import sendReceipt from "../helpers/sendReceipt.js";
 import {
   formatCreditCardNumber,
   formatCVC,
@@ -46,7 +47,7 @@ export default class PaymentForm extends React.Component {
   };
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     // defining props from card.jsx
     const addToUserOrder = this.props.addToUserOrder;
     const basketItems = this.props.basket;
@@ -103,7 +104,7 @@ export default class PaymentForm extends React.Component {
         });
 
         // post further down
-        post(basketList, firstName, orderList);
+        post(basketList, firstName, orderList, form.email.value);
         // resetform in App.jsx
         resetFrom();
       } else {
@@ -152,7 +153,8 @@ export default class PaymentForm extends React.Component {
 
     // Posting data (basketList) to Heroku.
     // Sending newOrder to userOrder and resetBasket.
-    async function post(data, firstName, orderList) {
+    async function post(data, firstName, orderList, email) {
+      console.log(email);
       const newOrder = [];
       const name = firstName;
       const order = orderList;
@@ -168,12 +170,15 @@ export default class PaymentForm extends React.Component {
       })
         .then((res) => res.json())
         .then((d) => {
-          console.log("Posted order.");
-          newOrder.push({ id: d.id, order: order, name: name });
+          // console.log("Posted order.");
+          newOrder.push({ id: d.id, order: order, name: name, email: email });
         });
 
       // addToUserOrder in App.jsx
       addToUserOrder(newOrder);
+      
+      sendReceipt(newOrder);
+
       // ThankYouForOrdering in Cart.jsx
       ThankYouForOrdering();
       // resetBasket in App
